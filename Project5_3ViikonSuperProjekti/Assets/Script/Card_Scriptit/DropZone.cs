@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler {    //ENABLE MYÖHEMMIN
+public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler {    //Laita tämä siihen paneliin mihin haluat kortien menevän.
+    //ENABLE MYÖHEMMIN
     //public Draggable.Slot typeOfItem = Draggable.Slot.INVENTORY;
     //linkki tutoriaalin kolmanteen osaan https://youtu.be/AM7wBz9azyU
     public void OnPointerEnter(PointerEventData eventData)
