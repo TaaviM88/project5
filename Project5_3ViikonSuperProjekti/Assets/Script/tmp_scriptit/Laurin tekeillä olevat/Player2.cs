@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour {
+public class Player2 : MonoBehaviour
+{
 
     private float inputDirection; // x value of our movevector
     private float verticalVelocity; // Y value of our move vector
@@ -17,24 +18,24 @@ public class Player : MonoBehaviour {
     //lastmotionilla lukittiin hypyn suunta
     private Vector3 lastMotion;
     private CharacterController controller;
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start()
     {
         controller = GetComponent<CharacterController>();
-	}
-	
-	// Update is called once per frame
-	void Update ()
+    }
+
+    // Update is called once per frame
+    void Update()
     {
         IsControllerGrounded();
         moveVector = Vector3.zero;
-        inputDirection = Input.GetAxis("P1movement") * speed;
+        inputDirection = Input.GetAxis("P2movement") * speed;
         //hyppy joka on mahdollinen kun grounded
-        if(IsControllerGrounded())
+        if (IsControllerGrounded())
         {
             verticalVelocity = 0;
 
-            if(Input.GetButtonDown("P1Jump"))
+            if (Input.GetButtonDown("P2Jump"))
             {
                 verticalVelocity = jumpForce;
                 //Kun ilmassa secondjump on aktiivinen
@@ -44,26 +45,26 @@ public class Player : MonoBehaviour {
         }
         else
         {
-            
-            if (Input.GetButtonDown("P1Jump"))
+
+            if (Input.GetButtonDown("P2Jump"))
             {
-                if(secondJumpAvail)
+                if (secondJumpAvail)
                 {
                     verticalVelocity = jumpForce;
                     secondJumpAvail = false;
                 }
             }
 
-                verticalVelocity -= gravity * Time.deltaTime;
+            verticalVelocity -= gravity * Time.deltaTime;
             //Jos haluat vapaan liikkumisen ja vapaan hyppy suunnan, ota kaksi seuraavaa käyttöön
-                //moveVector.x = inputDirection;
-                //moveVector.y = inputDirection;
+            //moveVector.x = inputDirection;
+            //moveVector.y = inputDirection;
             //Jos haluat fixedjump ota käyttöön
-                moveVector.x = lastMotion.x;
+            moveVector.x = lastMotion.x;
         }
 
         moveVector.y = verticalVelocity;
-      //  moveVector = new Vector3(inputDirection, verticalVelocity, 0);
+        //  moveVector = new Vector3(inputDirection, verticalVelocity, 0);
         controller.Move(moveVector * Time.deltaTime);
         lastMotion = moveVector;
 
@@ -95,9 +96,9 @@ public class Player : MonoBehaviour {
     //walljump
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-      if(controller.collisionFlags == CollisionFlags.Sides)
+        if (controller.collisionFlags == CollisionFlags.Sides)
         {
-            if(Input.GetButtonDown("P1Jump"))
+            if (Input.GetButtonDown("P2Jump"))
             {
                 moveVector = hit.normal * speed;
                 verticalVelocity = jumpForce;
