@@ -28,7 +28,9 @@ public class Player : MonoBehaviour {
     {
         IsControllerGrounded();
         moveVector = Vector3.zero;
-        inputDirection = Input.GetAxis("P1movement") * speed;
+        //saisko tähän määritettyä että jos inputtia ei tule on x velocity yhtäkuin 0?
+       inputDirection = Input.GetAxis("P1movement") * speed;
+        Debug.Log(inputDirection);
         //hyppy joka on mahdollinen kun grounded
         if(IsControllerGrounded())
         {
@@ -84,12 +86,21 @@ public class Player : MonoBehaviour {
         Debug.DrawRay(rightRayStart, Vector3.down, Color.blue);
 
         if (Physics.Raycast(rightRayStart, Vector3.down, (controller.height / 2) + hoverHeight))
+        {
+            //Debug.Log("osuu varpaat");
             return true;
+        }
+            
 
         if (Physics.Raycast(leftRayStart, Vector3.down, (controller.height / 2) + hoverHeight))
+        {
+            //Debug.Log("osuu kantapaa");
             return true;
+        }
 
+        //Debug.Log("ei osu maahan");
         return false;
+
     }
 
     //walljump
