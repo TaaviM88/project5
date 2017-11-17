@@ -12,27 +12,47 @@ public class Player : MonoBehaviour {
     public float gravity = 1.0f;
     public float hoverHeight = 0.2f;
     private bool secondJumpAvail = false;
+    private bool _facingRight = true;
+    public float value;
 
     private Vector3 moveVector;
     //lastmotionilla lukittiin hypyn suunta
     private Vector3 lastMotion;
     private CharacterController controller;
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start()
     {
         controller = GetComponent<CharacterController>();
-	}
-	
-	// Update is called once per frame
-	void Update ()
+    }
+
+    // Update is called once per frame
+    void Update()
     {
         IsControllerGrounded();
         moveVector = Vector3.zero;
         //saisko tähän määritettyä että jos inputtia ei tule on x velocity yhtäkuin 0?
-       inputDirection = Input.GetAxis("P1movement") * speed;
-        Debug.Log(inputDirection);
+        inputDirection = Input.GetAxis("P1movement") * speed;
+        value = Input.GetAxis("P1movement");
+        Debug.Log(value);
+        if (value > 0)
+        {
+            if (_facingRight == false)
+            {
+                Flip();
+            }
+        }
+
+        if (value < 0)
+        {
+            if (_facingRight == true)
+            {
+                Flip();
+            }
+        }
+
+        //Debug.Log(inputDirection);
         //hyppy joka on mahdollinen kun grounded
-        if(IsControllerGrounded())
+        if (IsControllerGrounded())
         {
             verticalVelocity = 0;
 
@@ -115,6 +135,14 @@ public class Player : MonoBehaviour {
             }
 
         }
+    }
+
+    private void Flip()
+    {
+        _facingRight = !_facingRight;
+        Vector3 theScale = transform.localScale;
+        theScale.z *= -1;
+        transform.localScale = theScale;
     }
 
 }
