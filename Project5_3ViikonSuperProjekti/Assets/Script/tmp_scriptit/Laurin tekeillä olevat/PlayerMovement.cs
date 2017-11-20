@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour {
+public class PlayerMovement : MonoBehaviour {
 
     private float inputDirection; // x value of our movevector
     private float verticalVelocity; // Y value of our move vector
@@ -15,6 +15,7 @@ public class Player : MonoBehaviour {
     private bool _facingRight = true;
     public float value;
 
+    private Animator anime;
     private Vector3 moveVector;
     //lastmotionilla lukittiin hypyn suunta
     private Vector3 lastMotion;
@@ -23,6 +24,7 @@ public class Player : MonoBehaviour {
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        anime = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -36,18 +38,27 @@ public class Player : MonoBehaviour {
         Debug.Log(value);
         if (value > 0)
         {
+            
             if (_facingRight == false)
             {
                 Flip();
             }
+            anime.SetInteger("AnimChar", 1);
         }
 
         if (value < 0)
         {
+           
             if (_facingRight == true)
             {
                 Flip();
             }
+            anime.SetInteger("AnimChar", 1);
+        }
+
+        if (value == 0)
+        {
+           anime.SetInteger("AnimChar", 0);
         }
 
         //Debug.Log(inputDirection);
@@ -56,13 +67,20 @@ public class Player : MonoBehaviour {
         {
             verticalVelocity = 0;
 
-            if(Input.GetButtonDown("P1Jump"))
+            if (Input.GetButtonDown("P1Jump"))
             {
                 verticalVelocity = jumpForce;
                 //Kun ilmassa secondjump on aktiivinen
                 secondJumpAvail = true;
+                anime.SetInteger("AnimChar", 2);
             }
             moveVector.x = inputDirection;
+
+            if (verticalVelocity < 0)
+            {
+                anime.SetInteger("AnimChar", 3);
+            }
+
         }
         else
         {

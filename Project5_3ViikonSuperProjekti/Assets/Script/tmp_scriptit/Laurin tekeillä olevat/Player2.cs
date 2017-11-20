@@ -5,6 +5,9 @@ using UnityEngine;
 public class Player2 : MonoBehaviour
 {
 
+    //NÄMÄ KONTROLLIT ON VANHAT. MONISTA PLAYER1 KONTROLLLIT KU OVAT VALMIIT JA PASTEE NÄIDEN PÄÄLLE
+    //MUISTA VAIHTAA INPUT MANAGERIN VIITTAUKSET
+
     private float inputDirection; // x value of our movevector
     private float verticalVelocity; // Y value of our move vector
 
