@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour {
     public float value;
 
     private Animator anime;
+    private Rigidbody rigidbody;
     private Vector3 moveVector;
     //lastmotionilla lukittiin hypyn suunta
     private Vector3 lastMotion;
@@ -25,6 +26,7 @@ public class PlayerMovement : MonoBehaviour {
     {
         controller = GetComponent<CharacterController>();
         anime = GetComponent<Animator>();
+        rigidbody = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -35,7 +37,7 @@ public class PlayerMovement : MonoBehaviour {
         //saisko tähän määritettyä että jos inputtia ei tule on x velocity yhtäkuin 0?
         inputDirection = Input.GetAxis("P1movement") * speed;
         value = Input.GetAxis("P1movement");
-        Debug.Log(value);
+        //Debug.Log(value);
         if (value > 0)
         {
             
@@ -72,15 +74,8 @@ public class PlayerMovement : MonoBehaviour {
                 verticalVelocity = jumpForce;
                 //Kun ilmassa secondjump on aktiivinen
                 secondJumpAvail = true;
-                anime.SetInteger("AnimChar", 2);
             }
             moveVector.x = inputDirection;
-
-            if (verticalVelocity < 0)
-            {
-                anime.SetInteger("AnimChar", 3);
-            }
-
         }
         else
         {
@@ -108,6 +103,21 @@ public class PlayerMovement : MonoBehaviour {
         lastMotion = moveVector;
 
     }
+    void FixedUpdate()
+    {   //tässä tippumis animaation laukaisu rigidbodylla
+        Debug.Log(moveVector.y);
+        if (moveVector.y > 0f)
+        {
+            Debug.Log("hyppaan");
+            anime.SetInteger("AnimChar", 2);
+        }
+        else if (moveVector.y < 0f)
+        {
+            Debug.Log("tipun");
+            anime.SetInteger("AnimChar", 3);
+        }
+    }
+
     // Raycast grounded check https://www.youtube.com/watch?v=8Cado6CzZUA&list=PLLH3mUGkfFCWwekOW1OMxyyIgc-Qm1OhI&index=10
     private bool IsControllerGrounded()
     {
@@ -151,7 +161,7 @@ public class PlayerMovement : MonoBehaviour {
                 moveVector = hit.normal * speed;
                 verticalVelocity = jumpForce;
             }
-
+            
         }
     }
 
