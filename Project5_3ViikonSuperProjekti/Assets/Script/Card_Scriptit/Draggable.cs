@@ -60,6 +60,16 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
         this.transform.SetParent(parentToReturnTo);
         GetComponent<CanvasGroup>().blocksRaycasts = true;
+        if (transform.parent.name == "Player1")
+        {
+            GameManager.gamemanager.Getplayer(PlayerType.player1);
+            Card _card = GetComponent<Card>();
+            //kortilla saadaan skillin tiedot, pelaajalla pitää olla playerskillset. Player1 on skillsetti addtoplayer metodilla 
+        }
+        if (transform.parent.name == "Player2")
+        {
+            GameManager.gamemanager.Getplayer(PlayerType.player2);
+        }
         this.transform.SetSiblingIndex(placeholder.transform.GetSiblingIndex());
         Destroy(placeholder);
         //Ota hohto efekti pois päältä jos tehty
