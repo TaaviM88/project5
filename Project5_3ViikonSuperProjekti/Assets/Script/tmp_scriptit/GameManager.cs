@@ -9,11 +9,11 @@ public enum PlayerType
 public class GameManager : MonoBehaviour {
     public static GameManager gamemanager;
     List<Player> listPlayers;
+
 	// Use this for initialization
 	void Awake () {
         gamemanager = this;
         listPlayers = new List<Player>();
-
 	}
 	
 	// Update is called once per frame
@@ -29,7 +29,14 @@ public class GameManager : MonoBehaviour {
         for( int i = 0; i<listPlayers.Count; i++ )
         {
             //vertaa pelaajan tyyppiä PlayerType player
-       //     if(player)
+            if (player == PlayerType.player1)
+            {
+
+            }
+            if (player == PlayerType.player2)
+            {
+
+            }
             
         }
         return null;

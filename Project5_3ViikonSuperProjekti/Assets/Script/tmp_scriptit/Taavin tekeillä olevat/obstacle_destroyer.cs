@@ -12,6 +12,10 @@ public class obstacle_destroyer : MonoBehaviour {
         part = GetComponent<ParticleSystem>();
         collisionEvents = new List<ParticleCollisionEvent>();
 	}
+
+    void Update()
+    {
+    }
 	
 	// Update is called once per frame
     void OnParticleCollision(GameObject other)

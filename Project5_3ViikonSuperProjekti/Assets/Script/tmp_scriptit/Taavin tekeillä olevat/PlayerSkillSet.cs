@@ -24,6 +24,7 @@ using System;
   {
       public enum Skill
       {
+          None,
           Fireball,
           IceStorm,
           Shield,

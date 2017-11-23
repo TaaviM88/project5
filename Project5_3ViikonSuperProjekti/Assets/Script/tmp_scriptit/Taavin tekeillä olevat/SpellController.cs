@@ -6,6 +6,7 @@ public class SpellController : MonoBehaviour {
     public float DestroyTime = 5f;
 	// Use this for initialization
 	void Start () {
+
         Invoke("DestroySelf",DestroyTime);
 	}
 	

@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
-    public enum PlayerType
-    {
-        player1, player2
-    }
+    public GameTypes.PlayerType playerType = GameTypes.PlayerType.None;
     PlayerSkillSet _skillset;
     List<Card> _cardList;
 	// Use this for initialization
@@ -18,4 +15,10 @@ public class Player : MonoBehaviour {
 	void Update () {
 		
 	}
+    public void AddCardToPlayer(Card card)
+    {
+        _cardList.Add(card);
+    }
+ 
+   
 }
