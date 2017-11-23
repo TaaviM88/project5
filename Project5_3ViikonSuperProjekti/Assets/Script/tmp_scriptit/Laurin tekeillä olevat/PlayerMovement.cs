@@ -14,7 +14,8 @@ public class PlayerMovement : MonoBehaviour {
     private bool secondJumpAvail = false;
     private bool _facingRight = true;
     public float value;
-
+    
+	AnimeController _animeScript;
     private Animator anime;
     private Rigidbody rigidbody;
     private Vector3 moveVector;
@@ -24,6 +25,7 @@ public class PlayerMovement : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+		_animeScript = GetComponent<AnimeController> ();
         controller = GetComponent<CharacterController>();
         anime = GetComponent<Animator>();
         rigidbody = GetComponent<Rigidbody>();
@@ -45,25 +47,24 @@ public class PlayerMovement : MonoBehaviour {
             {
                 Flip();
             }
-            anime.SetInteger("AnimChar", 1);
+			_animeScript.RunAnimation ();
         }
 
-        if (value < 0)
+        else if (value < 0)
         {
            
             if (_facingRight == true)
             {
                 Flip();
             }
-            anime.SetInteger("AnimChar", 1);
+			_animeScript.RunAnimation ();
         }
+		else if (value == 0 && verticalVelocity == 0)
+		{
+			_animeScript.StanceAnimation ();
+		}
 
-        if (value == 0)
-        {
-           anime.SetInteger("AnimChar", 0);
-        }
-
-        //Debug.Log(inputDirection);
+		//----------------------------------------------------------------------------
         //hyppy joka on mahdollinen kun grounded
         if (IsControllerGrounded())
         {
@@ -71,6 +72,7 @@ public class PlayerMovement : MonoBehaviour {
 
             if (Input.GetButtonDown("P1Jump"))
             {
+				_animeScript.JumpAnimation ();
                 verticalVelocity = jumpForce;
                 //Kun ilmassa secondjump on aktiivinen
                 secondJumpAvail = true;
@@ -105,16 +107,16 @@ public class PlayerMovement : MonoBehaviour {
     }
     void FixedUpdate()
     {   //tässä tippumis animaation laukaisu rigidbodylla
-        Debug.Log(moveVector.y);
-        if (moveVector.y > 0f)
+        //Debug.Log(moveVector.y);
+       	if (moveVector.y > 0f)
         {
-            Debug.Log("hyppaan");
-            anime.SetInteger("AnimChar", 2);
+            //Debug.Log("hyppaan");
+            
         }
         else if (moveVector.y < 0f)
         {
             Debug.Log("tipun");
-            anime.SetInteger("AnimChar", 3);
+			_animeScript.FallingAnimation ();
         }
     }
 
