@@ -47,7 +47,7 @@ public class PlayerMovement : MonoBehaviour {
             {
                 Flip();
             }
-			_animeScript.RunAnimation ();
+			//_animeScript.RunAnimation ();
         }
 
         else if (value < 0)
@@ -57,11 +57,11 @@ public class PlayerMovement : MonoBehaviour {
             {
                 Flip();
             }
-			_animeScript.RunAnimation ();
+			//_animeScript.RunAnimation ();
         }
 		else if (value == 0 && verticalVelocity == 0)
 		{
-			_animeScript.StanceAnimation ();
+			//_animeScript.StanceAnimation ();
 		}
 
 		//----------------------------------------------------------------------------
@@ -72,7 +72,7 @@ public class PlayerMovement : MonoBehaviour {
 
             if (Input.GetButtonDown("P1Jump"))
             {
-				_animeScript.JumpAnimation ();
+				//_animeScript.JumpAnimation ();
                 verticalVelocity = jumpForce;
                 //Kun ilmassa secondjump on aktiivinen
                 secondJumpAvail = true;
@@ -116,7 +116,7 @@ public class PlayerMovement : MonoBehaviour {
         else if (moveVector.y < 0f)
         {
             Debug.Log("tipun");
-			_animeScript.FallingAnimation ();
+			//_animeScript.FallingAnimation ();
         }
     }
 
