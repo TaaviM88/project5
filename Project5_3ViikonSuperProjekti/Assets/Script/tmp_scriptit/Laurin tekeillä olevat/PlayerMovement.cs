@@ -15,17 +15,27 @@ public class PlayerMovement : MonoBehaviour {
     private bool _facingRight = true;
     public float value;
     
-	AnimeController _animeScript;
+	//AnimeController _animeScript;
     private Animator anime;
     private Rigidbody rigidbody;
     private Vector3 moveVector;
     //lastmotionilla lukittiin hypyn suunta
     private Vector3 lastMotion;
     private CharacterController controller;
+
+	/*Animaatio STATET---------------------------------------------
+	 * State 0 = Ase stance(idle)
+	 * State 1 = Run with hands
+	 * State 2 = Jump Up
+	 * State 3 = Falling
+	 * State 4 = attackk
+	 * State 5 = walljump
+	 *--------------------------------------------------------------
+	*/
     // Use this for initialization
     void Start()
     {
-		_animeScript = GetComponent<AnimeController> ();
+		//_animeScript = GetComponent<AnimeController> ();
         controller = GetComponent<CharacterController>();
         anime = GetComponent<Animator>();
         rigidbody = GetComponent<Rigidbody>();
@@ -34,9 +44,9 @@ public class PlayerMovement : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+		//LIIKKUMINEN JA FLIP, Run ja Idle animaatio ----------------------------------------------------------------
         IsControllerGrounded();
         moveVector = Vector3.zero;
-        //saisko tähän määritettyä että jos inputtia ei tule on x velocity yhtäkuin 0?
         inputDirection = Input.GetAxis("P1movement") * speed;
         value = Input.GetAxis("P1movement");
         //Debug.Log(value);
@@ -47,32 +57,47 @@ public class PlayerMovement : MonoBehaviour {
             {
                 Flip();
             }
-			//_animeScript.RunAnimation ();
+			if (IsControllerGrounded()) 
+			{	
+				anime.SetInteger ("State", 1);
+			}
         }
 
-        else if (value < 0)
+        if (value < 0)
         {
            
             if (_facingRight == true)
             {
                 Flip();
             }
-			//_animeScript.RunAnimation ();
+			if (IsControllerGrounded()) 
+			{	
+				anime.SetInteger ("State", 1);
+			}
         }
-		else if (value == 0 && verticalVelocity == 0)
+		if (value == 0 && verticalVelocity == 0)
 		{
-			//_animeScript.StanceAnimation ();
+			anime.SetInteger ("State", 0);
 		}
 
 		//----------------------------------------------------------------------------
-        //hyppy joka on mahdollinen kun grounded
+
+		//HYÖKKÄYS ANIMAATIO (hyökkäys komento itsessään on playeruseskill.cs)
+
+		if (Input.GetButtonDown("P1Fire"))
+		{
+			anime.SetInteger ("State", 4);
+		}
+
+		//----------------------------------------------------------------------------
+        //HYPPY, TUPLAHYPPY ja molempien animaatiot
         if (IsControllerGrounded())
         {
             verticalVelocity = 0;
 
             if (Input.GetButtonDown("P1Jump"))
             {
-				//_animeScript.JumpAnimation ();
+				anime.SetInteger ("State", 2);
                 verticalVelocity = jumpForce;
                 //Kun ilmassa secondjump on aktiivinen
                 secondJumpAvail = true;
@@ -86,6 +111,7 @@ public class PlayerMovement : MonoBehaviour {
             {
                 if(secondJumpAvail)
                 {
+					anime.SetInteger ("State", 2);
                     verticalVelocity = jumpForce;
                     secondJumpAvail = false;
                 }
@@ -96,7 +122,7 @@ public class PlayerMovement : MonoBehaviour {
                 //moveVector.x = inputDirection;
                 //moveVector.y = inputDirection;
             //Jos haluat fixedjump ota käyttöön
-                moveVector.x = lastMotion.x;
+               moveVector.x = lastMotion.x;
         }
 
         moveVector.y = verticalVelocity;
@@ -105,21 +131,30 @@ public class PlayerMovement : MonoBehaviour {
         lastMotion = moveVector;
 
     }
+
+	//-----------------------------------------------------------------------------------------------
+
     void FixedUpdate()
-    {   //tässä tippumis animaation laukaisu rigidbodylla
+    {   
+		//tässä FALLING animaation laukaisu rigidbodylla
+
         //Debug.Log(moveVector.y);
-       	if (moveVector.y > 0f)
+		if (moveVector.y != 0f /*&& Input.GetButtonUp("P1Jump")*/)
         {
-            //Debug.Log("hyppaan");
+            Debug.Log("hyppasin, menen up ja hyppy ei pohjassa");
+			anime.SetInteger ("State", 3);
             
         }
-        else if (moveVector.y < 0f)
+        /*if (moveVector.y < 0f)
         {
             Debug.Log("tipun");
+			anime.SetInteger ("State", 3);
 			//_animeScript.FallingAnimation ();
-        }
+        }*/
     }
+	//-------------------------------------------------------------------------------------
 
+	// GROUNDED CHECK RAYCASTILLA
     // Raycast grounded check https://www.youtube.com/watch?v=8Cado6CzZUA&list=PLLH3mUGkfFCWwekOW1OMxyyIgc-Qm1OhI&index=10
     private bool IsControllerGrounded()
     {
@@ -152,21 +187,25 @@ public class PlayerMovement : MonoBehaviour {
         return false;
 
     }
+	//------------------------------------------------------------------------------------
 
-    //walljump
+    //TÄSSÄ WALLJUMP JA SEN ANIMAATIO
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
       if(controller.collisionFlags == CollisionFlags.Sides)
         {
             if(Input.GetButtonDown("P1Jump"))
             {
+				anime.SetInteger ("State", 5);
                 moveVector = hit.normal * speed;
                 verticalVelocity = jumpForce;
             }
             
         }
     }
+	//--------------------------------------------------------------------------------------
 
+	//TÄSSÄ MÄÄRITELTIIN FLIPPI
     private void Flip()
     {
         _facingRight = !_facingRight;
