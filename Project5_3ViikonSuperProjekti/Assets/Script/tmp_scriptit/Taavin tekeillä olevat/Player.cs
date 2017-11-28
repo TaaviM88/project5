@@ -9,15 +9,21 @@ public class Player : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         _cardList = new List<Card>();
+		GameManager.gamemanager.AddPlayer(this);
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
-    public void AddCardToPlayer(Card card)
+    public bool AddCardToPlayer(Card card)
     {
+		if(_cardList.Count <=6)
+		{
         _cardList.Add(card);
+		return true;
+		}
+		return false;
     }
  
    

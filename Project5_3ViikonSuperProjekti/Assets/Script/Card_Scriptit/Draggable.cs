@@ -8,6 +8,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
    public Transform parentToReturnTo = null;
    public Transform placeholderParent = null;
    GameObject placeholder = null;
+   private Player _player;
   /* public enum Slot { WEAPON, HEAD, CHEST, LEGS, FEET, INVENTORY };
    public Slot typeOfItem = Slot.WEAPON;*/
     public void OnBeginDrag(PointerEventData eventData)
@@ -62,15 +63,18 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         GetComponent<CanvasGroup>().blocksRaycasts = true;
         if (transform.parent.name == "Player1")
         {
-             GameManager.gamemanager.Getplayer(PlayerType.player1);
+           
+           _player = GameManager.gamemanager.GetPlayer(GameTypes.PlayerType.player1);
+           Debug.Log(_player);
             Card _card = GetComponent<Card>();
-            
-            
+           
+			_player.AddCardToPlayer(_card);
+			Debug.Log(_card+"Vittu");
             //kortilla saadaan skillin tiedot, pelaajalla pitää olla playerskillset. Player1 on skillsetti addtoplayer metodilla 
         }
         if (transform.parent.name == "Player2")
         {
-            GameManager.gamemanager.Getplayer(PlayerType.player2);
+          _player =  GameManager.gamemanager.GetPlayer(GameTypes.PlayerType.player2);
             
         }
         this.transform.SetSiblingIndex(placeholder.transform.GetSiblingIndex());

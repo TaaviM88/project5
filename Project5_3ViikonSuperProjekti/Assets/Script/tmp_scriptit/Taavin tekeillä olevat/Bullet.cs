@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour {
-    private float speed = 50f;
+    public float speed = 3f;
     public int powerUpInt = 0;
     public float damage = 0f;
+    public float timer = 10f;
     private Vector3 bulletMovement;
     private Vector3 bulletRotation;
+    private int direction = 1;
 	// Use this for initialization
 
     void Update()
     {
-        transform.position += bulletMovement;
+        transform.position +=  direction* bulletMovement;
         transform.localRotation *= Quaternion.Euler(bulletRotation);
     }
     void OnEnable()
@@ -50,7 +52,7 @@ public class Bullet : MonoBehaviour {
                 break;
         }
 
-        Invoke("Destroy", 2f);
+        Invoke("Destroy", timer);
     }
 
     void Destroy()
@@ -69,5 +71,9 @@ public class Bullet : MonoBehaviour {
         {
             Destroy();
         }
+    }
+    public void ChangeDirection()
+    {
+        direction *= -1;
     }
 }
