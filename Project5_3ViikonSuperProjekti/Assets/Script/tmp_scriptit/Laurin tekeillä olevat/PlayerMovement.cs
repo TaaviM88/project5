@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour {
     private bool secondJumpAvail = false;
     private bool _facingRight = true;
     public float value;
-    
+
 	//AnimeController _animeScript;
     private Animator anime;
     private Rigidbody rigidbody;
@@ -61,6 +61,7 @@ public class PlayerMovement : MonoBehaviour {
 			{	
 				anime.SetInteger ("State", 1);
 			}
+
         }
 
         if (value < 0)
@@ -74,10 +75,12 @@ public class PlayerMovement : MonoBehaviour {
 			{	
 				anime.SetInteger ("State", 1);
 			}
+
         }
 		if (value == 0 && verticalVelocity == 0)
 		{
 			anime.SetInteger ("State", 0);
+
 		}
 
 		//----------------------------------------------------------------------------

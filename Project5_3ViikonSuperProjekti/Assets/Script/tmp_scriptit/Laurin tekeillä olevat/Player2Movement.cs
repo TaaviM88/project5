@@ -119,10 +119,10 @@ public class Player2Movement : MonoBehaviour {
 
 			verticalVelocity -= gravity * Time.deltaTime;
 			//Jos haluat vapaan liikkumisen ja vapaan hyppy suunnan, ota kaksi seuraavaa käyttöön
-			//moveVector.x = inputDirection;
-			//moveVector.y = inputDirection;
+			moveVector.x = inputDirection;
+			moveVector.y = inputDirection;
 			//Jos haluat fixedjump ota käyttöön
-			moveVector.x = lastMotion.x;
+			//moveVector.x = lastMotion.x;
 		}
 
 		moveVector.y = verticalVelocity;
