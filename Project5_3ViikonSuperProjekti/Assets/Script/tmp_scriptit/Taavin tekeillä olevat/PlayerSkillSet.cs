@@ -58,7 +58,16 @@ namespace Skills
               Debug.Log("whoosh");
               /* FireBall-prefabin luonti */
               GameObject _prefab = GameManager.gamemanager.Effectlist.GetEffect(Skill.Fireball);
-              GameObject clone = UnityEngine.Object.Instantiate(_prefab, Player.transform.position, Player.transform.rotation);
+              GameObject clone = UnityEngine.Object.Instantiate(_prefab, Player.GetComponentInChildren<PlayerUseSkill>().transform.position, Player.transform.rotation);
+
+              if (Player.transform.localScale.z == -1)
+              {
+                  ParticleSystem localvelo = clone.GetComponent<ParticleSystem>();
+                  var vel = localvelo.velocityOverLifetime;
+
+                  
+              }
+
              /*Vector3 _scale = clone.transform.localScale;
              _scale.z = Player.transform.localScale.z;
              clone.transform.localScale = _scale;*/

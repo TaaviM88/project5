@@ -7,16 +7,18 @@ public class PlayerUseSkill : MonoBehaviour
 public  GameObject playerGameObject;
 public  GameObject cardGameObject;
 Card _card;
-PlayerSkillSet _player;
+PlayerSkillSet _playerSkillSet;
+Player _playerscript;
 void Awake()
 {
-    _player = playerGameObject.GetComponent<PlayerSkillSet>();
+    _playerSkillSet = playerGameObject.GetComponent<PlayerSkillSet>();
     _card = cardGameObject.GetComponent<Card>();
+    _playerscript = GetComponentInParent<Player>().GetComponent<Player>();
 }
 void Start()
 {
     //Debug.Log(_card.cardSkill);
-    _player.AddSkillToPlayer(_card.cardSkill);
+    _playerSkillSet.AddSkillToPlayer(_card.cardSkill);
    
 }
     void Update()
@@ -27,14 +29,29 @@ void Start()
        _scale.x = transform.parent.localScale.z;*/
 
         //P1FIRE
-        if (Input.GetButtonDown("P1Fire"))
-        {   
-         //Luo kortissa määritellyn prefabin(effektin)
-        /* GameObject  clone = Instantiate(_card.effect, transform.position,transform.rotation);
-         clone.transform.localScale = _scale;*/
-        // clone.transform.parent = transform.parent;
-            _player.UseSkillOnPlayer(_card.cardSkill);
-            _player.RemoveSkillToPlayer(_card.cardSkill);
+        if (_playerscript.playerType == GameTypes.PlayerType.player1)
+        {
+            if (Input.GetButtonDown("P1Fire"))
+            {
+                //Luo kortissa määritellyn prefabin(effektin)
+                /* GameObject  clone = Instantiate(_card.effect, transform.position,transform.rotation);
+                 clone.transform.localScale = _scale;*/
+                // clone.transform.parent = transform.parent;
+                _playerSkillSet.UseSkillOnPlayer(_card.cardSkill);
+                _playerSkillSet.RemoveSkillToPlayer(_card.cardSkill);
+            }
+        }
+        if (_playerscript.playerType == GameTypes.PlayerType.player2)
+        {
+            if (Input.GetButtonDown("P2Fire"))
+            {
+                //Luo kortissa määritellyn prefabin(effektin)
+                /* GameObject  clone = Instantiate(_card.effect, transform.position,transform.rotation);
+                 clone.transform.localScale = _scale;*/
+                // clone.transform.parent = transform.parent;
+                _playerSkillSet.UseSkillOnPlayer(_card.cardSkill);
+                _playerSkillSet.RemoveSkillToPlayer(_card.cardSkill);
+            }
         }
     }
 }
