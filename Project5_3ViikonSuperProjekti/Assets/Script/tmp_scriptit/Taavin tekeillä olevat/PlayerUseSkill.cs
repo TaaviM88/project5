@@ -18,7 +18,7 @@ void Awake()
 void Start()
 {
     //Debug.Log(_card.cardSkill);
-    _playerSkillSet.AddSkillToPlayer(_card.cardSkill);
+    //_playerSkillSet.AddSkillToPlayer(_card.cardSkill);
    
 }
     void Update()
@@ -31,15 +31,25 @@ void Start()
         //P1FIRE
         if (_playerscript.playerType == GameTypes.PlayerType.player1)
         {
-            if (Input.GetButtonDown("P1Fire"))
+            if (Input.GetButtonDown("P1Fire") && _playerscript._cardList.Count != 0)
             {
                 //Luo kortissa määritellyn prefabin(effektin)
                 /* GameObject  clone = Instantiate(_card.effect, transform.position,transform.rotation);
                  clone.transform.localScale = _scale;*/
                 // clone.transform.parent = transform.parent;
+                /*for (int i = 0; i <= _playerscript._cardList.Count;i++ )
+                {
+                    //Kortti joka sijoitetaan _card ja sitten käytetään useSkillonplayer(_card.cardskill), käytön jälkeen poistetaan
+                    _card = _playerscript._cardList[i];
+                }*/
+                _card = _playerscript._cardList[0];
                 _playerSkillSet.UseSkillOnPlayer(_card.cardSkill);
-                _playerSkillSet.RemoveSkillToPlayer(_card.cardSkill);
+                _playerscript.RemoveCardFromPlayer(_card);
+                //_playerSkillSet.RemoveSkillToPlayer(_card.cardSkill);    
             }
+            else
+            { print("Out of skill"); }
+
         }
         if (_playerscript.playerType == GameTypes.PlayerType.player2)
         {

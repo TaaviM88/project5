@@ -61,7 +61,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
         this.transform.SetParent(parentToReturnTo);
         GetComponent<CanvasGroup>().blocksRaycasts = true;
-        if (transform.parent.name == "Player1")
+        if (transform.parent.name == "Player1_tab")
         {
            
            _player = GameManager.gamemanager.GetPlayer(GameTypes.PlayerType.player1);
@@ -72,7 +72,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 			Debug.Log(_card+"Vittu");
             //kortilla saadaan skillin tiedot, pelaajalla pitää olla playerskillset. Player1 on skillsetti addtoplayer metodilla 
         }
-        if (transform.parent.name == "Player2")
+        if (transform.parent.name == "Player2_tab")
         {
           _player =  GameManager.gamemanager.GetPlayer(GameTypes.PlayerType.player2);
             

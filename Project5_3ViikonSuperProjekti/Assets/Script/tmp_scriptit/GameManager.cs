@@ -55,4 +55,5 @@ public class GameManager : MonoBehaviour {
         Time.timeScale = 1;
         Debug.Log("Aika pysäytetty" + Time.timeScale);
     }
+
 }

@@ -6,6 +6,7 @@ public class ButtonManager : MonoBehaviour {
 
     public AudioClip ButtonSoundEffect;
     private AudioSource source;
+    public GameObject _canvas;
     void Start()
     {
         source = GetComponent<AudioSource>();
@@ -20,5 +21,14 @@ public class ButtonManager : MonoBehaviour {
     {
         source.PlayOneShot(ButtonSoundEffect);
         Application.Quit();
+    }
+    public void CanvasDisable()
+    {
+        _canvas.SetActive(false);
+    }
+
+    public void CanvasEnable()
+    {
+        _canvas.SetActive(true);
     }
 }

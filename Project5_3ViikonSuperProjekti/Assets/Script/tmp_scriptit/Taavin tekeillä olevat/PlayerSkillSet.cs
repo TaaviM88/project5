@@ -62,34 +62,50 @@ namespace Skills
 
               if (Player.transform.localScale.z == -1)
               {
-                  ParticleSystem localvelo = clone.GetComponent<ParticleSystem>();
+                  //clone.transform.Rotate(new Vector3(180, 0, 0));  
+                  Vector3 _scale = clone.transform.localScale;
+                  _scale.x = Player.transform.localScale.z;
+                  clone.transform.localScale = _scale;
+                                          
+                  /*ParticleSystem localvelo = clone.GetComponent<ParticleSystem>();
                   var vel = localvelo.velocityOverLifetime;
-
-                  
+                  vel.x *= -1;*/
+                  /*Vector3 _scale = clone.transform.localScale;
+                  _scale.x *= -1; //Player.transform.localScale.z;
+                  clone.transform.localScale = _scale;
+                  //clone.transform.localScale = Player.transform.localScale;
+                  */
               }
 
              /*Vector3 _scale = clone.transform.localScale;
              _scale.z = Player.transform.localScale.z;
              clone.transform.localScale = _scale;*/
-              //clone.transform.localScale = Player.transform.localScale;
+             //clone.transform.localScale = Player.transform.localScale;
           }},
           {Skill.FireArrow, (PlayerSkillSet, Player) => {
               PlayerSkillSet.health -= 1;
-              GameObject _prefab = GameManager.gamemanager.Effectlist.GetEffect(Skill.FireArrow);
+               GameObject _prefab = GameManager.gamemanager.Effectlist.GetEffect(Skill.FireArrow);
               GameObject clone = UnityEngine.Object.Instantiate(_prefab, Player.GetComponentInChildren<PlayerUseSkill>().transform.position, Player.transform.rotation);
-              //Debug.Log((Player.GetComponentInParent<Transform>().localScale.z));
-              Debug.Log(Player.transform.localScale);
-              if( Player.transform.localScale.z == -1)
+
+              if (Player.transform.localScale.z == -1)
               {
+                    Vector3 _scale = clone.transform.localScale;
+                  _scale.x = Player.transform.localScale.z;
+                  clone.transform.localScale = _scale;
                   clone.GetComponent<Bullet>().ChangeDirection();
               }
-             /* if(Player.GetComponentInParent<Transform>().localScale.z == -1)
-              {
-                  Debug.Log("pelaaja katsoo vasemmalle"+(Player.GetComponentInParent<Transform>().localScale.z));
-                   clone.GetComponent<Bullet>().ChangeDirection();
-              }*/
              
               
+          }},
+           {Skill.Plasma, (PlayerSkillSet, Player) => {
+              PlayerSkillSet.health -= 1;
+              GameObject _prefab = GameManager.gamemanager.Effectlist.GetEffect(Skill.Plasma);
+              GameObject clone = UnityEngine.Object.Instantiate(_prefab, Player.GetComponentInChildren<PlayerUseSkill>().transform.position, Player.transform.rotation);
+              if (Player.transform.localScale.z == -1)
+              {
+
+                  clone.GetComponent<Bullet>().ChangeDirection();
+              }
           }},
           {Skill.IceArrow, (PlayerSkillSet, Player) => {
               PlayerSkillSet.health -= 1;
@@ -97,9 +113,12 @@ namespace Skills
               GameObject clone = UnityEngine.Object.Instantiate(_prefab, Player.GetComponentInChildren<PlayerUseSkill>().transform.position, Player.transform.rotation);
               if (Player.transform.localScale.z == -1)
               {
-
+                    Vector3 _scale = clone.transform.localScale;
+                  _scale.x = Player.transform.localScale.z;
+                  clone.transform.localScale = _scale;
                   clone.GetComponent<Bullet>().ChangeDirection();
               }
+             
           }},
           {Skill.IceStorm, (PlayerSkillSet, Player) => {PlayerSkillSet.health -= 1;
             GameObject _prefab = GameManager.gamemanager.Effectlist.GetEffect(Skill.IceStorm);
@@ -117,12 +136,7 @@ namespace Skills
           {Skill.Shield,   (PlayerSkillSet, Player) => {
               PlayerSkillSet.armor = 1;
               GameObject _prefab = GameManager.gamemanager.Effectlist.GetEffect(Skill.Shield);
-              GameObject clone = UnityEngine.Object.Instantiate(_prefab, Player.GetComponentInChildren<PlayerUseSkill>().transform.position, Player.transform.rotation);
-              if (Player.transform.localScale.z == -1)
-              {
-
-                  clone.GetComponent<Bullet>().ChangeDirection();
-              }
+              GameObject clone = UnityEngine.Object.Instantiate(_prefab, Player.GetComponentInChildren<PlayerUseSkill>().transform.position, Player.transform.rotation); 
           }},
           {Skill.Meteor,   (PlayerSkillSet, Player) => {PlayerSkillSet.health -= 1;}},
       };
@@ -140,12 +154,13 @@ public class PlayerSkillSet : MonoBehaviour
         _playerStats = new Stats.PlayerStats();
         _player = GetComponentInParent<Player>();
     }
-
+    //lisää pelaajalle skillin
     public void AddSkillToPlayer(Skills.Skill skill)
     {
         _playerStats.skills.Add(skill);
     }
 
+    //poistaa yhden skillin pelaajalta
     public void RemoveSkillToPlayer(Skills.Skill skill)
     {
         //poistaa yhden skillin
@@ -155,6 +170,7 @@ public class PlayerSkillSet : MonoBehaviour
         }
 
     }
+    //poistaa kaikki skillit pelaajalta
     public void clearSkillToPlayer(Skills.Skill skill)
     {
         //tyhjentää koko listan
@@ -164,7 +180,7 @@ public class PlayerSkillSet : MonoBehaviour
         }
     }
 
-
+    //Käyttää skillin
     public void UseSkillOnPlayer(Skills.Skill skill)
     {
         if (Skills.Actions.SkillActions.ContainsKey(skill))

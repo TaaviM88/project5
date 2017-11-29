@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour {
     public GameTypes.PlayerType playerType = GameTypes.PlayerType.None;
     PlayerSkillSet _skillset;
-    List<Card> _cardList;
+  public  List<Card> _cardList;
 	// Use this for initialization
 	void Start () {
         _cardList = new List<Card>();
@@ -25,6 +25,14 @@ public class Player : MonoBehaviour {
 		}
 		return false;
     }
- 
+    public bool RemoveCardFromPlayer(Card card)
+    {
+        if(_cardList.Count !=0)
+        {
+            _cardList.RemoveAt(0);
+            return true;
+        }
+        return false;
+    }
    
 }

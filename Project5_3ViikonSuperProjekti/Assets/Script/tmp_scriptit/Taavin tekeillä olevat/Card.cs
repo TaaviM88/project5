@@ -7,6 +7,7 @@ public class Card : MonoBehaviour {
     public GameObject effect;
 	// Use this for initialization
 	void Start () {
+        //Kommentoi jos error
         //cardSkill = GetComponent<Skills.Skill>();
 	}
 	
