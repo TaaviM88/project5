@@ -59,9 +59,11 @@ void Start()
                 /* GameObject  clone = Instantiate(_card.effect, transform.position,transform.rotation);
                  clone.transform.localScale = _scale;*/
                 // clone.transform.parent = transform.parent;
+                _card = _playerscript._cardList[0];
                 _playerSkillSet.UseSkillOnPlayer(_card.cardSkill);
-                _playerSkillSet.RemoveSkillToPlayer(_card.cardSkill);
+                _playerscript.RemoveCardFromPlayer(_card);
             }
+            { print("Out of skill"); }
         }
     }
 }
