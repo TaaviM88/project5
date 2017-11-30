@@ -66,7 +66,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
            
            _player = GameManager.gamemanager.GetPlayer(GameTypes.PlayerType.player1);
            Debug.Log(_player);
-            Card _card = GetComponent<Card>();
+           Card _card = GetComponent<Card>();
            
 			_player.AddCardToPlayer(_card);
 			Debug.Log(_card+"Vittu");
@@ -75,6 +75,8 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         if (transform.parent.name == "Player2_tab")
         {
           _player =  GameManager.gamemanager.GetPlayer(GameTypes.PlayerType.player2);
+          Card _card = GetComponent<Card>();
+          _player.AddCardToPlayer(_card);
             
         }
         this.transform.SetSiblingIndex(placeholder.transform.GetSiblingIndex());
@@ -82,6 +84,5 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         //Ota hohto efekti pois päältä jos tehty
         //Tsekkailee mitä on kortin alla.
         //EventSystem.current.RaycastAll(eventData)
-
     }
 }
