@@ -91,6 +91,8 @@ public class PlayerMovement : MonoBehaviour {
 		if (Input.GetButtonDown("P1Fire"))
 		{
 			anime.SetInteger ("State", 4);
+			//AudioManager.audioManager.WandSwing ();
+			AudioManager.audioManager.WandSwing ();
 		}
 
 		//----------------------------------------------------------------------------
