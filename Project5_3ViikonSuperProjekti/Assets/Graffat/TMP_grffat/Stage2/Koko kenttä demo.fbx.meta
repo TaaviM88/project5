@@ -1,0 +1,322 @@
+fileFormatVersion: 2
+guid: 6ba8d4a2fa89b654a897ad8f11eee323
+timeCreated: 1512114242
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Cube.003
+    100002: Cube.006
+    100004: Cube.007
+    100006: Cube.009
+    100008: Cube.010
+    100010: Cube.011
+    100012: Cube.012
+    100014: Cube.013
+    100016: Cube.014
+    100018: Cube.015
+    100020: //RootNode
+    100022: Kukkanen.001
+    100024: Kukkanen.002
+    100026: Leaf1.001
+    100028: Leaf1.002
+    100030: Leaf1.003
+    100032: Leaf1.004
+    100034: Leaf1.005
+    100036: Leaf2.001
+    100038: Mushroom1.002
+    100040: Mushroom1.003
+    100042: Mushroom2 lowpoly.001
+    100044: Mushroom2 lowpoly.002
+    100046: Ruoho1
+    100048: Ruoho1.001
+    100050: Ruoho1.002
+    100052: Ruoho1.003
+    100054: Ruoho1.004
+    100056: Ruoho1.005
+    100058: Ruoho1.006
+    100060: Ruoho1.007
+    100062: Ruoho1.008
+    100064: Ruoho1.009
+    100066: Ruoho1.010
+    100068: Ruoho1.011
+    100070: Ruoho1.012
+    100072: Ruoho1.013
+    100074: Ruoho1.014
+    100076: Ruoho1.015
+    100078: Ruoho1.016
+    100080: Ruoho1.017
+    100082: Ruoho1.018
+    100084: Ruoho1.019
+    100086: Ruoho1.020
+    100088: Ruoho1.021
+    100090: Stage2_middle.001
+    100092: Vines1
+    100094: Vines2
+    100096: Vines3
+    100098: Vines4
+    400000: Cube.003
+    400002: Cube.006
+    400004: Cube.007
+    400006: Cube.009
+    400008: Cube.010
+    400010: Cube.011
+    400012: Cube.012
+    400014: Cube.013
+    400016: Cube.014
+    400018: Cube.015
+    400020: //RootNode
+    400022: Kukkanen.001
+    400024: Kukkanen.002
+    400026: Leaf1.001
+    400028: Leaf1.002
+    400030: Leaf1.003
+    400032: Leaf1.004
+    400034: Leaf1.005
+    400036: Leaf2.001
+    400038: Mushroom1.002
+    400040: Mushroom1.003
+    400042: Mushroom2 lowpoly.001
+    400044: Mushroom2 lowpoly.002
+    400046: Ruoho1
+    400048: Ruoho1.001
+    400050: Ruoho1.002
+    400052: Ruoho1.003
+    400054: Ruoho1.004
+    400056: Ruoho1.005
+    400058: Ruoho1.006
+    400060: Ruoho1.007
+    400062: Ruoho1.008
+    400064: Ruoho1.009
+    400066: Ruoho1.010
+    400068: Ruoho1.011
+    400070: Ruoho1.012
+    400072: Ruoho1.013
+    400074: Ruoho1.014
+    400076: Ruoho1.015
+    400078: Ruoho1.016
+    400080: Ruoho1.017
+    400082: Ruoho1.018
+    400084: Ruoho1.019
+    400086: Ruoho1.020
+    400088: Ruoho1.021
+    400090: Stage2_middle.001
+    400092: Vines1
+    400094: Vines2
+    400096: Vines3
+    400098: Vines4
+    2300000: Cube.003
+    2300002: Cube.006
+    2300004: Cube.007
+    2300006: Cube.009
+    2300008: Cube.010
+    2300010: Cube.011
+    2300012: Cube.012
+    2300014: Cube.013
+    2300016: Cube.014
+    2300018: Cube.015
+    2300020: Kukkanen.001
+    2300022: Kukkanen.002
+    2300024: Leaf1.001
+    2300026: Leaf1.002
+    2300028: Leaf1.003
+    2300030: Leaf1.004
+    2300032: Leaf1.005
+    2300034: Leaf2.001
+    2300036: Mushroom1.002
+    2300038: Mushroom1.003
+    2300040: Mushroom2 lowpoly.001
+    2300042: Mushroom2 lowpoly.002
+    2300044: Ruoho1
+    2300046: Ruoho1.001
+    2300048: Ruoho1.002
+    2300050: Ruoho1.003
+    2300052: Ruoho1.004
+    2300054: Ruoho1.005
+    2300056: Ruoho1.006
+    2300058: Ruoho1.007
+    2300060: Ruoho1.008
+    2300062: Ruoho1.009
+    2300064: Ruoho1.010
+    2300066: Ruoho1.011
+    2300068: Ruoho1.012
+    2300070: Ruoho1.013
+    2300072: Ruoho1.014
+    2300074: Ruoho1.015
+    2300076: Ruoho1.016
+    2300078: Ruoho1.017
+    2300080: Ruoho1.018
+    2300082: Ruoho1.019
+    2300084: Ruoho1.020
+    2300086: Ruoho1.021
+    2300088: Stage2_middle.001
+    2300090: Vines1
+    2300092: Vines2
+    2300094: Vines3
+    2300096: Vines4
+    3300000: Cube.003
+    3300002: Cube.006
+    3300004: Cube.007
+    3300006: Cube.009
+    3300008: Cube.010
+    3300010: Cube.011
+    3300012: Cube.012
+    3300014: Cube.013
+    3300016: Cube.014
+    3300018: Cube.015
+    3300020: Kukkanen.001
+    3300022: Kukkanen.002
+    3300024: Leaf1.001
+    3300026: Leaf1.002
+    3300028: Leaf1.003
+    3300030: Leaf1.004
+    3300032: Leaf1.005
+    3300034: Leaf2.001
+    3300036: Mushroom1.002
+    3300038: Mushroom1.003
+    3300040: Mushroom2 lowpoly.001
+    3300042: Mushroom2 lowpoly.002
+    3300044: Ruoho1
+    3300046: Ruoho1.001
+    3300048: Ruoho1.002
+    3300050: Ruoho1.003
+    3300052: Ruoho1.004
+    3300054: Ruoho1.005
+    3300056: Ruoho1.006
+    3300058: Ruoho1.007
+    3300060: Ruoho1.008
+    3300062: Ruoho1.009
+    3300064: Ruoho1.010
+    3300066: Ruoho1.011
+    3300068: Ruoho1.012
+    3300070: Ruoho1.013
+    3300072: Ruoho1.014
+    3300074: Ruoho1.015
+    3300076: Ruoho1.016
+    3300078: Ruoho1.017
+    3300080: Ruoho1.018
+    3300082: Ruoho1.019
+    3300084: Ruoho1.020
+    3300086: Ruoho1.021
+    3300088: Stage2_middle.001
+    3300090: Vines1
+    3300092: Vines2
+    3300094: Vines3
+    3300096: Vines4
+    4300000: Kukkanen.002
+    4300002: Kukkanen.001
+    4300004: Mushroom1.003
+    4300006: Mushroom1.002
+    4300008: Mushroom2 lowpoly.002
+    4300010: Mushroom2 lowpoly.001
+    4300012: Cube.013
+    4300014: Cube.015
+    4300016: Cube.014
+    4300018: Cube.012
+    4300020: Cube.011
+    4300022: Leaf1.005
+    4300024: Leaf1.004
+    4300026: Leaf1.003
+    4300028: Leaf1.002
+    4300030: Cube.010
+    4300032: Ruoho1.021
+    4300034: Ruoho1.020
+    4300036: Ruoho1.019
+    4300038: Ruoho1.018
+    4300040: Ruoho1.017
+    4300042: Ruoho1.016
+    4300044: Ruoho1.015
+    4300046: Ruoho1.014
+    4300048: Ruoho1.013
+    4300050: Ruoho1.012
+    4300052: Ruoho1.011
+    4300054: Ruoho1.010
+    4300056: Ruoho1.009
+    4300058: Ruoho1.008
+    4300060: Ruoho1.007
+    4300062: Ruoho1.006
+    4300064: Ruoho1.005
+    4300066: Ruoho1.004
+    4300068: Ruoho1.003
+    4300070: Ruoho1.002
+    4300072: Ruoho1.001
+    4300074: Ruoho1
+    4300076: Vines4
+    4300078: Vines3
+    4300080: Vines2
+    4300082: Vines1
+    4300084: Cube.009
+    4300086: Cube.007
+    4300088: Cube.006
+    4300090: Leaf1.001
+    4300092: Leaf2.001
+    4300094: Cube.003
+    4300096: Stage2_middle.001
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
