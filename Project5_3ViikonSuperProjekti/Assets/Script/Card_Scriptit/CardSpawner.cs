@@ -5,14 +5,20 @@ using UnityEngine;
 public class CardSpawner : MonoBehaviour {
     Card[] CardsPrefabs;
     List<Card> _cards =  new List<Card>();
-    public int CardAmount = 6;
+    public int CardAmountRandomised = 6;
+    public bool CardRandomizer = false;
 	// Use this for initialization
 	void Start () {
         CardsPrefabs = Resources.LoadAll<Card>("Cards");
-        CreateCards();
-        //RandomizeCards();
+        if (CardRandomizer == true)
+        {
+            RandomizeCards();
+        }
+        else { CreateCards(); }
+        
 	}
 
+    //Luo kortteja. J merkkaa montako samaa korttia luodaan
     public void CreateCards()
     {
         for (int i = 0; i < CardsPrefabs.Length; i++)
@@ -23,10 +29,10 @@ public class CardSpawner : MonoBehaviour {
             }
         }
     }
-
+    // randomisti antaa kortteja
     public void RandomizeCards()
-    { 
-        for (int i = 0; i < CardAmount; i++)
+    {
+        for (int i = 0; i < CardAmountRandomised; i++)
         {
             int randomindex = Random.Range(0, CardsPrefabs.Length);
                 _cards.Add(Instantiate(CardsPrefabs[randomindex], transform));
