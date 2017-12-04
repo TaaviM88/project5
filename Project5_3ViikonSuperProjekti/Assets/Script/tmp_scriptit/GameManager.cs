@@ -8,9 +8,11 @@ using UnityEngine;
 }*/
 
 public class GameManager : MonoBehaviour {
-    public static GameManager gamemanager;
-    List<Player> listPlayers;
+   public static GameManager gamemanager;
+   List<Player> listPlayers;
    public GameTypes.PlayerType _player;
+   ///UIRoundOver _uiRoundOver;
+   public GameObject RoundOverCanvas;
    private Effect_Container _effectContainer;
    public Effect_Container Effectlist { get 
    {
@@ -24,12 +26,25 @@ public class GameManager : MonoBehaviour {
 	void Awake () {
         gamemanager = this;
         listPlayers = new List<Player>();
-        //StopTimeScale();  
+        if (RoundOverCanvas == null)
+        {
+            Debug.Log("ASPEE antaa bitsejä Retkulle");
+        }
+        /*_uiRoundOver = GetComponent<UIRoundOver>();
+        if (_uiRoundOver == null)
+        {
+            Debug.Log("JOS OLEN NULLI NIIN ANNNA MULLE JULL...");
+        }*/
+        //RoundOverCanvas.enabled = false;
+        RoundOverCanvas.SetActive(false);
+       
+       
+        StopTimeScale();  
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+        Debug.Log(Time.timeScale + "TimeScale");
 	}
     public void AddPlayer(Player player)
     {
@@ -47,13 +62,25 @@ public class GameManager : MonoBehaviour {
     }
     public void StopTimeScale()
     {
+      
         Time.timeScale = 0;
         Debug.Log("Aika pysäytetty" + Time.timeScale);
     }
     public void StartTimeScale()
     {
         Time.timeScale = 1;
-        Debug.Log("Aika pysäytetty" + Time.timeScale);
+        Debug.Log("Aika käynnistetty" + Time.timeScale);
     }
 
+    public void Winner()
+    {
+     //   StopTimeScale();
+        RoundOverCanvas.SetActive(true);
+        UIRoundOver _uiroundover = RoundOverCanvas.GetComponentInChildren<UIRoundOver>();
+        _uiroundover.Show();
+        //_uiRoundOver.enabled = true;
+        //_uiRoundOver.Show();
+        Debug.Log("OLET WIINERI!");
+
+    }
 }

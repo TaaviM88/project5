@@ -1,0 +1,32 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+public class UIRoundOver : MonoBehaviour {
+    private Text _text;
+	// Use this for initialization
+	private void Awake  () {
+        _text = GetComponentInChildren<Text>(true);
+        //gameObject.SetActive(false);
+	}
+	
+	// Update is called once per frame
+    /*public void Show(GameTypes.PlayerType winner)
+    {
+        string text = "Round Over!";
+        if (winner != null)
+        {
+            text += "\n" + winner + "Wins!";
+        }
+        _text.text = text;
+        gameObject.SetActive(true);
+    }*/
+    public void Show()
+    {
+        string text = "Round Over!";
+        text += "\n Jompi kumpi voitti!";
+        
+        _text.text = text;
+        gameObject.SetActive(true);
+    }
+}

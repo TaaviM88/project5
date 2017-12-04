@@ -25,6 +25,7 @@ public class Bullet : MonoBehaviour {
         {
             case 0:
                 bulletMovement = Vector3.right * speed * Time.deltaTime;
+                speed = 0;
                 //bulletRotation = new Vector3(0, 0, 20 * speed * Time.deltaTime);
                 //damage = 1;
                 //GetComponent<SpriteRenderer>().sprite = _SpPowerup0;
@@ -32,8 +33,9 @@ public class Bullet : MonoBehaviour {
                 break;
 
             case 1:
-                bulletMovement = Vector3.right * speed * Time.deltaTime;
-                bulletRotation = new Vector3(0, 0, 5 * speed * Time.deltaTime);
+                bulletMovement = new Vector3(0, 0, 0);
+                /*bulletMovement = Vector3.right * speed * Time.deltaTime;
+                bulletRotation = new Vector3(0, 0, 5 * speed * Time.deltaTime);*/
                 //damage = 4;
                 //GetComponent<SpriteRenderer>().sprite = _SpPowerup1;
                 //GetComponent<CircleCollider2D>().radius = 0.21f;
@@ -75,5 +77,10 @@ public class Bullet : MonoBehaviour {
     public void ChangeDirection()
     {
         direction *= -1;
+    }
+    public void StopBullet()
+    {
+        speed = 0;
+        bulletMovement = new Vector3(0, 0, 0);
     }
 }

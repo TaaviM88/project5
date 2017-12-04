@@ -5,11 +5,13 @@ using UnityEngine;
 public class Player : MonoBehaviour {
     public GameTypes.PlayerType playerType = GameTypes.PlayerType.None;
     PlayerSkillSet _skillset;
-  public  List<Card> _cardList;
+    public  List<Card> _cardList;
+    Player _player;
 	// Use this for initialization
 	void Start () {
         _cardList = new List<Card>();
 		GameManager.gamemanager.AddPlayer(this);
+        Player _player = this;
 	}
 	
 	// Update is called once per frame
@@ -25,6 +27,7 @@ public class Player : MonoBehaviour {
 		}
 		return false;
     }
+
     public bool RemoveCardFromPlayer(Card card)
     {
         if(_cardList.Count !=0)
@@ -34,5 +37,16 @@ public class Player : MonoBehaviour {
         }
         return false;
     }
-   
+
+   void OnTriggerEnter(Collider col)
+   {
+       PlayerDie();
+   }
+
+   public void PlayerDie()
+   {
+       
+       GameManager.gamemanager.Winner();
+       Debug.Log("LUL KUOLIN SAATANA");
+   }
 }

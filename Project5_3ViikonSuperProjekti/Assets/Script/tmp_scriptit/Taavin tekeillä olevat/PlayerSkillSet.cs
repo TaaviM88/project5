@@ -59,7 +59,7 @@ namespace Skills
               /* FireBall-prefabin luonti */
               GameObject _prefab = GameManager.gamemanager.Effectlist.GetEffect(Skill.Fireball);
               GameObject clone = UnityEngine.Object.Instantiate(_prefab, Player.GetComponentInChildren<PlayerUseSkill>().transform.position, Player.transform.rotation);
-
+              AudioManager.audioManager.FireBall();
               if (Player.transform.localScale.z == -1)
               {
                   //clone.transform.Rotate(new Vector3(180, 0, 0));  
@@ -86,7 +86,7 @@ namespace Skills
               PlayerSkillSet.health -= 1;
                GameObject _prefab = GameManager.gamemanager.Effectlist.GetEffect(Skill.FireArrow);
               GameObject clone = UnityEngine.Object.Instantiate(_prefab, Player.GetComponentInChildren<PlayerUseSkill>().transform.position, Player.transform.rotation);
-
+              AudioManager.audioManager.FireArrow();
               if (Player.transform.localScale.z == -1)
               {
                     Vector3 _scale = clone.transform.localScale;
@@ -101,6 +101,7 @@ namespace Skills
               PlayerSkillSet.health -= 1;
               GameObject _prefab = GameManager.gamemanager.Effectlist.GetEffect(Skill.Plasma);
               GameObject clone = UnityEngine.Object.Instantiate(_prefab, Player.GetComponentInChildren<PlayerUseSkill>().transform.position, Player.transform.rotation);
+              AudioManager.audioManager.PlasmaBall();
               if (Player.transform.localScale.z == -1)
               {
 
@@ -111,6 +112,7 @@ namespace Skills
               PlayerSkillSet.health -= 1;
               GameObject _prefab = GameManager.gamemanager.Effectlist.GetEffect(Skill.IceArrow);
               GameObject clone = UnityEngine.Object.Instantiate(_prefab, Player.GetComponentInChildren<PlayerUseSkill>().transform.position, Player.transform.rotation);
+              AudioManager.audioManager.IceArrow();
               if (Player.transform.localScale.z == -1)
               {
                     Vector3 _scale = clone.transform.localScale;
@@ -122,21 +124,23 @@ namespace Skills
           }},
           {Skill.IceStorm, (PlayerSkillSet, Player) => {PlayerSkillSet.health -= 1;
             GameObject _prefab = GameManager.gamemanager.Effectlist.GetEffect(Skill.IceStorm);
+            AudioManager.audioManager.IceStorm();
               if(Player.transform.localScale.z == 1)
               {
-                  GameObject clone = UnityEngine.Object.Instantiate(_prefab, Player.GetComponentInChildren<PlayerUseSkill>().transform.position + new Vector3(5, -1, Player.transform.position.z), Player.transform.rotation);
+                  GameObject clone = UnityEngine.Object.Instantiate(_prefab, Player.GetComponentInChildren<PlayerUseSkill>().transform.position + new Vector3(5, -1, Player.transform.position.z), Quaternion.Euler(new Vector3(0,180,0)));
               }
            
            if (Player.transform.localScale.z == -1)
             {
-                GameObject clone = UnityEngine.Object.Instantiate(_prefab, Player.GetComponentInChildren<PlayerUseSkill>().transform.position + new Vector3(-5, -1, Player.transform.position.z), Player.transform.rotation);
+                GameObject clone = UnityEngine.Object.Instantiate(_prefab, Player.GetComponentInChildren<PlayerUseSkill>().transform.position + new Vector3(-5, -1, Player.transform.position.z), Quaternion.Euler(new Vector3(0, 0, 0)));
                 //clone.GetComponent<Bullet>().ChangeDirection();
             }
           }},
           {Skill.Shield,   (PlayerSkillSet, Player) => {
               PlayerSkillSet.armor = 1;
               GameObject _prefab = GameManager.gamemanager.Effectlist.GetEffect(Skill.Shield);
-              GameObject clone = UnityEngine.Object.Instantiate(_prefab, Player.GetComponentInChildren<PlayerUseSkill>().transform.position, Player.transform.rotation); 
+              GameObject clone = UnityEngine.Object.Instantiate(_prefab, Player.GetComponentInChildren<PlayerUseSkill>().transform.position, Player.transform.rotation);
+              AudioManager.audioManager.ShieldBubble();
           }},
           {Skill.Meteor,   (PlayerSkillSet, Player) => {PlayerSkillSet.health -= 1;}},
       };
