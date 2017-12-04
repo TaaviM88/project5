@@ -6,12 +6,12 @@ public class Player : MonoBehaviour {
     public GameTypes.PlayerType playerType = GameTypes.PlayerType.None;
     PlayerSkillSet _skillset;
     public  List<Card> _cardList;
-    Player _player;
+
 	// Use this for initialization
 	void Start () {
         _cardList = new List<Card>();
 		GameManager.gamemanager.AddPlayer(this);
-        Player _player = this;
+       
 	}
 	
 	// Update is called once per frame
@@ -46,7 +46,7 @@ public class Player : MonoBehaviour {
    public void PlayerDie()
    {
        
-       GameManager.gamemanager.Winner();
+       GameManager.gamemanager.Winner(this);
        Debug.Log("LUL KUOLIN SAATANA");
    }
 }

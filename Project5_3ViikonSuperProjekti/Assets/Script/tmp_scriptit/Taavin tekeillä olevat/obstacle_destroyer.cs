@@ -36,7 +36,7 @@ public class obstacle_destroyer : MonoBehaviour {
                    bullet.StopBullet();
                     Debug.Log(other);
                 }
-                Destroy(other.gameObject);
+                //Destroy(other.gameObject);
             }
            /* Player _player = GetComponent<Player>();
             if (_player != null)

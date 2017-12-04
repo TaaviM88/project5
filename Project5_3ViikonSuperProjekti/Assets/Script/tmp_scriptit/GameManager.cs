@@ -72,12 +72,23 @@ public class GameManager : MonoBehaviour {
         Debug.Log("Aika käynnistetty" + Time.timeScale);
     }
 
-    public void Winner()
+    public void Winner(Player _player)
     {
+        Player winner = null;
+        foreach (var p in listPlayers)
+        {
+            if (p != _player)
+            {
+                winner = p;
+            }
+          
+        }
+
+    
      //   StopTimeScale();
         RoundOverCanvas.SetActive(true);
         UIRoundOver _uiroundover = RoundOverCanvas.GetComponentInChildren<UIRoundOver>();
-        _uiroundover.Show();
+        _uiroundover.Show(winner);
         //_uiRoundOver.enabled = true;
         //_uiRoundOver.Show();
         Debug.Log("OLET WIINERI!");
