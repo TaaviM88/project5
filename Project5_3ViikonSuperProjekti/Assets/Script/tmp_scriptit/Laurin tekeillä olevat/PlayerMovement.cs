@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour {
     private bool _facingRight = true;
     public float value;
 
+	bool isRunning;
 	//AnimeController _animeScript;
     private Animator anime;
     private Rigidbody rigidbody;
@@ -60,6 +61,7 @@ public class PlayerMovement : MonoBehaviour {
             }
 			if (IsControllerGrounded()) 
 			{	
+				isRunning = true;
 				anime.SetInteger ("State", 1);
 			}
 
@@ -74,15 +76,24 @@ public class PlayerMovement : MonoBehaviour {
             }
 			if (IsControllerGrounded()) 
 			{	
+				isRunning = true;
 				anime.SetInteger ("State", 1);
 			}
 
         }
 		if (value == 0 && verticalVelocity == 0)
 		{
+			isRunning = false;
 			anime.SetInteger ("State", 0);
+		}
+
+		// juoksu ääni on hyllylllä
+		/*if (isRunning == true) 
+		{
+			AudioManager.audioManager.RunSound ();
 
 		}
+		else*/
 
 		//----------------------------------------------------------------------------
 
