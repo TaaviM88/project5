@@ -1,0 +1,152 @@
+fileFormatVersion: 2
+guid: 149cc7424be412e468927a2be996bfdc
+timeCreated: 1512371501
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: BigShroom1
+    100002: BigShroom2
+    100004: BigShroom3
+    100006: LittleLeafs
+    100008: Mushroom2.000
+    100010: Mushroom2.001
+    100012: Mushroom2.003
+    100014: Mushroom2.004
+    100016: Mushroom2.005
+    100018: Mushroom2.006
+    100020: Mushroom2.007
+    100022: Platform_map2
+    100024: //RootNode
+    100026: RockForPlatform
+    100028: RockForPlatform.001
+    100030: RockForPlatform.002
+    400000: BigShroom1
+    400002: BigShroom2
+    400004: BigShroom3
+    400006: LittleLeafs
+    400008: Mushroom2.000
+    400010: Mushroom2.001
+    400012: Mushroom2.003
+    400014: Mushroom2.004
+    400016: Mushroom2.005
+    400018: Mushroom2.006
+    400020: Mushroom2.007
+    400022: Platform_map2
+    400024: //RootNode
+    400026: RockForPlatform
+    400028: RockForPlatform.001
+    400030: RockForPlatform.002
+    2300000: BigShroom1
+    2300002: BigShroom2
+    2300004: BigShroom3
+    2300006: LittleLeafs
+    2300008: Mushroom2.000
+    2300010: Mushroom2.001
+    2300012: Mushroom2.003
+    2300014: Mushroom2.004
+    2300016: Mushroom2.005
+    2300018: Mushroom2.006
+    2300020: Mushroom2.007
+    2300022: Platform_map2
+    2300024: RockForPlatform
+    2300026: RockForPlatform.001
+    2300028: RockForPlatform.002
+    3300000: BigShroom1
+    3300002: BigShroom2
+    3300004: BigShroom3
+    3300006: LittleLeafs
+    3300008: Mushroom2.000
+    3300010: Mushroom2.001
+    3300012: Mushroom2.003
+    3300014: Mushroom2.004
+    3300016: Mushroom2.005
+    3300018: Mushroom2.006
+    3300020: Mushroom2.007
+    3300022: Platform_map2
+    3300024: RockForPlatform
+    3300026: RockForPlatform.001
+    3300028: RockForPlatform.002
+    4300000: LittleLeafs
+    4300002: RockForPlatform.002
+    4300004: RockForPlatform.001
+    4300006: RockForPlatform
+    4300008: Platform_map2
+    4300010: BigShroom3
+    4300012: BigShroom2
+    4300014: BigShroom1
+    4300016: Mushroom2.007
+    4300018: Mushroom2.006
+    4300020: Mushroom2.005
+    4300022: Mushroom2.004
+    4300024: Mushroom2.003
+    4300026: Mushroom2.000
+    4300028: Mushroom2.001
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
