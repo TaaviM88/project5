@@ -6,7 +6,7 @@ public class Player : MonoBehaviour {
     public GameTypes.PlayerType playerType = GameTypes.PlayerType.None;
     PlayerSkillSet _skillset;
     public  List<Card> _cardList;
-
+    bool isdead = false;
 	// Use this for initialization
 	void Start () {
         _cardList = new List<Card>();
@@ -40,13 +40,25 @@ public class Player : MonoBehaviour {
 
    void OnTriggerEnter(Collider col)
    {
+       Debug.Log("Ai perkele muhun osu");
        PlayerDie();
    }
 
+   void OnTriggerStay(Collider col)
+   {
+       Debug.Log("Olen pelaajan sisällä");
+   }
+   void OnTriggerExit(Collider col)
+   {
+       Debug.Log("lähdin pelaajasta");
+   }
    public void PlayerDie()
    {
-       
-       GameManager.gamemanager.Winner(this);
-       Debug.Log("LUL KUOLIN SAATANA");
+       if (isdead == false)
+       {
+           GameManager.gamemanager.Winner(this);
+           Debug.Log("LUL KUOLIN SAATANA");
+           isdead = true;
+       }
    }
 }

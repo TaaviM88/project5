@@ -85,14 +85,14 @@ namespace Skills
           {Skill.FireArrow, (PlayerSkillSet, Player) => {
               PlayerSkillSet.health -= 1;
                GameObject _prefab = GameManager.gamemanager.Effectlist.GetEffect(Skill.FireArrow);
-              GameObject clone = UnityEngine.Object.Instantiate(_prefab, Player.GetComponentInChildren<PlayerUseSkill>().transform.position, Player.transform.rotation);
+               GameObject clone = UnityEngine.Object.Instantiate(_prefab, Player.GetComponentInChildren<PlayerUseSkill>().transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
               AudioManager.audioManager.FireArrow();
               if (Player.transform.localScale.z == -1)
               {
                     Vector3 _scale = clone.transform.localScale;
                   _scale.x = Player.transform.localScale.z;
                   clone.transform.localScale = _scale;
-                  clone.GetComponent<Bullet>().ChangeDirection();
+                  //clone.GetComponent<Bullet>().ChangeDirection();
               }
              
               
@@ -100,25 +100,28 @@ namespace Skills
            {Skill.Plasma, (PlayerSkillSet, Player) => {
               PlayerSkillSet.health -= 1;
               GameObject _prefab = GameManager.gamemanager.Effectlist.GetEffect(Skill.Plasma);
-              GameObject clone = UnityEngine.Object.Instantiate(_prefab, Player.GetComponentInChildren<PlayerUseSkill>().transform.position, Player.transform.rotation);
+                if (Player.transform.localScale.z == 1)
+              {
+              GameObject clone = UnityEngine.Object.Instantiate(_prefab, Player.GetComponentInChildren<PlayerUseSkill>().transform.position + new Vector3(5, 0, 0), Player.transform.rotation);
+                }
               AudioManager.audioManager.PlasmaBall();
               if (Player.transform.localScale.z == -1)
               {
-
+                  GameObject clone = UnityEngine.Object.Instantiate(_prefab, Player.GetComponentInChildren<PlayerUseSkill>().transform.position + new Vector3(-5, 0, 0), Player.transform.rotation);
                   clone.GetComponent<Bullet>().ChangeDirection();
               }
           }},
           {Skill.IceArrow, (PlayerSkillSet, Player) => {
               PlayerSkillSet.health -= 1;
               GameObject _prefab = GameManager.gamemanager.Effectlist.GetEffect(Skill.IceArrow);
-              GameObject clone = UnityEngine.Object.Instantiate(_prefab, Player.GetComponentInChildren<PlayerUseSkill>().transform.position, Player.transform.rotation);
+              GameObject clone = UnityEngine.Object.Instantiate(_prefab, Player.GetComponentInChildren<PlayerUseSkill>().transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
               AudioManager.audioManager.IceArrow();
               if (Player.transform.localScale.z == -1)
               {
                     Vector3 _scale = clone.transform.localScale;
                   _scale.x = Player.transform.localScale.z;
                   clone.transform.localScale = _scale;
-                  clone.GetComponent<Bullet>().ChangeDirection();
+                  //clone.GetComponent<Bullet>().ChangeDirection();
               }
              
           }},

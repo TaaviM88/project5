@@ -21,12 +21,4 @@ public class UIRoundOver : MonoBehaviour {
         _text.text = text;
         gameObject.SetActive(true);
     }
-    /*public void Show()
-    {
-        string text = "Round Over!";
-        text += "\n Jompi kumpi voitti!";
-        
-        _text.text = text;
-        gameObject.SetActive(true);
-    }*/
 }

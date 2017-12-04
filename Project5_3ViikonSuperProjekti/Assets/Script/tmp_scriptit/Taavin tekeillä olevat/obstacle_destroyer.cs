@@ -45,16 +45,18 @@ public class obstacle_destroyer : MonoBehaviour {
             }*/
             if (other.gameObject.tag == "Player")
             {
+                other.GetComponent<Player>().PlayerDie();
                 Bullet bullet = GetComponent<Bullet>();
                 if (bullet != null)
                 {
-
+                   
                     bullet.StopBullet();
+                    Destroy(gameObject, 1f);
                     Debug.Log(other);
                 }
                 //Destroy(other.gameObject);
-                Player _player = other.gameObject.GetComponent<Player>();
-                _player.PlayerDie();
+                /*Player _player = other.gameObject.GetComponent<Player>();
+                _player.PlayerDie();*/
             }
             /*if (rb)
             {

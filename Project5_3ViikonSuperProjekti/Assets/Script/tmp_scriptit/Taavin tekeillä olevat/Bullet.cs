@@ -6,7 +6,8 @@ public class Bullet : MonoBehaviour {
     public float speed = 3f;
     public int powerUpInt = 0;
     public float damage = 0f;
-    public float timer = 10f;
+    //Timer ei tällä hetkellä käytössä. Tsekkaa SpellCOntroller.cs filu
+    private float timer = 10f;
     private Vector3 bulletMovement;
     private Vector3 bulletRotation;
     private int direction = 1;
@@ -59,7 +60,9 @@ public class Bullet : MonoBehaviour {
 
     void Destroy()
     {
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
+        //Destroy(gameObject, 1);
+        Debug.Log("LUL EN TEE MITÄÄN PASKA! T: BULLET LASSE");
     }
 
     void OnDisable()
@@ -67,13 +70,6 @@ public class Bullet : MonoBehaviour {
         CancelInvoke();
     }
 
-    private void OnCollisionEnter2D(Collision2D coll)
-    {
-        if (coll.gameObject.tag == "Enemy")
-        {
-            Destroy();
-        }
-    }
     public void ChangeDirection()
     {
         direction *= -1;

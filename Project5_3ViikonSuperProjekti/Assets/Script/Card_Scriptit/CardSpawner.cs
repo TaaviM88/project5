@@ -6,6 +6,7 @@ public class CardSpawner : MonoBehaviour {
     Card[] CardsPrefabs;
     List<Card> _cards =  new List<Card>();
     public int CardAmountRandomised = 6;
+    public int CardCopies = 2;
     public bool CardRandomizer = false;
 	// Use this for initialization
 	void Start () {
@@ -23,7 +24,8 @@ public class CardSpawner : MonoBehaviour {
     {
         for (int i = 0; i < CardsPrefabs.Length; i++)
         {
-            for (int j = 0; j < 2; j++)
+            //CardCopies = montako kopiota yhdestä kortista tehdään
+            for (int j = 0; j < CardCopies; j++)
             {
                 _cards.Add(Instantiate(CardsPrefabs[i], transform));
             }
