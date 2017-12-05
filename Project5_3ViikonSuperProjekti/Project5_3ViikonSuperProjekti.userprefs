@@ -1,15 +1,16 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\tmp_scriptit\Laurin tekeillä olevat\PlayerMovement.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\tmp_scriptit\Laurin tekeillä olevat\FPScounter.cs">
     <Files>
-      <File FileName="Assets\Script\tmp_scriptit\Laurin tekeillä olevat\PlayerMovement.cs" Line="135" Column="14" />
+      <File FileName="Assets\Script\tmp_scriptit\Laurin tekeillä olevat\PlayerMovement.cs" Line="1" Column="1" />
       <File FileName="Assets\Script\tmp_scriptit\Laurin tekeillä olevat\AnimeController.cs" Line="1" Column="1" />
       <File FileName="Assets\Script\tmp_scriptit\Laurin tekeillä olevat\NewContAndAnim.cs" Line="1" Column="1" />
       <File FileName="Assets\Script\tmp_scriptit\Laurin tekeillä olevat\CameraManager.cs" Line="1" Column="1" />
       <File FileName="Assets\Script\tmp_scriptit\Laurin tekeillä olevat\Floater.cs" Line="1" Column="1" />
       <File FileName="Assets\Script\tmp_scriptit\Laurin tekeillä olevat\Player2Movement.cs" Line="1" Column="1" />
       <File FileName="Assets\Script\tmp_scriptit\Taavin tekeillä olevat\Player.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\tmp_scriptit\Laurin tekeillä olevat\AudioManager.cs" Line="48" Column="10" />
+      <File FileName="Assets\Script\tmp_scriptit\Laurin tekeillä olevat\AudioManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\tmp_scriptit\Laurin tekeillä olevat\FPScounter.cs" Line="28" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
