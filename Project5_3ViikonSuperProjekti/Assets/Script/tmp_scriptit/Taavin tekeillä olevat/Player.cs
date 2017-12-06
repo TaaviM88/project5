@@ -1,22 +1,40 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class Player : MonoBehaviour {
     public GameTypes.PlayerType playerType = GameTypes.PlayerType.None;
     PlayerSkillSet _skillset;
+    UIPlayerCardImager _uicard;
     public  List<Card> _cardList;
     bool isdead = false;
 	// Use this for initialization
 	void Start () {
         _cardList = new List<Card>();
 		GameManager.gamemanager.AddPlayer(this);
-       
+        //_uicard =  GetComponent<UIPlayerCardImager>();
+        _uicard = FindObjectOfType<UIPlayerCardImager>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+
+        //Yritys hakea pelaajan tän hetkisen kortin ja piirtää se HUDIIN. Ei toimi
+        /*if (_cardList.Count != 0)
+        {
+            if (_uicard == null)
+            {
+                Debug.Log("VITTU KU EI LÖYDY");
+                //_uicard = GetComponent<UIPlayerCardImager>();
+            }
+            else
+            {
+                Image _cardsprite = _cardList[0].GetComponent<Image>();
+                Debug.Log(_cardsprite + "Korttikuva");
+                _uicard.CardImage(_cardsprite);
+                
+            }
+        }*/
 	}
     public bool AddCardToPlayer(Card card)
     {

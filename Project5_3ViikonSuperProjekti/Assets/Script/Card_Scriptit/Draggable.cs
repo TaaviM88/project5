@@ -11,9 +11,11 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
    private Player _player;
   /* public enum Slot { WEAPON, HEAD, CHEST, LEGS, FEET, INVENTORY };
    public Slot typeOfItem = Slot.WEAPON;*/
+
+    //kortti otetaan hiireen
     public void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log("OnBeginDrag");
+       // Debug.Log("OnBeginDrag");
         placeholder = new GameObject();
         placeholder.transform.SetParent(this.transform.parent);
         LayoutElement le = placeholder.AddComponent<LayoutElement>();
@@ -31,9 +33,10 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         //Voi tehdä esim hohto efektin dropzone:lle
         //DropZone[] zones =  GameObject.FindObjectsOfType<DropZone>();
     }
+    //Korttia raahataan
     public void OnDrag(PointerEventData eventData)
     {
-        Debug.Log("OnDrag");
+        //Debug.Log("OnDrag");
         this.transform.position = eventData.position;
         if (placeholder.transform.parent != placeholderParent)
             placeholderParent.transform.SetParent(placeholderParent);
@@ -55,9 +58,10 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         }
         placeholder.transform.SetSiblingIndex(newSiblingindex);
     }
+    //kortti laitettu pois
     public void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log("OnEndDrag");
+        //Debug.Log("OnEndDrag");
 
         this.transform.SetParent(parentToReturnTo);
         GetComponent<CanvasGroup>().blocksRaycasts = true;
@@ -65,11 +69,11 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         {
            
            _player = GameManager.gamemanager.GetPlayer(GameTypes.PlayerType.player1);
-           Debug.Log(_player);
+           //Debug.Log(_player);
            Card _card = GetComponent<Card>();
            
 			_player.AddCardToPlayer(_card);
-			Debug.Log(_card+"Vittu");
+
             //kortilla saadaan skillin tiedot, pelaajalla pitää olla playerskillset. Player1 on skillsetti addtoplayer metodilla 
         }
         if (transform.parent.name == "Player2_tab")

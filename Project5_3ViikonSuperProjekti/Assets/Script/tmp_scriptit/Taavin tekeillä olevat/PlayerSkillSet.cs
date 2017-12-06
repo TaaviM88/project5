@@ -27,8 +27,10 @@ namespace Skills
         None,
         Fireball,
         FireArrow,
+        PyroBlast,
         IceArrow,
         IceStorm,
+        IceBlast,
         Shield,
         Meteor,
         Plasma
@@ -41,8 +43,10 @@ namespace Skills
       {
           {Skill.Fireball, "Fireball"},
           {Skill.FireArrow, "Fire Arrow"},
+          {Skill.PyroBlast, "PyroBlast"},
           {Skill.IceArrow, "Ice Arrow"},
           {Skill.IceStorm, "Ice Storm"},
+          {Skill.IceBlast, "Ice Blast"},
           {Skill.Shield,  "Shield"},
           {Skill.Meteor, "Meteor"},
           {Skill.Plasma, "Plasma"}
@@ -97,6 +101,21 @@ namespace Skills
              
               
           }},
+           {Skill.PyroBlast, (PlayerSkillSet, Player) => {
+              PlayerSkillSet.health -= 1;
+              GameObject _prefab = GameManager.gamemanager.Effectlist.GetEffect(Skill.PyroBlast);
+              GameObject clone = UnityEngine.Object.Instantiate(_prefab, Player.GetComponentInChildren<PlayerUseSkill>().transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
+              clone.transform.SetParent(Player.GetComponentInChildren<PlayerUseSkill>().transform);
+              AudioManager.audioManager.FireArrow();
+              if (Player.transform.localScale.z == -1)
+              {
+                    Vector3 _scale = clone.transform.localScale;
+                  _scale.x = Player.transform.localScale.z;
+                  clone.transform.localScale = _scale;
+                  //clone.GetComponent<Bullet>().ChangeDirection();
+              }    
+              
+          }},
            {Skill.Plasma, (PlayerSkillSet, Player) => {
               PlayerSkillSet.health -= 1;
               GameObject _prefab = GameManager.gamemanager.Effectlist.GetEffect(Skill.Plasma);
@@ -136,6 +155,23 @@ namespace Skills
            if (Player.transform.localScale.z == -1)
             {
                 GameObject clone = UnityEngine.Object.Instantiate(_prefab, Player.GetComponentInChildren<PlayerUseSkill>().transform.position + new Vector3(-5, -1, Player.transform.position.z), Quaternion.Euler(new Vector3(0, 0, 0)));
+                //clone.GetComponent<Bullet>().ChangeDirection();
+            }
+          }},
+          {Skill.IceBlast, (PlayerSkillSet, Player) => {
+              PlayerSkillSet.health -= 1;
+              GameObject _prefab = GameManager.gamemanager.Effectlist.GetEffect(Skill.IceBlast);
+              if(Player.transform.localScale.z == 1)
+              {
+                  GameObject clone = UnityEngine.Object.Instantiate(_prefab, Player.GetComponentInChildren<PlayerUseSkill>().transform.position + new Vector3(4, -1, Player.transform.position.z), Quaternion.Euler(new Vector3(0,180,0)));
+              }
+           
+           if (Player.transform.localScale.z == -1)
+            {
+                GameObject clone = UnityEngine.Object.Instantiate(_prefab, Player.GetComponentInChildren<PlayerUseSkill>().transform.position + new Vector3(-4, -1, Player.transform.position.z), Quaternion.Euler(new Vector3(0, 0, 0)));
+                Vector3 _scale = clone.transform.localScale;
+                _scale.x = Player.transform.localScale.z;
+                clone.transform.localScale = _scale;
                 //clone.GetComponent<Bullet>().ChangeDirection();
             }
           }},

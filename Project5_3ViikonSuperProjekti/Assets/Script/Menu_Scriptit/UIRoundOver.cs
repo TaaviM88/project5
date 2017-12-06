@@ -21,4 +21,14 @@ public class UIRoundOver : MonoBehaviour {
         _text.text = text;
         gameObject.SetActive(true);
     }
+
+    public void ShowNoOneWins()
+    {
+        string text = "Round Over!";
+       
+            text += "\n" +  " No winners!";
+        
+        _text.text = text;
+        gameObject.SetActive(true);
+    }
 }

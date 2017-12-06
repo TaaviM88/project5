@@ -6,6 +6,8 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
     //ENABLE MYÖHEMMIN
     //public Draggable.Slot typeOfItem = Draggable.Slot.INVENTORY;
     //linkki tutoriaalin kolmanteen osaan https://youtu.be/AM7wBz9azyU
+
+    //Hiiri on kortin yllä
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (eventData.pointerDrag == null)
@@ -30,9 +32,10 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
             d.placeholderParent = d.parentToReturnTo;
         }
     }
+    //Pudotetaan kortti pudotus alueelle
     public void OnDrop(PointerEventData eventData)
     {
-        Debug.Log(eventData.pointerDrag.name + "was dropped on"+ gameObject.name);
+        //Debug.Log(eventData.pointerDrag.name + "was dropped on"+ gameObject.name);
         Draggable d = eventData.pointerDrag.GetComponent<Draggable>();
         if (d != null)
         {

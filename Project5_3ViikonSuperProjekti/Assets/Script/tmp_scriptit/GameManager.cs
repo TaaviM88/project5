@@ -12,9 +12,10 @@ public class GameManager : MonoBehaviour {
    List<Player> listPlayers;
    public GameTypes.PlayerType _player;
    bool TimeGoingDown = false, playerisdead = false;
-   
+
    ///UIRoundOver _uiRoundOver;
    public GameObject RoundOverCanvas;
+   private bool _isRunning = false;
    private Effect_Container _effectContainer;
 
    public Effect_Container Effectlist { get 
@@ -52,7 +53,6 @@ public class GameManager : MonoBehaviour {
         {
             StartCoroutine(SlowTimeScale());
         }
-   
 	}
     public void AddPlayer(Player player)
     {
@@ -70,9 +70,7 @@ public class GameManager : MonoBehaviour {
     }
     public void StopTimeScale()
     {
-      
-        Time.timeScale = 0;
-        Debug.Log("Aika pysäytetty" + Time.timeScale);
+             Time.timeScale = 0;
     }
    IEnumerator SlowTimeScale()
     {
@@ -86,7 +84,6 @@ public class GameManager : MonoBehaviour {
         else
         {
             Time.timeScale -= slowtimer;
-            Debug.Log("LUL VÄHENSIN TEIDÄN RAHOJA");
         }
         TimeGoingDown = false;
     }
@@ -98,28 +95,38 @@ public class GameManager : MonoBehaviour {
 
     public void Winner(Player _player)
     {
-        Player winner = null;
-        foreach (var p in listPlayers)
+        if (_player != null)
         {
-            if (p != _player)
+            Player winner = null;
+            foreach (var p in listPlayers)
             {
-                winner = p;
-            }
-          
-        }
-        //StopTimeScale();
-        //SlowTimeScale();
-        playerisdead = true;
+                if (p != _player)
+                {
+                    winner = p;
+                }
 
-        
+            }
+            //StopTimeScale();
+            //SlowTimeScale();
+            playerisdead = true;
             RoundOverCanvas.SetActive(true);
             UIRoundOver _uiroundover = RoundOverCanvas.GetComponentInChildren<UIRoundOver>();
             _uiroundover.Show(winner);
-        
+        }
+        else
+        {
+            RoundOverCanvas.SetActive(true);
+            UIRoundOver _uiroundover = RoundOverCanvas.GetComponentInChildren<UIRoundOver>();
+            _uiroundover.ShowNoOneWins();
+        }
         //_uiRoundOver.enabled = true;
         //_uiRoundOver.Show();
         //Debug.Log("OLET WIINERI!");
-
     }
+
+    /*public void TimeUp()
+    {
+      
+    }*/
 
 }

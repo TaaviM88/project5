@@ -9,6 +9,7 @@ public  GameObject cardGameObject;
 Card _card;
 PlayerSkillSet _playerSkillSet;
 Player _playerscript;
+
 void Awake()
 {
     _playerSkillSet = playerGameObject.GetComponent<PlayerSkillSet>();
@@ -31,6 +32,7 @@ void Start()
         //P1FIRE
         if (_playerscript.playerType == GameTypes.PlayerType.player1)
         {
+
             if (Input.GetButtonDown("P1Fire") && _playerscript._cardList.Count != 0)
             {
                 //Luo kortissa määritellyn prefabin(effektin)
@@ -51,9 +53,9 @@ void Start()
             { print("Out of skill"); }
 
         }
-        if (_playerscript.playerType == GameTypes.PlayerType.player2)
+        if (_playerscript.playerType == GameTypes.PlayerType.player2 )
         {
-            if (Input.GetButtonDown("P2Fire"))
+            if (Input.GetButtonDown("P2Fire") && _playerscript._cardList.Count != 0)
             {
                 //Luo kortissa määritellyn prefabin(effektin)
                 /* GameObject  clone = Instantiate(_card.effect, transform.position,transform.rotation);
