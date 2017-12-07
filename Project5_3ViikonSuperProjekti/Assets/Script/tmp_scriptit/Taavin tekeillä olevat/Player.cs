@@ -21,7 +21,7 @@ public class Player : MonoBehaviour {
 	void Update () {
 
         //Yritys hakea pelaajan tän hetkisen kortin ja piirtää se HUDIIN. Ei toimi
-        /*if (_cardList.Count != 0)
+        if (_cardList.Count != 0)
         {
             if (_uicard == null)
             {
@@ -32,10 +32,10 @@ public class Player : MonoBehaviour {
             {
                 Image _cardsprite = _cardList[0].GetComponent<Image>();
                 Debug.Log(_cardsprite + "Korttikuva");
-                _uicard.CardImage(_cardsprite);
+                _uicard.CardImage(_cardsprite,this);
                 
             }
-        }*/
+        }
 	}
     public bool AddCardToPlayer(Card card)
     {

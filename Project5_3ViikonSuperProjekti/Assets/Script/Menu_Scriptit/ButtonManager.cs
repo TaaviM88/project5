@@ -25,11 +25,19 @@ public class ButtonManager : MonoBehaviour {
     public void CanvasDisable()
     {
         _canvas.SetActive(false);
+        
         GameManager.gamemanager.StartTimeScale();       
     }
 
     public void CanvasEnable()
     {
         _canvas.SetActive(true);
+    }
+    public void MoveCanvas()
+    {
+        transform.position += new Vector3(1000, 0, 0);
+        RectTransform  canvasRect = gameObject.GetComponent<RectTransform>();
+        canvasRect.position = new Vector3(1000, 0, 0);
+        GameManager.gamemanager.StartTimeScale();       
     }
 }
