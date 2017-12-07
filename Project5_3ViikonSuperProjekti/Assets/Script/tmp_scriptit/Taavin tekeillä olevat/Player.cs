@@ -7,6 +7,7 @@ public class Player : MonoBehaviour {
     PlayerSkillSet _skillset;
     UIPlayerCardImager _uicard;
     public  List<Card> _cardList;
+	public GameObject deathAnimation;
     bool isdead = false;
 	// Use this for initialization
 	void Start () {
@@ -68,12 +69,14 @@ public class Player : MonoBehaviour {
    }
    void OnTriggerExit(Collider col)
    {
+
        Debug.Log("lähdin pelaajasta");
    }
    public void PlayerDie()
    {
        if (isdead == false)
        {
+			Instantiate (deathAnimation, transform.position, transform.rotation);
            GameManager.gamemanager.Winner(this);
            Debug.Log("LUL KUOLIN SAATANA");
            isdead = true;

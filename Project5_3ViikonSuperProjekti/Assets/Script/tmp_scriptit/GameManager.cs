@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour {
     {
         TimeGoingDown = true;
         float slowtimer = 0.1f;
-        yield return new  WaitForSeconds(0.1f);
+        yield return new  WaitForSeconds(0.2f);
         if (Time.timeScale < 0.1f)
         {
             StopTimeScale();
