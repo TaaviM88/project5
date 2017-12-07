@@ -28,4 +28,12 @@ public class UIPlayerCardImager : MonoBehaviour {
             _Player2CardImage.sprite = card.sprite;
         }
     }
+
+    public void NoCardLeft(Player player)
+    {
+        if (player.playerType == GameTypes.PlayerType.player1)
+        {
+            _Player1CardImage.CrossFadeAlpha(0, 2, true);
+        }
+    }
 }

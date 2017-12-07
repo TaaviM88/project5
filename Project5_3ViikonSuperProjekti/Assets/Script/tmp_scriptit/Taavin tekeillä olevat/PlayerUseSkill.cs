@@ -33,7 +33,7 @@ void Start()
         if (_playerscript.playerType == GameTypes.PlayerType.player1)
         {
 
-            if (Input.GetButtonDown("P1Fire") && _playerscript._cardList.Count != 0)
+            if (Input.GetButtonDown("P1Fire") && _playerscript._cardList.Count != 0 && Time.timeScale == 1)
             {
                 //Luo kortissa määritellyn prefabin(effektin)
                 /* GameObject  clone = Instantiate(_card.effect, transform.position,transform.rotation);
@@ -53,7 +53,7 @@ void Start()
             { print("Out of skill"); }
 
         }
-        if (_playerscript.playerType == GameTypes.PlayerType.player2 )
+        if (_playerscript.playerType == GameTypes.PlayerType.player2 && Time.timeScale == 1)
         {
             if (Input.GetButtonDown("P2Fire") && _playerscript._cardList.Count != 0)
             {

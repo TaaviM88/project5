@@ -42,96 +42,98 @@ public class Player2Movement : MonoBehaviour {
 	}
 
 	// Update is called once per frame
-	void Update()
-	{
-		//LIIKKUMINEN JA FLIP, Run ja Idle animaatio ----------------------------------------------------------------
-		IsControllerGrounded();
-		moveVector = Vector3.zero;
-		inputDirection = Input.GetAxis("P2movement") * speed;
-		value = Input.GetAxis("P2movement");
-		//Debug.Log(value);
-		if (value > 0)
-		{
+    void Update()
+    {
+        if (Time.timeScale == 1)
+        {
+            //LIIKKUMINEN JA FLIP, Run ja Idle animaatio ----------------------------------------------------------------
+            IsControllerGrounded();
+            moveVector = Vector3.zero;
+            inputDirection = Input.GetAxis("P2movement") * speed;
+            value = Input.GetAxis("P2movement");
+            //Debug.Log(value);
+            if (value > 0)
+            {
 
-			if (_facingRight == false)
-			{
-				Flip();
-			}
-			if (IsControllerGrounded()) 
-			{	
-				anime.SetInteger ("State", 1);
-			}
-		}
+                if (_facingRight == false)
+                {
+                    Flip();
+                }
+                if (IsControllerGrounded())
+                {
+                    anime.SetInteger("State", 1);
+                }
+            }
 
-		if (value < 0)
-		{
+            if (value < 0)
+            {
 
-			if (_facingRight == true)
-			{
-				Flip();
-			}
-			if (IsControllerGrounded()) 
-			{	
-				anime.SetInteger ("State", 1);
-			}
-		}
-		if (value == 0 && verticalVelocity == 0)
-		{
-			anime.SetInteger ("State", 0);
-		}
+                if (_facingRight == true)
+                {
+                    Flip();
+                }
+                if (IsControllerGrounded())
+                {
+                    anime.SetInteger("State", 1);
+                }
+            }
+            if (value == 0 && verticalVelocity == 0)
+            {
+                anime.SetInteger("State", 0);
+            }
 
-		//----------------------------------------------------------------------------
+            //----------------------------------------------------------------------------
 
-		//HYÖKKÄYS ANIMAATIO (hyökkäys komento itsessään on playeruseskill.cs)
+            //HYÖKKÄYS ANIMAATIO (hyökkäys komento itsessään on playeruseskill.cs)
 
-		if (Input.GetButtonDown("P2Fire"))
-		{
-			anime.SetInteger ("State", 4);
-		}
+            if (Input.GetButtonDown("P2Fire"))
+            {
+                anime.SetInteger("State", 4);
+            }
 
-		//----------------------------------------------------------------------------
-		//HYPPY, TUPLAHYPPY ja molempien animaatiot
-		if (IsControllerGrounded())
-		{
-			verticalVelocity = 0;
+            //----------------------------------------------------------------------------
+            //HYPPY, TUPLAHYPPY ja molempien animaatiot
+            if (IsControllerGrounded())
+            {
+                verticalVelocity = 0;
 
-			if (Input.GetButtonDown("P2Jump"))
-			{
-				anime.SetInteger ("State", 2);
-				verticalVelocity = jumpForce;
-				//Kun ilmassa secondjump on aktiivinen
-				secondJumpAvail = true;
-			}
-			moveVector.x = inputDirection;
-		}
-		else
-		{
+                if (Input.GetButtonDown("P2Jump"))
+                {
+                    anime.SetInteger("State", 2);
+                    verticalVelocity = jumpForce;
+                    //Kun ilmassa secondjump on aktiivinen
+                    secondJumpAvail = true;
+                }
+                moveVector.x = inputDirection;
+            }
+            else
+            {
 
-			if (Input.GetButtonDown("P2Jump"))
-			{
-				if(secondJumpAvail)
-				{
-					anime.SetInteger ("State", 2);
-					verticalVelocity = jumpForce;
-					secondJumpAvail = false;
-				}
-			}
+                if (Input.GetButtonDown("P2Jump"))
+                {
+                    if (secondJumpAvail)
+                    {
+                        anime.SetInteger("State", 2);
+                        verticalVelocity = jumpForce;
+                        secondJumpAvail = false;
+                    }
+                }
 
-			verticalVelocity -= gravity * Time.deltaTime;
-			//Jos haluat vapaan liikkumisen ja vapaan hyppy suunnan, ota kaksi seuraavaa käyttöön
-			moveVector.x = inputDirection;
-			moveVector.y = inputDirection;
-			//Jos haluat fixedjump ota käyttöön
-			//moveVector.x = lastMotion.x;
-		}
+                verticalVelocity -= gravity * Time.deltaTime;
+                //Jos haluat vapaan liikkumisen ja vapaan hyppy suunnan, ota kaksi seuraavaa käyttöön
+                moveVector.x = inputDirection;
+                moveVector.y = inputDirection;
+                //Jos haluat fixedjump ota käyttöön
+                //moveVector.x = lastMotion.x;
+            }
 
-		moveVector.y = verticalVelocity;
-		//  moveVector = new Vector3(inputDirection, verticalVelocity, 0);
-		controller.Move(moveVector * Time.deltaTime);
-		lastMotion = moveVector;
+            moveVector.y = verticalVelocity;
+            //  moveVector = new Vector3(inputDirection, verticalVelocity, 0);
+            controller.Move(moveVector * Time.deltaTime);
+            lastMotion = moveVector;
 
-	}
-
+        }
+    }
 	//-----------------------------------------------------------------------------------------------
 
 	void FixedUpdate()

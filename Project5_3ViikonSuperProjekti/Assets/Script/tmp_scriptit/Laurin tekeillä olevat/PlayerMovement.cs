@@ -46,109 +46,112 @@ public class PlayerMovement : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-		//LIIKKUMINEN JA FLIP, Run ja Idle animaatio ----------------------------------------------------------------
-        IsControllerGrounded();
-        moveVector = Vector3.zero;
-        inputDirection = Input.GetAxis("P1movement") * speed;
-        value = Input.GetAxis("P1movement");
-        //Debug.Log(value);
-        if (value > 0)
+        if (Time.timeScale == 1)
         {
-            
-            if (_facingRight == false)
+            //LIIKKUMINEN JA FLIP, Run ja Idle animaatio ----------------------------------------------------------------
+            IsControllerGrounded();
+            moveVector = Vector3.zero;
+            inputDirection = Input.GetAxis("P1movement") * speed;
+            value = Input.GetAxis("P1movement");
+            //Debug.Log(value);
+            if (value > 0)
             {
-                Flip();
-            }
-			if (IsControllerGrounded()) 
-			{	
-				isRunning = true;
-				anime.SetInteger ("State", 1);
-			}
 
-        }
-
-        if (value < 0)
-        {
-           
-            if (_facingRight == true)
-            {
-                Flip();
-            }
-			if (IsControllerGrounded()) 
-			{	
-				isRunning = true;
-				anime.SetInteger ("State", 1);
-			}
-
-        }
-		if (value == 0 && verticalVelocity == 0)
-		{
-			isRunning = false;
-			anime.SetInteger ("State", 0);
-		}
-
-		// juoksu ääni on hyllylllä
-		/*if (isRunning == true) 
-		{
-			AudioManager.audioManager.RunSound ();
-
-		}
-		else*/
-
-		//----------------------------------------------------------------------------
-
-		//HYÖKKÄYS ANIMAATIO (hyökkäys komento itsessään on playeruseskill.cs)
-
-		if (Input.GetButtonDown("P1Fire"))
-		{
-			anime.SetInteger ("State", 4);
-			//AudioManager.audioManager.WandSwing ();
-			AudioManager.audioManager.WandSwing ();
-		}
-
-		//----------------------------------------------------------------------------
-        //HYPPY, TUPLAHYPPY ja molempien animaatiot
-        if (IsControllerGrounded())
-        {
-            verticalVelocity = 0;
-
-            if (Input.GetButtonDown("P1Jump"))
-            {
-				anime.SetInteger ("State", 2);
-                verticalVelocity = jumpForce;
-                //Kun ilmassa secondjump on aktiivinen
-                secondJumpAvail = true;
-            }
-            moveVector.x = inputDirection;
-        }
-        else
-        {
-            
-            if (Input.GetButtonDown("P1Jump"))
-            {
-                if(secondJumpAvail)
+                if (_facingRight == false)
                 {
-					anime.SetInteger ("State", 2);
-                    verticalVelocity = jumpForce;
-                    secondJumpAvail = false;
+                    Flip();
                 }
+                if (IsControllerGrounded())
+                {
+                    isRunning = true;
+                    anime.SetInteger("State", 1);
+                }
+
             }
+
+            if (value < 0)
+            {
+
+                if (_facingRight == true)
+                {
+                    Flip();
+                }
+                if (IsControllerGrounded())
+                {
+                    isRunning = true;
+                    anime.SetInteger("State", 1);
+                }
+
+            }
+            if (value == 0 && verticalVelocity == 0)
+            {
+                isRunning = false;
+                anime.SetInteger("State", 0);
+            }
+
+            // juoksu ääni on hyllylllä
+            /*if (isRunning == true) 
+            {
+                AudioManager.audioManager.RunSound ();
+
+            }
+            else*/
+
+            //----------------------------------------------------------------------------
+
+            //HYÖKKÄYS ANIMAATIO (hyökkäys komento itsessään on playeruseskill.cs)
+
+            if (Input.GetButtonDown("P1Fire"))
+            {
+                anime.SetInteger("State", 4);
+                //AudioManager.audioManager.WandSwing ();
+                AudioManager.audioManager.WandSwing();
+            }
+
+            //----------------------------------------------------------------------------
+            //HYPPY, TUPLAHYPPY ja molempien animaatiot
+            if (IsControllerGrounded())
+            {
+                verticalVelocity = 0;
+
+                if (Input.GetButtonDown("P1Jump"))
+                {
+                    anime.SetInteger("State", 2);
+                    verticalVelocity = jumpForce;
+                    //Kun ilmassa secondjump on aktiivinen
+                    secondJumpAvail = true;
+                }
+                moveVector.x = inputDirection;
+            }
+            else
+            {
+
+                if (Input.GetButtonDown("P1Jump"))
+                {
+                    if (secondJumpAvail)
+                    {
+                        anime.SetInteger("State", 2);
+                        verticalVelocity = jumpForce;
+                        secondJumpAvail = false;
+                    }
+                }
 
                 verticalVelocity -= gravity * Time.deltaTime;
-            //Jos haluat vapaan liikkumisen ja vapaan hyppy suunnan, ota kaksi seuraavaa käyttöön
+                //Jos haluat vapaan liikkumisen ja vapaan hyppy suunnan, ota kaksi seuraavaa käyttöön
                 moveVector.x = inputDirection;
                 moveVector.y = inputDirection;
-            //Jos haluat fixedjump ota käyttöön
-               //moveVector.x = lastMotion.x;
+                //Jos haluat fixedjump ota käyttöön
+                //moveVector.x = lastMotion.x;
+            }
+
+            moveVector.y = verticalVelocity;
+            //  moveVector = new Vector3(inputDirection, verticalVelocity, 0);
+            controller.Move(moveVector * Time.deltaTime);
+            lastMotion = moveVector;
+
         }
 
-        moveVector.y = verticalVelocity;
-      //  moveVector = new Vector3(inputDirection, verticalVelocity, 0);
-        controller.Move(moveVector * Time.deltaTime);
-        lastMotion = moveVector;
-
     }
-
 	//-----------------------------------------------------------------------------------------------
 
     void FixedUpdate()

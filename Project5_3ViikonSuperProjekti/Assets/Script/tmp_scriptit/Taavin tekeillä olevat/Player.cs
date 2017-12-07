@@ -20,7 +20,55 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        //Yritys hakea pelaajan tän hetkisen kortin ja piirtää se HUDIIN. Ei toimi
+        //Yritys hakea pelaajan tän hetkisen kortin ja piirtää se HUDIIN. 
+        /*if (_cardList.Count != 0)
+        {
+            if (_uicard == null)
+            {
+                Debug.Log("VITTU KU EI LÖYDY");
+                //_uicard = GetComponent<UIPlayerCardImager>();
+            }
+            else
+            {
+                Image _cardsprite = _cardList[0].GetComponent<Image>();
+                Debug.Log(_cardsprite + "Korttikuva");
+                _uicard.CardImage(_cardsprite, this);
+
+            }
+        }
+        else { _uicard.NoCardLeft(this); }*/
+       
+	}
+    public bool AddCardToPlayer(Card card)
+    {
+		if(_cardList.Count <=6)
+		{
+        _cardList.Add(card);
+            //tarkastetaan onko listassa yksi kortti, jos on niin käsketään UIPlayerCardImager.cs piirtää se HUD:iin
+        if (_cardList.Count == 1)
+        {
+            DrawUICard();
+        }
+		return true;
+		}
+		return false;
+    }
+
+    public bool RemoveCardFromPlayer(Card card)
+    {
+        if(_cardList.Count !=0)
+        {
+            _cardList.RemoveAt(0);
+            //piirtää uuden kortin HUD:iin
+            DrawUICard();
+
+            return true;
+        }
+        return false;
+    }
+
+    public void DrawUICard()
+    {
         if (_cardList.Count != 0)
         {
             if (_uicard == null)
@@ -32,31 +80,12 @@ public class Player : MonoBehaviour {
             {
                 Image _cardsprite = _cardList[0].GetComponent<Image>();
                 Debug.Log(_cardsprite + "Korttikuva");
-                _uicard.CardImage(_cardsprite,this);
-                
+                _uicard.CardImage(_cardsprite, this);
+
             }
         }
-	}
-    public bool AddCardToPlayer(Card card)
-    {
-		if(_cardList.Count <=6)
-		{
-        _cardList.Add(card);
-		return true;
-		}
-		return false;
+        else { _uicard.NoCardLeft(this); }
     }
-
-    public bool RemoveCardFromPlayer(Card card)
-    {
-        if(_cardList.Count !=0)
-        {
-            _cardList.RemoveAt(0);
-            return true;
-        }
-        return false;
-    }
-
    void OnTriggerEnter(Collider col)
    {
        Debug.Log("Ai perkele muhun osu");

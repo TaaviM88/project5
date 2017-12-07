@@ -23,5 +23,18 @@ public class UiTimer : MonoBehaviour {
         //jakojäännös
         int seconds = (int)timer % 60;
         _text.text = minutes.ToString("D2") + ":" + seconds.ToString("D2");
+
+        if (timer <= 10)
+        {
+            //_text.fontSize = 38;
+            if (_text.fontSize < 58)
+            {
+                _text.fontSize += 1;
+               
+            }
+            //_text.color = Color.red;
+            _text.fontStyle = FontStyle.Bold;
+            
+        }
 	}
 }

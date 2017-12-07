@@ -178,7 +178,7 @@ namespace Skills
           {Skill.Shield,   (PlayerSkillSet, Player) => {
               PlayerSkillSet.armor = 1;
               GameObject _prefab = GameManager.gamemanager.Effectlist.GetEffect(Skill.Shield);
-              GameObject clone = UnityEngine.Object.Instantiate(_prefab, Player.GetComponentInChildren<PlayerUseSkill>().transform.position, Player.transform.rotation);
+              GameObject clone = UnityEngine.Object.Instantiate(_prefab, Player.GetComponentInChildren<PlayerUseSkill>().transform.position+ new Vector3(0,2,0) , Player.transform.rotation);
               AudioManager.audioManager.ShieldBubble();
           }},
           {Skill.Meteor,   (PlayerSkillSet, Player) => {PlayerSkillSet.health -= 1;}},
