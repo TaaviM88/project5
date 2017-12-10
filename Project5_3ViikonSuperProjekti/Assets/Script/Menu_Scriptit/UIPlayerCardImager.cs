@@ -35,5 +35,9 @@ public class UIPlayerCardImager : MonoBehaviour {
         {
             _Player1CardImage.CrossFadeAlpha(0, 2, true);
         }
+        if (player.playerType == GameTypes.PlayerType.player2)
+        {
+            _Player2CardImage.CrossFadeAlpha(0, 2, true);
+        }
     }
 }
