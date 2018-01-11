@@ -47,7 +47,7 @@ public class Player : MonoBehaviour {
             //tarkastetaan onko listassa yksi kortti, jos on niin käsketään UIPlayerCardImager.cs piirtää se HUD:iin
         if (_cardList.Count == 1)
         {
-            //DrawUICard();
+            DrawUICard();
         }
 		return true;
 		}

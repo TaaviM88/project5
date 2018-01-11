@@ -37,7 +37,7 @@ public class CardSpawner : MonoBehaviour {
         for (int i = 0; i < CardAmountRandomised; i++)
         {
             int randomindex = Random.Range(0, CardsPrefabs.Length);
-                _cards.Add(Instantiate(CardsPrefabs[randomindex], transform));
+            _cards.Add(Instantiate(CardsPrefabs[randomindex], transform));
         }
     }
 }
