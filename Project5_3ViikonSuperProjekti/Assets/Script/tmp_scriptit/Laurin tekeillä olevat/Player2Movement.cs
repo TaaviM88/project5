@@ -52,7 +52,7 @@ public class Player2Movement : MonoBehaviour {
             inputDirection = Input.GetAxis("P2movement") * speed;
             value = Input.GetAxis("P2movement");
             //Debug.Log(value);
-            if (value > 0)
+            if (value < 0)
             {
 
                 if (_facingRight == false)
@@ -65,7 +65,7 @@ public class Player2Movement : MonoBehaviour {
                 }
             }
 
-            if (value < 0)
+            if (value > 0)
             {
 
                 if (_facingRight == true)
