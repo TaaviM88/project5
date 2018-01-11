@@ -64,7 +64,7 @@ namespace Skills
               GameObject _prefab = GameManager.gamemanager.Effectlist.GetEffect(Skill.Fireball);
               GameObject clone = UnityEngine.Object.Instantiate(_prefab, Player.GetComponentInChildren<PlayerUseSkill>().transform.position, Player.transform.rotation);
               AudioManager.audioManager.FireBall();
-              if (Player.transform.localScale.z == -1)
+              if (Player.transform.localScale.z == -1 )
               {
                   //clone.transform.Rotate(new Vector3(180, 0, 0));  
                   Vector3 _scale = clone.transform.localScale;
@@ -89,17 +89,30 @@ namespace Skills
           {Skill.FireArrow, (PlayerSkillSet, Player) => {
               PlayerSkillSet.health -= 1;
                GameObject _prefab = GameManager.gamemanager.Effectlist.GetEffect(Skill.FireArrow);
+             
                GameObject clone = UnityEngine.Object.Instantiate(_prefab, Player.GetComponentInChildren<PlayerUseSkill>().transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
               AudioManager.audioManager.FireArrow();
-              if (Player.transform.localScale.z == -1)
+              if (Player.transform.localScale.z == -1 )
               {
                     Vector3 _scale = clone.transform.localScale;
                   _scale.x = Player.transform.localScale.z;
                   clone.transform.localScale = _scale;
                   //clone.GetComponent<Bullet>().ChangeDirection();
+
               }
+              /*if(Player.playerType == GameTypes.PlayerType.player2)
+              {
+                  GameObject clone = UnityEngine.Object.Instantiate(_prefab, Player.GetComponentInChildren<PlayerUseSkill>().transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
+                  AudioManager.audioManager.FireArrow();
+                  if (Player.transform.localScale.z == -1)
+                  {
+                      Vector3 _scale = clone.transform.localScale;
+                      _scale.x = Player.transform.localScale.z;
+                      clone.transform.localScale = _scale;
+                      //clone.GetComponent<Bullet>().ChangeDirection();
+                  }
+              }*/
              
-              
           }},
            {Skill.PyroBlast, (PlayerSkillSet, Player) => {
               PlayerSkillSet.health -= 1;
