@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour {
    List<Player> listPlayers;
    public GameTypes.PlayerType _player;
    bool TimeGoingDown = false, playerisdead = false;
-
+   public bool TimeScaleOff = true;
    ///UIRoundOver _uiRoundOver;
    public GameObject RoundOverCanvas;
    private bool _isRunning = false;
@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour {
         listPlayers = new List<Player>();
         if (RoundOverCanvas == null)
         {
-            Debug.Log("ASPEE antaa bitsejä Retkulle");
+            Debug.Log("RounoverCanvas on NULL");
         }
         /*_uiRoundOver = GetComponent<UIRoundOver>();
         if (_uiRoundOver == null)
@@ -41,9 +41,11 @@ public class GameManager : MonoBehaviour {
         }*/
         //RoundOverCanvas.enabled = false;
         RoundOverCanvas.SetActive(false);
-       
-       
-        StopTimeScale();  
+
+        if (TimeScaleOff)
+        {
+            StopTimeScale();
+        }
 	}
 	
 	// Update is called once per frame
