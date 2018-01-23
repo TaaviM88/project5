@@ -27,7 +27,7 @@ namespace Skills
         None,
         Fireball,
         FireArrow,
-        PyroBlast,
+        FlameThrower,
         IceArrow,
         IceStorm,
         IceBlast,
@@ -43,7 +43,7 @@ namespace Skills
       {
           {Skill.Fireball, "Fireball"},
           {Skill.FireArrow, "Fire Arrow"},
-          {Skill.PyroBlast, "PyroBlast"},
+          {Skill.FlameThrower, "FlameThrower"},
           {Skill.IceArrow, "Ice Arrow"},
           {Skill.IceStorm, "Ice Storm"},
           {Skill.IceBlast, "Ice Blast"},
@@ -114,9 +114,9 @@ namespace Skills
               }*/
              
           }},
-           {Skill.PyroBlast, (PlayerSkillSet, Player) => {
+           {Skill.FlameThrower, (PlayerSkillSet, Player) => {
               PlayerSkillSet.health -= 1;
-              GameObject _prefab = GameManager.gamemanager.Effectlist.GetEffect(Skill.PyroBlast);
+              GameObject _prefab = GameManager.gamemanager.Effectlist.GetEffect(Skill.FlameThrower);
               GameObject clone = UnityEngine.Object.Instantiate(_prefab, Player.GetComponentInChildren<PlayerUseSkill>().transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
               clone.transform.SetParent(Player.GetComponentInChildren<PlayerUseSkill>().transform);
               AudioManager.audioManager.FireArrow();

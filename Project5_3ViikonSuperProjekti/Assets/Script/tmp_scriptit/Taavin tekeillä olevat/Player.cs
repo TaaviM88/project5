@@ -9,36 +9,25 @@ public class Player : MonoBehaviour {
     public  List<Card> _cardList;
 	public GameObject deathAnimation;
     bool isdead = false;
+    public int KillAxelY = -47;
+
 	// Use this for initialization
 	void Start () {
         _cardList = new List<Card>();
 		GameManager.gamemanager.AddPlayer(this);
-        //_uicard =  GetComponent<UIPlayerCardImager>();
         _uicard = FindObjectOfType<UIPlayerCardImager>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-        //Yritys hakea pelaajan tän hetkisen kortin ja piirtää se HUDIIN. 
-        /*if (_cardList.Count != 0)
+        //Jos pelaajan y-korkeus on liian pieni ( tällä hetkeä -47), pelaaja kuolee
+        if (this.transform.position.y <= KillAxelY)
         {
-            if (_uicard == null)
-            {
-                Debug.Log("VITTU KU EI LÖYDY");
-                //_uicard = GetComponent<UIPlayerCardImager>();
-            }
-            else
-            {
-                Image _cardsprite = _cardList[0].GetComponent<Image>();
-                Debug.Log(_cardsprite + "Korttikuva");
-                _uicard.CardImage(_cardsprite, this);
-
-            }
+            PlayerDie();
         }
-        else { _uicard.NoCardLeft(this); }*/
-       
-	}
+    }
+
     public bool AddCardToPlayer(Card card)
     {
 		if(_cardList.Count <=6)
