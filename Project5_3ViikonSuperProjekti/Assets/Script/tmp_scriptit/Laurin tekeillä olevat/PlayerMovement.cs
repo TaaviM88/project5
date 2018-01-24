@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour {
     public float value;
 
 	bool isRunning;
+    bool CanPlayerMove;
 	//AnimeController _animeScript;
     private Animator anime;
     private Rigidbody rigidbody;
@@ -34,143 +35,145 @@ public class PlayerMovement : MonoBehaviour {
 	 *--------------------------------------------------------------
 	*/
     // Use this for initialization
+
+    void Awake()
+    {
+        CanPlayerMove = true;
+    }
+
     void Start()
     {
 		//_animeScript = GetComponent<AnimeController> ();
         controller = GetComponent<CharacterController>();
         anime = GetComponent<Animator>();
         rigidbody = GetComponent<Rigidbody>();
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Time.timeScale == 1)
+        if (CanPlayerMove == true)
         {
-            //LIIKKUMINEN JA FLIP, Run ja Idle animaatio ----------------------------------------------------------------
-            IsControllerGrounded();
-            moveVector = Vector3.zero;
-            inputDirection = Input.GetAxis("P1movement") * speed;
-            value = Input.GetAxis("P1movement");
-            //Debug.Log(value);
-            if (value > 0)
+            if (Time.timeScale == 1)
             {
-
-                if (_facingRight == false)
+                //LIIKKUMINEN JA FLIP, Run ja Idle animaatio ----------------------------------------------------------------
+                IsControllerGrounded();
+                moveVector = Vector3.zero;
+                inputDirection = Input.GetAxis("P1movement") * speed;
+                value = Input.GetAxis("P1movement");
+                //Debug.Log(value);
+                if (value > 0)
                 {
-                    Flip();
+
+                    if (_facingRight == false)
+                    {
+                        Flip();
+                    }
+                    if (IsControllerGrounded())
+                    {
+                        isRunning = true;
+                        anime.SetInteger("State", 1);
+                    }
+
                 }
+
+                if (value < 0)
+                {
+
+                    if (_facingRight == true)
+                    {
+                        Flip();
+                    }
+                    if (IsControllerGrounded())
+                    {
+                        isRunning = true;
+                        anime.SetInteger("State", 1);
+                    }
+
+                }
+                if (value == 0 && verticalVelocity == 0)
+                {
+                    isRunning = false;
+                    anime.SetInteger("State", 0);
+                }
+
+                // juoksu ääni on hyllylllä
+                /*if (isRunning == true) 
+                {
+                    AudioManager.audioManager.RunSound ();
+
+                }
+                else*/
+
+                //----------------------------------------------------------------------------
+
+                //HYÖKKÄYS ANIMAATIO (hyökkäys komento itsessään on playeruseskill.cs)
+
+                if (Input.GetButtonDown("P1Fire"))
+                {
+                    anime.SetInteger("State", 4);
+                    //AudioManager.audioManager.WandSwing ();
+                    AudioManager.audioManager.WandSwing();
+                }
+
+                //----------------------------------------------------------------------------
+                //HYPPY, TUPLAHYPPY ja molempien animaatiot
                 if (IsControllerGrounded())
                 {
-                    isRunning = true;
-                    anime.SetInteger("State", 1);
-                }
+                    verticalVelocity = 0;
 
-            }
-
-            if (value < 0)
-            {
-
-                if (_facingRight == true)
-                {
-                    Flip();
-                }
-                if (IsControllerGrounded())
-                {
-                    isRunning = true;
-                    anime.SetInteger("State", 1);
-                }
-
-            }
-            if (value == 0 && verticalVelocity == 0)
-            {
-                isRunning = false;
-                anime.SetInteger("State", 0);
-            }
-
-            // juoksu ääni on hyllylllä
-            /*if (isRunning == true) 
-            {
-                AudioManager.audioManager.RunSound ();
-
-            }
-            else*/
-
-            //----------------------------------------------------------------------------
-
-            //HYÖKKÄYS ANIMAATIO (hyökkäys komento itsessään on playeruseskill.cs)
-
-            if (Input.GetButtonDown("P1Fire"))
-            {
-                anime.SetInteger("State", 4);
-                //AudioManager.audioManager.WandSwing ();
-                AudioManager.audioManager.WandSwing();
-            }
-
-            //----------------------------------------------------------------------------
-            //HYPPY, TUPLAHYPPY ja molempien animaatiot
-            if (IsControllerGrounded())
-            {
-                verticalVelocity = 0;
-
-                if (Input.GetButtonDown("P1Jump"))
-                {
-                    anime.SetInteger("State", 2);
-                    verticalVelocity = jumpForce;
-                    //Kun ilmassa secondjump on aktiivinen
-                    secondJumpAvail = true;
-                }
-                moveVector.x = inputDirection;
-            }
-            else
-            {
-
-                if (Input.GetButtonDown("P1Jump"))
-                {
-                    if (secondJumpAvail)
+                    if (Input.GetButtonDown("P1Jump"))
                     {
                         anime.SetInteger("State", 2);
                         verticalVelocity = jumpForce;
-                        secondJumpAvail = false;
+                        //Kun ilmassa secondjump on aktiivinen
+                        secondJumpAvail = true;
                     }
+                    moveVector.x = inputDirection;
+                }
+                else
+                {
+
+                    if (Input.GetButtonDown("P1Jump"))
+                    {
+                        if (secondJumpAvail)
+                        {
+                            anime.SetInteger("State", 2);
+                            verticalVelocity = jumpForce;
+                            secondJumpAvail = false;
+                        }
+                    }
+
+                    verticalVelocity -= gravity * Time.deltaTime;
+                    //Jos haluat vapaan liikkumisen ja vapaan hyppy suunnan, ota kaksi seuraavaa käyttöön
+                    moveVector.x = inputDirection;
+                    moveVector.y = inputDirection;
+                    //Jos haluat fixedjump ota käyttöön
+                    //moveVector.x = lastMotion.x;
                 }
 
-                verticalVelocity -= gravity * Time.deltaTime;
-                //Jos haluat vapaan liikkumisen ja vapaan hyppy suunnan, ota kaksi seuraavaa käyttöön
-                moveVector.x = inputDirection;
-                moveVector.y = inputDirection;
-                //Jos haluat fixedjump ota käyttöön
-                //moveVector.x = lastMotion.x;
+                moveVector.y = verticalVelocity;
+                //  moveVector = new Vector3(inputDirection, verticalVelocity, 0);
+                controller.Move(moveVector * Time.deltaTime);
+                lastMotion = moveVector;
+
             }
 
-            moveVector.y = verticalVelocity;
-            //  moveVector = new Vector3(inputDirection, verticalVelocity, 0);
-            controller.Move(moveVector * Time.deltaTime);
-            lastMotion = moveVector;
-
         }
-
     }
 	//-----------------------------------------------------------------------------------------------
 
     void FixedUpdate()
-    {   
-		//tässä FALLING animaation laukaisu rigidbodylla
+    {
+            //tässä FALLING animaation laukaisu rigidbodylla
 
-        //Debug.Log(moveVector.y);
-		if (moveVector.y != 0f /*&& Input.GetButtonUp("P1Jump")*/)
-        {
-            Debug.Log("hyppasin, menen up ja hyppy ei pohjassa");
-			anime.SetInteger ("State", 3);
-            
-        }
-        /*if (moveVector.y < 0f)
-        {
-            Debug.Log("tipun");
-			anime.SetInteger ("State", 3);
-			//_animeScript.FallingAnimation ();
-        }*/
+            //Debug.Log(moveVector.y);
+            if (moveVector.y != 0f /*&& Input.GetButtonUp("P1Jump")*/)
+            {
+                Debug.Log("hyppasin, menen up ja hyppy ei pohjassa");
+                anime.SetInteger("State", 3);
+
+            }
     }
 	//-------------------------------------------------------------------------------------
 
@@ -178,49 +181,54 @@ public class PlayerMovement : MonoBehaviour {
     // Raycast grounded check https://www.youtube.com/watch?v=8Cado6CzZUA&list=PLLH3mUGkfFCWwekOW1OMxyyIgc-Qm1OhI&index=10
     private bool IsControllerGrounded()
     {
-        Vector3 leftRayStart;
-        Vector3 rightRayStart;
+        
+            Vector3 leftRayStart;
+            Vector3 rightRayStart;
 
-        leftRayStart = controller.bounds.center;
-        rightRayStart = controller.bounds.center;
+            leftRayStart = controller.bounds.center;
+            rightRayStart = controller.bounds.center;
 
-        leftRayStart.x -= controller.bounds.extents.x;
-        rightRayStart.x += controller.bounds.extents.x;
+            leftRayStart.x -= controller.bounds.extents.x;
+            rightRayStart.x += controller.bounds.extents.x;
 
-        Debug.DrawRay(leftRayStart, Vector3.down, Color.red);
-        Debug.DrawRay(rightRayStart, Vector3.down, Color.blue);
+            Debug.DrawRay(leftRayStart, Vector3.down, Color.red);
+            Debug.DrawRay(rightRayStart, Vector3.down, Color.blue);
 
-        if (Physics.Raycast(rightRayStart, Vector3.down, (controller.height / 2) + hoverHeight))
-        {
-            //Debug.Log("osuu varpaat");
-            return true;
-        }
-            
+            if (Physics.Raycast(rightRayStart, Vector3.down, (controller.height / 2) + hoverHeight))
+            {
+                //Debug.Log("osuu varpaat");
+                return true;
+            }
 
-        if (Physics.Raycast(leftRayStart, Vector3.down, (controller.height / 2) + hoverHeight))
-        {
-            //Debug.Log("osuu kantapaa");
-            return true;
-        }
 
-        //Debug.Log("ei osu maahan");
-        return false;
+            if (Physics.Raycast(leftRayStart, Vector3.down, (controller.height / 2) + hoverHeight))
+            {
+                //Debug.Log("osuu kantapaa");
+                return true;
+            }
 
+            //Debug.Log("ei osu maahan");
+            return false;
+
+       
     }
 	//------------------------------------------------------------------------------------
 
     //TÄSSÄ WALLJUMP JA SEN ANIMAATIO
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-      if(controller.collisionFlags == CollisionFlags.Sides)
+        if (CanPlayerMove == true)
         {
-            if(Input.GetButtonDown("P1Jump"))
+            if (controller.collisionFlags == CollisionFlags.Sides)
             {
-				anime.SetInteger ("State", 5);
-                moveVector = hit.normal * speed;
-                verticalVelocity = jumpForce;
+                if (Input.GetButtonDown("P1Jump"))
+                {
+                    anime.SetInteger("State", 5);
+                    moveVector = hit.normal * speed;
+                    verticalVelocity = jumpForce;
+                }
+
             }
-            
         }
     }
 	//--------------------------------------------------------------------------------------
@@ -232,6 +240,18 @@ public class PlayerMovement : MonoBehaviour {
         Vector3 theScale = transform.localScale;
         theScale.z *= -1;
         transform.localScale = theScale;
+    }
+
+    public void EnableDisablePlayerMovement()
+    {
+        if (CanPlayerMove == false)
+        {
+            CanPlayerMove = true;
+        }
+        else if (CanPlayerMove == true)
+        {
+            CanPlayerMove = false;
+        }
     }
 
 }

@@ -94,10 +94,15 @@ public class Player : MonoBehaviour {
    {
        if (isdead == false)
        {
-			Instantiate (deathAnimation, transform.position, transform.rotation);
-           GameManager.gamemanager.Winner(this);
-           Debug.Log("LUL KUOLIN SAATANA");
-           isdead = true;
+		    Instantiate (deathAnimation, transform.position, transform.rotation);
+            GameManager.gamemanager.Winner(this);
+           /* PlayerMovement playerMovement = GetComponent<PlayerMovement>();
+            playerMovement.EnableDisablePlayerMovement();
+            Player2Movement playerMovement2 = GetComponent<Player2Movement>();
+            playerMovement2.EnableDisablePlayerMovement2();*/
+            Debug.Log("LUL KUOLIN SAATANA");
+            isdead = true;
+           
        }
    }
 }

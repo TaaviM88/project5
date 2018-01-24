@@ -34,12 +34,7 @@ public class GameManager : MonoBehaviour {
         {
             Debug.Log("RounoverCanvas on NULL");
         }
-        /*_uiRoundOver = GetComponent<UIRoundOver>();
-        if (_uiRoundOver == null)
-        {
-            Debug.Log("JOS OLEN NULLI NIIN ANNNA MULLE JULL...");
-        }*/
-        //RoundOverCanvas.enabled = false;
+
         RoundOverCanvas.SetActive(false);
 
         if (TimeScaleOff)
@@ -51,6 +46,7 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         Debug.Log(Time.timeScale + "TimeScale");
+
         if (Time.timeScale > 0 && TimeGoingDown == false && playerisdead == true)
         {
             StartCoroutine(SlowTimeScale());
@@ -95,6 +91,14 @@ public class GameManager : MonoBehaviour {
         Debug.Log("Aika käynnistetty" + Time.timeScale);
     }
 
+    public void EnablePlayerMovements()
+    {
+        PlayerMovement playerMovement = GetComponent<PlayerMovement>();
+        playerMovement.EnableDisablePlayerMovement();
+        Player2Movement playerMovement2 = GetComponent<Player2Movement>();
+        playerMovement2.EnableDisablePlayerMovement2();
+    }
+
     public void Winner(Player _player)
     {
         if (_player != null)
@@ -108,8 +112,7 @@ public class GameManager : MonoBehaviour {
                 }
 
             }
-            //StopTimeScale();
-            //SlowTimeScale();
+
             playerisdead = true;
             RoundOverCanvas.SetActive(true);
             UIRoundOver _uiroundover = RoundOverCanvas.GetComponentInChildren<UIRoundOver>();
@@ -121,14 +124,7 @@ public class GameManager : MonoBehaviour {
             UIRoundOver _uiroundover = RoundOverCanvas.GetComponentInChildren<UIRoundOver>();
             _uiroundover.ShowNoOneWins();
         }
-        //_uiRoundOver.enabled = true;
-        //_uiRoundOver.Show();
-        //Debug.Log("OLET WIINERI!");
-    }
 
-    /*public void TimeUp()
-    {
-      
-    }*/
+    }
 
 }

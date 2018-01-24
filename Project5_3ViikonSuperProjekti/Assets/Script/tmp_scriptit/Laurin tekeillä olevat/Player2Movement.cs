@@ -14,7 +14,7 @@ public class Player2Movement : MonoBehaviour {
 	private bool secondJumpAvail = false;
 	private bool _facingRight = true;
 	public float value;
-
+    bool CanPlayerMove2;
 	//AnimeController _animeScript;
 	private Animator anime;
 	private Rigidbody rigidbody;
@@ -32,6 +32,12 @@ public class Player2Movement : MonoBehaviour {
 	 * State 5 = walljump
 	 *--------------------------------------------------------------
 	*/
+
+    void Awake()
+    {
+        CanPlayerMove2 = true;
+    }
+
 	// Use this for initialization
 	void Start()
 	{
@@ -44,94 +50,97 @@ public class Player2Movement : MonoBehaviour {
 	// Update is called once per frame
     void Update()
     {
-        if (Time.timeScale == 1)
+        if (CanPlayerMove2 == true)
         {
-            //LIIKKUMINEN JA FLIP, Run ja Idle animaatio ----------------------------------------------------------------
-            IsControllerGrounded();
-            moveVector = Vector3.zero;
-            inputDirection = Input.GetAxis("P2movement") * speed;
-            value = Input.GetAxis("P2movement");
-            //Debug.Log(value);
-            if (value < 0)
+            if (Time.timeScale == 1)
             {
-
-                if (_facingRight == false)
+                //LIIKKUMINEN JA FLIP, Run ja Idle animaatio ----------------------------------------------------------------
+                IsControllerGrounded();
+                moveVector = Vector3.zero;
+                inputDirection = Input.GetAxis("P2movement") * speed;
+                value = Input.GetAxis("P2movement");
+                //Debug.Log(value);
+                if (value < 0)
                 {
-                    Flip();
-                }
-                if (IsControllerGrounded())
-                {
-                    anime.SetInteger("State", 1);
-                }
-            }
 
-            if (value > 0)
-            {
-
-                if (_facingRight == true)
-                {
-                    Flip();
-                }
-                if (IsControllerGrounded())
-                {
-                    anime.SetInteger("State", 1);
-                }
-            }
-            if (value == 0 && verticalVelocity == 0)
-            {
-                anime.SetInteger("State", 0);
-            }
-
-            //----------------------------------------------------------------------------
-
-            //HYÖKKÄYS ANIMAATIO (hyökkäys komento itsessään on playeruseskill.cs)
-
-            if (Input.GetButtonDown("P2Fire"))
-            {
-                anime.SetInteger("State", 4);
-            }
-
-            //----------------------------------------------------------------------------
-            //HYPPY, TUPLAHYPPY ja molempien animaatiot
-            if (IsControllerGrounded())
-            {
-                verticalVelocity = 0;
-
-                if (Input.GetButtonDown("P2Jump"))
-                {
-                    anime.SetInteger("State", 2);
-                    verticalVelocity = jumpForce;
-                    //Kun ilmassa secondjump on aktiivinen
-                    secondJumpAvail = true;
-                }
-                moveVector.x = inputDirection;
-            }
-            else
-            {
-
-                if (Input.GetButtonDown("P2Jump"))
-                {
-                    if (secondJumpAvail)
+                    if (_facingRight == false)
                     {
-                        anime.SetInteger("State", 2);
-                        verticalVelocity = jumpForce;
-                        secondJumpAvail = false;
+                        Flip();
+                    }
+                    if (IsControllerGrounded())
+                    {
+                        anime.SetInteger("State", 1);
                     }
                 }
 
-                verticalVelocity -= gravity * Time.deltaTime;
-                //Jos haluat vapaan liikkumisen ja vapaan hyppy suunnan, ota kaksi seuraavaa käyttöön
-                moveVector.x = inputDirection;
-                moveVector.y = inputDirection;
-                //Jos haluat fixedjump ota käyttöön
-                //moveVector.x = lastMotion.x;
+                if (value > 0)
+                {
+
+                    if (_facingRight == true)
+                    {
+                        Flip();
+                    }
+                    if (IsControllerGrounded())
+                    {
+                        anime.SetInteger("State", 1);
+                    }
+                }
+                if (value == 0 && verticalVelocity == 0)
+                {
+                    anime.SetInteger("State", 0);
+                }
+
+                //----------------------------------------------------------------------------
+
+                //HYÖKKÄYS ANIMAATIO (hyökkäys komento itsessään on playeruseskill.cs)
+
+                if (Input.GetButtonDown("P2Fire"))
+                {
+                    anime.SetInteger("State", 4);
+                }
+
+                //----------------------------------------------------------------------------
+                //HYPPY, TUPLAHYPPY ja molempien animaatiot
+                if (IsControllerGrounded())
+                {
+                    verticalVelocity = 0;
+
+                    if (Input.GetButtonDown("P2Jump"))
+                    {
+                        anime.SetInteger("State", 2);
+                        verticalVelocity = jumpForce;
+                        //Kun ilmassa secondjump on aktiivinen
+                        secondJumpAvail = true;
+                    }
+                    moveVector.x = inputDirection;
+                }
+                else
+                {
+
+                    if (Input.GetButtonDown("P2Jump"))
+                    {
+                        if (secondJumpAvail)
+                        {
+                            anime.SetInteger("State", 2);
+                            verticalVelocity = jumpForce;
+                            secondJumpAvail = false;
+                        }
+                    }
+
+                    verticalVelocity -= gravity * Time.deltaTime;
+                    //Jos haluat vapaan liikkumisen ja vapaan hyppy suunnan, ota kaksi seuraavaa käyttöön
+                    moveVector.x = inputDirection;
+                    moveVector.y = inputDirection;
+                    //Jos haluat fixedjump ota käyttöön
+                    //moveVector.x = lastMotion.x;
+                }
+
+                moveVector.y = verticalVelocity;
+                //  moveVector = new Vector3(inputDirection, verticalVelocity, 0);
+                controller.Move(moveVector * Time.deltaTime);
+                lastMotion = moveVector;
+
             }
-
-            moveVector.y = verticalVelocity;
-            //  moveVector = new Vector3(inputDirection, verticalVelocity, 0);
-            controller.Move(moveVector * Time.deltaTime);
-            lastMotion = moveVector;
-
         }
     }
 	//-----------------------------------------------------------------------------------------------
@@ -147,12 +156,7 @@ public class Player2Movement : MonoBehaviour {
 			anime.SetInteger ("State", 3);
 
 		}
-		/*if (moveVector.y < 0f)
-        {
-            Debug.Log("tipun");
-			anime.SetInteger ("State", 3);
-			//_animeScript.FallingAnimation ();
-        }*/
+	
 	}
 	//-------------------------------------------------------------------------------------
 
@@ -194,16 +198,19 @@ public class Player2Movement : MonoBehaviour {
 	//TÄSSÄ WALLJUMP JA SEN ANIMAATIO
 	private void OnControllerColliderHit(ControllerColliderHit hit)
 	{
-		if(controller.collisionFlags == CollisionFlags.Sides)
-		{
-			if(Input.GetButtonDown("P2Jump"))
-			{
-				anime.SetInteger ("State", 5);
-				moveVector = hit.normal * speed;
-				verticalVelocity = jumpForce;
-			}
+        if (CanPlayerMove2 == true)
+        {
+            if (controller.collisionFlags == CollisionFlags.Sides)
+            {
+                if (Input.GetButtonDown("P2Jump"))
+                {
+                    anime.SetInteger("State", 5);
+                    moveVector = hit.normal * speed;
+                    verticalVelocity = jumpForce;
+                }
 
-		}
+            }
+        }
 	}
 	//--------------------------------------------------------------------------------------
 
@@ -216,4 +223,15 @@ public class Player2Movement : MonoBehaviour {
 		transform.localScale = theScale;
 	}
 
+    public void EnableDisablePlayerMovement2()
+    {
+        if (CanPlayerMove2 == false)
+        {
+            CanPlayerMove2 = true;
+        }
+        else if (CanPlayerMove2 == true)
+        {
+            CanPlayerMove2 = false;
+        }
+    }
 }
