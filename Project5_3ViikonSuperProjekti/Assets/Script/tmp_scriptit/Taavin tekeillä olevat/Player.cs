@@ -10,12 +10,21 @@ public class Player : MonoBehaviour {
 	public GameObject deathAnimation;
     bool isdead = false;
     public int KillAxelY = -47;
-
+    PlayerMovement pmovement;
+    Player2Movement p2movement;
 	// Use this for initialization
 	void Start () {
         _cardList = new List<Card>();
 		GameManager.gamemanager.AddPlayer(this);
         _uicard = FindObjectOfType<UIPlayerCardImager>();
+        if (this.playerType == GameTypes.PlayerType.player1)
+        {
+            pmovement = GetComponent<PlayerMovement>();
+        }
+        if (this.playerType == GameTypes.PlayerType.player2)
+        {
+            p2movement = GetComponent<Player2Movement>();
+        }
 	}
 	
 	// Update is called once per frame
@@ -68,7 +77,6 @@ public class Player : MonoBehaviour {
             else
             {
                 Image _cardsprite = _cardList[0].GetComponent<Image>();
-                Debug.Log(_cardsprite + "Korttikuva");
                 _uicard.CardImage(_cardsprite, this);
 
             }
@@ -77,29 +85,41 @@ public class Player : MonoBehaviour {
     }
    void OnTriggerEnter(Collider col)
    {
-       Debug.Log("Ai perkele muhun osu");
+     
        PlayerDie();
    }
 
    void OnTriggerStay(Collider col)
    {
-       Debug.Log("Olen pelaajan sisällä");
+
    }
    void OnTriggerExit(Collider col)
    {
 
-       Debug.Log("lähdin pelaajasta");
+
    }
+
+   public void ToggleMovement()
+   {
+       if (this.playerType == GameTypes.PlayerType.player1)
+            {
+                pmovement.EnableDisablePlayerMovement();
+                Debug.Log("player1 toggle");
+            }
+       if(this.playerType == GameTypes.PlayerType.player2)
+            {
+                p2movement.EnableDisablePlayerMovement2();
+                Debug.Log("player2 toggle");
+            }
+   }
+
    public void PlayerDie()
    {
        if (isdead == false)
        {
 		    Instantiate (deathAnimation, transform.position, transform.rotation);
             GameManager.gamemanager.Winner(this);
-           /* PlayerMovement playerMovement = GetComponent<PlayerMovement>();
-            playerMovement.EnableDisablePlayerMovement();
-            Player2Movement playerMovement2 = GetComponent<Player2Movement>();
-            playerMovement2.EnableDisablePlayerMovement2();*/
+            GameManager.gamemanager.EnablePlayerMovements();      
             Debug.Log("LUL KUOLIN SAATANA");
             isdead = true;
            

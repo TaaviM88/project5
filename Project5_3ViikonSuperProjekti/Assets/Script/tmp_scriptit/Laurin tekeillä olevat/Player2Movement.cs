@@ -35,7 +35,7 @@ public class Player2Movement : MonoBehaviour {
 
     void Awake()
     {
-        CanPlayerMove2 = true;
+        CanPlayerMove2 = false;
     }
 
 	// Use this for initialization
@@ -228,10 +228,12 @@ public class Player2Movement : MonoBehaviour {
         if (CanPlayerMove2 == false)
         {
             CanPlayerMove2 = true;
+            Debug.Log("pelaaja2 voi liikkua");
         }
         else if (CanPlayerMove2 == true)
         {
             CanPlayerMove2 = false;
+            Debug.Log("pelaaja2 ei voi liikkua");
         }
     }
 }

@@ -35,7 +35,6 @@ public class Card_RandomizedButton : MonoBehaviour {
             _player = GameManager.gamemanager.GetPlayer(GameTypes.PlayerType.player1);
             Card _card = GetComponent<Card>();
             _card = CardsPrefabs[randomindex];
-            Debug.Log(_card);
             _player.AddCardToPlayer(_card);
         }
     }
@@ -48,7 +47,6 @@ public class Card_RandomizedButton : MonoBehaviour {
             _player = GameManager.gamemanager.GetPlayer(GameTypes.PlayerType.player2);
             Card _card = GetComponent<Card>();
             _card = CardsPrefabs[randomindex];
-            Debug.Log(_card);
             _player.AddCardToPlayer(_card);
         }
     }

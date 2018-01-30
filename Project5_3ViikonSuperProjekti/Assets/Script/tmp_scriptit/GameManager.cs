@@ -17,7 +17,8 @@ public class GameManager : MonoBehaviour {
    public GameObject RoundOverCanvas;
    private bool _isRunning = false;
    private Effect_Container _effectContainer;
-
+   PlayerMovement playerMovement1;
+   Player2Movement playerMovement2;
    public Effect_Container Effectlist { get 
    {
        if (_effectContainer == null)
@@ -68,8 +69,9 @@ public class GameManager : MonoBehaviour {
     }
     public void StopTimeScale()
     {
-             Time.timeScale = 0;
+      Time.timeScale = 0;
     }
+
    IEnumerator SlowTimeScale()
     {
         TimeGoingDown = true;
@@ -87,15 +89,16 @@ public class GameManager : MonoBehaviour {
     }
     public void StartTimeScale()
     {
-        Time.timeScale = 1;
-        Debug.Log("Aika käynnistetty" + Time.timeScale);
+        UiTimer.uiTimer.StartTimer();
+        //Time.timeScale = 1;
+        //Debug.Log("Aika käynnistetty" + Time.timeScale);
     }
 
     public void EnablePlayerMovements()
     {
-        PlayerMovement playerMovement = GetComponent<PlayerMovement>();
-        playerMovement.EnableDisablePlayerMovement();
-        Player2Movement playerMovement2 = GetComponent<Player2Movement>();
+        playerMovement1 = FindObjectOfType<PlayerMovement>();
+        playerMovement1.EnableDisablePlayerMovement();
+        playerMovement2 = FindObjectOfType<Player2Movement>();
         playerMovement2.EnableDisablePlayerMovement2();
     }
 
@@ -112,7 +115,6 @@ public class GameManager : MonoBehaviour {
                 }
 
             }
-
             playerisdead = true;
             RoundOverCanvas.SetActive(true);
             UIRoundOver _uiroundover = RoundOverCanvas.GetComponentInChildren<UIRoundOver>();
@@ -124,7 +126,5 @@ public class GameManager : MonoBehaviour {
             UIRoundOver _uiroundover = RoundOverCanvas.GetComponentInChildren<UIRoundOver>();
             _uiroundover.ShowNoOneWins();
         }
-
     }
-
 }

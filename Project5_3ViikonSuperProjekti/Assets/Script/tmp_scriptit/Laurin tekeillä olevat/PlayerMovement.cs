@@ -38,7 +38,7 @@ public class PlayerMovement : MonoBehaviour {
 
     void Awake()
     {
-        CanPlayerMove = true;
+        CanPlayerMove = false;
     }
 
     void Start()
@@ -247,10 +247,14 @@ public class PlayerMovement : MonoBehaviour {
         if (CanPlayerMove == false)
         {
             CanPlayerMove = true;
+            //pelaaja voi liikkua
+            Debug.Log("pelaaja1 voi liikkua");
         }
         else if (CanPlayerMove == true)
         {
             CanPlayerMove = false;
+            //pelaaja ei voi liikkua
+            Debug.Log("pelaaja1 ei voi liikkua");
         }
     }
 

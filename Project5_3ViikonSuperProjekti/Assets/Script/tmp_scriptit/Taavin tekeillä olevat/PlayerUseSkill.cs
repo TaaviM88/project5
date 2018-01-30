@@ -49,8 +49,7 @@ void Start()
                 _playerscript.RemoveCardFromPlayer(_card);
                 //_playerSkillSet.RemoveSkillToPlayer(_card.cardSkill);    
             }
-            else
-            { print("Out of skill"); }
+          
 
         }
         if (_playerscript.playerType == GameTypes.PlayerType.player2 && Time.timeScale == 1)
@@ -65,7 +64,7 @@ void Start()
                 _playerSkillSet.UseSkillOnPlayer(_card.cardSkill);
                 _playerscript.RemoveCardFromPlayer(_card);
             }
-            { print("Out of skill"); }
+            
         }
     }
 }
