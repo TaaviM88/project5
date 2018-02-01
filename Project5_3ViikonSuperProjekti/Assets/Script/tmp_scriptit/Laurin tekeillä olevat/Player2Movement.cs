@@ -35,7 +35,7 @@ public class Player2Movement : MonoBehaviour {
 
     void Awake()
     {
-        CanPlayerMove2 = false;
+        DisablePlayerMovement2();
     }
 
 	// Use this for initialization
@@ -223,17 +223,15 @@ public class Player2Movement : MonoBehaviour {
 		transform.localScale = theScale;
 	}
 
-    public void EnableDisablePlayerMovement2()
+    public void EnablePlayerMovement2()
     {
-        if (CanPlayerMove2 == false)
-        {
-            CanPlayerMove2 = true;
-            Debug.Log("pelaaja2 voi liikkua");
-        }
-        else if (CanPlayerMove2 == true)
-        {
-            CanPlayerMove2 = false;
-            Debug.Log("pelaaja2 ei voi liikkua");
-        }
+        CanPlayerMove2 = true;
+        Debug.Log("pelaaja2 voi liikkua");
+       
+    }
+    public void DisablePlayerMovement2()
+    {
+        CanPlayerMove2 = false;
+        Debug.Log("pelaaja2 ei voi liikkua");
     }
 }

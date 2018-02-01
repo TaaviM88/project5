@@ -24,10 +24,11 @@ public class ButtonManager : MonoBehaviour {
     }
     public void CanvasDisable()
     {
+        GameManager.gamemanager.EnablePlayerMovements();
+        GameManager.gamemanager.StartTimeScale();
         _canvas.SetActive(false);
         
-        //GameManager.gamemanager.StartTimeScale();
-        GameManager.gamemanager.EnablePlayerMovements();
+        
     }
 
     public void CanvasEnable()

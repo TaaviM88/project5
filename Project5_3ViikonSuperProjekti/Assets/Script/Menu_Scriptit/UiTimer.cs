@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 public class UiTimer : MonoBehaviour {
-    public static UiTimer uiTimer;
     public float timer = 30;
     private Text _text;
     bool startTimer = false;
@@ -47,5 +46,10 @@ public class UiTimer : MonoBehaviour {
     public void StartTimer()
     {
         startTimer = true;
+    }
+
+    public void StopTimer()
+    {
+        startTimer = false;
     }
 }

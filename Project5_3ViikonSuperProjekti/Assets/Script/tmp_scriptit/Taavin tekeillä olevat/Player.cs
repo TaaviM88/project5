@@ -10,21 +10,11 @@ public class Player : MonoBehaviour {
 	public GameObject deathAnimation;
     bool isdead = false;
     public int KillAxelY = -47;
-    PlayerMovement pmovement;
-    Player2Movement p2movement;
 	// Use this for initialization
 	void Start () {
         _cardList = new List<Card>();
 		GameManager.gamemanager.AddPlayer(this);
         _uicard = FindObjectOfType<UIPlayerCardImager>();
-        if (this.playerType == GameTypes.PlayerType.player1)
-        {
-            pmovement = GetComponent<PlayerMovement>();
-        }
-        if (this.playerType == GameTypes.PlayerType.player2)
-        {
-            p2movement = GetComponent<Player2Movement>();
-        }
 	}
 	
 	// Update is called once per frame
@@ -99,7 +89,7 @@ public class Player : MonoBehaviour {
 
    }
 
-   public void ToggleMovement()
+  /* public void ToggleMovement()
    {
        if (this.playerType == GameTypes.PlayerType.player1)
             {
@@ -111,7 +101,7 @@ public class Player : MonoBehaviour {
                 p2movement.EnableDisablePlayerMovement2();
                 Debug.Log("player2 toggle");
             }
-   }
+   }*/
 
    public void PlayerDie()
    {
@@ -119,10 +109,9 @@ public class Player : MonoBehaviour {
        {
 		    Instantiate (deathAnimation, transform.position, transform.rotation);
             GameManager.gamemanager.Winner(this);
-            GameManager.gamemanager.EnablePlayerMovements();      
+            //GameManager.gamemanager.EnablePlayerMovements();      
             Debug.Log("LUL KUOLIN SAATANA");
             isdead = true;
-           
        }
    }
 }

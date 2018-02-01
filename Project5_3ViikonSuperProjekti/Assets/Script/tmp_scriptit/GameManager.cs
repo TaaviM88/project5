@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour {
    private Effect_Container _effectContainer;
    PlayerMovement playerMovement1;
    Player2Movement playerMovement2;
+    UiTimer uiTimer;
    public Effect_Container Effectlist { get 
    {
        if (_effectContainer == null)
@@ -38,20 +39,21 @@ public class GameManager : MonoBehaviour {
 
         RoundOverCanvas.SetActive(false);
 
-        if (TimeScaleOff)
+        /*if (TimeScaleOff)
         {
             StopTimeScale();
-        }
+        }*/
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
         Debug.Log(Time.timeScale + "TimeScale");
 
-        if (Time.timeScale > 0 && TimeGoingDown == false && playerisdead == true)
+        /*if (Time.timeScale > 0 && TimeGoingDown == false && playerisdead == true)
         {
             StartCoroutine(SlowTimeScale());
-        }
+        }*/
 	}
     public void AddPlayer(Player player)
     {
@@ -67,7 +69,7 @@ public class GameManager : MonoBehaviour {
         }
         return null;
     }
-    public void StopTimeScale()
+   /* public void StopTimeScale()
     {
       Time.timeScale = 0;
     }
@@ -86,24 +88,38 @@ public class GameManager : MonoBehaviour {
             Time.timeScale -= slowtimer;
         }
         TimeGoingDown = false;
-    }
+    }*/
+
     public void StartTimeScale()
     {
-        UiTimer.uiTimer.StartTimer();
-        //Time.timeScale = 1;
+        //UiTimer.uiTimer.StartTimer();
+        uiTimer = FindObjectOfType<UiTimer>();
+        uiTimer.StartTimer();
+        Time.timeScale = 1;
         //Debug.Log("Aika käynnistetty" + Time.timeScale);
     }
 
     public void EnablePlayerMovements()
     {
         playerMovement1 = FindObjectOfType<PlayerMovement>();
-        playerMovement1.EnableDisablePlayerMovement();
+        playerMovement1.EnablePlayerMovement();
         playerMovement2 = FindObjectOfType<Player2Movement>();
-        playerMovement2.EnableDisablePlayerMovement2();
+        playerMovement2.EnablePlayerMovement2();
+    }
+
+    public void DisablePlayerMovements()
+    {
+        playerMovement1 = FindObjectOfType<PlayerMovement>();
+        playerMovement1.DisablePlayerMovement();
+        playerMovement2 = FindObjectOfType<Player2Movement>();
+        playerMovement2.DisablePlayerMovement2();
     }
 
     public void Winner(Player _player)
     {
+        DisablePlayerMovements();
+        uiTimer = FindObjectOfType<UiTimer>();
+        uiTimer.StopTimer();
         if (_player != null)
         {
             Player winner = null;
