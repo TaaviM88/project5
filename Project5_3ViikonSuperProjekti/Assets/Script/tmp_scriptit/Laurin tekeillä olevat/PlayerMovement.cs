@@ -74,12 +74,10 @@ public class PlayerMovement : MonoBehaviour {
                         isRunning = true;
                         anime.SetInteger("State", 1);
                     }
-
                 }
 
                 if (value < 0)
                 {
-
                     if (_facingRight == true)
                     {
                         Flip();
@@ -89,7 +87,6 @@ public class PlayerMovement : MonoBehaviour {
                         isRunning = true;
                         anime.SetInteger("State", 1);
                     }
-
                 }
                 if (value == 0 && verticalVelocity == 0)
                 {
@@ -200,7 +197,6 @@ public class PlayerMovement : MonoBehaviour {
                 return true;
             }
 
-
             if (Physics.Raycast(leftRayStart, Vector3.down, (controller.height / 2) + hoverHeight))
             {
                 //Debug.Log("osuu kantapaa");
@@ -209,8 +205,6 @@ public class PlayerMovement : MonoBehaviour {
 
             //Debug.Log("ei osu maahan");
             return false;
-
-       
     }
 	//------------------------------------------------------------------------------------
 

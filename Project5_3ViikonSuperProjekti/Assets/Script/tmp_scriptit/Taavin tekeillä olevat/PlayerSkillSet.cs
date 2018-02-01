@@ -127,7 +127,8 @@ namespace Skills
                   clone.transform.localScale = _scale;
                   //clone.GetComponent<Bullet>().ChangeDirection();
               }    
-              
+             
+
           }},
            {Skill.Plasma, (PlayerSkillSet, Player) => {
               PlayerSkillSet.health -= 1;
