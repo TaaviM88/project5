@@ -37,7 +37,7 @@ public class UiTimer : MonoBehaviour {
 
                 }
                 //_text.color = Color.red;
-                _text.fontStyle = FontStyle.Bold;
+                //_text.fontStyle = FontStyle.Bold;
 
             }
         }

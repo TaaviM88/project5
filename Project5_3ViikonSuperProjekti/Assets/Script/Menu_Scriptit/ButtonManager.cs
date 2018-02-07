@@ -7,6 +7,7 @@ public class ButtonManager : MonoBehaviour {
     public AudioClip ButtonSoundEffect;
     private AudioSource source;
     public GameObject _canvas;
+    public GameObject _uiCountdownTimer;
     void Start()
     {
         source = GetComponent<AudioSource>();
@@ -24,11 +25,11 @@ public class ButtonManager : MonoBehaviour {
     }
     public void CanvasDisable()
     {
-        GameManager.gamemanager.EnablePlayerMovements();
-        GameManager.gamemanager.StartTimeScale();
+        if(_uiCountdownTimer != null)
+        {
+            _uiCountdownTimer.SetActive(true);
+        }  
         _canvas.SetActive(false);
-        
-        
     }
 
     public void CanvasEnable()
