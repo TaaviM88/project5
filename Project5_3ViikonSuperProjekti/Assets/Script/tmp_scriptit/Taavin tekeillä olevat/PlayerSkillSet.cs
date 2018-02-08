@@ -117,15 +117,20 @@ namespace Skills
            {Skill.FlameThrower, (PlayerSkillSet, Player) => {
               PlayerSkillSet.health -= 1;
               GameObject _prefab = GameManager.gamemanager.Effectlist.GetEffect(Skill.FlameThrower);
-              GameObject clone = UnityEngine.Object.Instantiate(_prefab, Player.GetComponentInChildren<PlayerUseSkill>().transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
-              clone.transform.SetParent(Player.GetComponentInChildren<PlayerUseSkill>().transform);
+               if(Player.transform.localScale.z == 1)
+               {
+                   GameObject clone = UnityEngine.Object.Instantiate(_prefab, Player.GetComponentInChildren<PlayerUseSkill>().transform.position + new Vector3(15, 0, 0), Player.transform.rotation);
+               }
+              
+              //clone.transform.SetParent(Player.GetComponentInChildren<PlayerUseSkill>().transform);
+
               AudioManager.audioManager.FireArrow();
               if (Player.transform.localScale.z == -1)
               {
-                    Vector3 _scale = clone.transform.localScale;
+                   GameObject clone = UnityEngine.Object.Instantiate(_prefab, Player.GetComponentInChildren<PlayerUseSkill>().transform.position + new Vector3(-15, 0, 0), Player.transform.rotation);
+                   Vector3 _scale = clone.transform.localScale;
                   _scale.x = Player.transform.localScale.z;
                   clone.transform.localScale = _scale;
-                  //clone.GetComponent<Bullet>().ChangeDirection();
               }    
              
 
@@ -136,7 +141,8 @@ namespace Skills
                 if (Player.transform.localScale.z == 1)
               {
               GameObject clone = UnityEngine.Object.Instantiate(_prefab, Player.GetComponentInChildren<PlayerUseSkill>().transform.position + new Vector3(5, 0, 0), Player.transform.rotation);
-                }
+              }
+
               AudioManager.audioManager.PlasmaBall();
               if (Player.transform.localScale.z == -1)
               {

@@ -48,8 +48,6 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        Debug.Log(Time.timeScale + "TimeScale");
-
         /*if (Time.timeScale > 0 && TimeGoingDown == false && playerisdead == true)
         {
             StartCoroutine(SlowTimeScale());

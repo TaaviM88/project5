@@ -9,9 +9,22 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
    public Transform placeholderParent = null;
    GameObject placeholder = null;
    private Player _player;
-  /* public enum Slot { WEAPON, HEAD, CHEST, LEGS, FEET, INVENTORY };
-   public Slot typeOfItem = Slot.WEAPON;*/
-
+    Button button;
+    /* public enum Slot { WEAPON, HEAD, CHEST, LEGS, FEET, INVENTORY };
+     public Slot typeOfItem = Slot.WEAPON;*/
+   
+    void Start()
+    {
+        button = GetComponent<Button>();
+        if (button == null)
+        {
+            Debug.Log("Button puuttuu");
+        }
+        else
+        {
+            button.navigation = Navigation.defaultNavigation;
+        }
+    }
     //kortti otetaan hiireen
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -28,10 +41,16 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         placeholderParent = parentToReturnTo;
         this.transform.SetParent(this.transform.parent.parent);
         GetComponent<CanvasGroup>().blocksRaycasts = false;
-        
 
+        Debug.Log(EventSystem.current.currentSelectedGameObject.name);
         //Voi tehdä esim hohto efektin dropzone:lle
         //DropZone[] zones =  GameObject.FindObjectsOfType<DropZone>();
+    }
+ 
+    void Update()
+    {
+        Debug.Log(EventSystem.current.currentSelectedGameObject.name);
+    
     }
     //Korttia raahataan
     public void OnDrag(PointerEventData eventData)
