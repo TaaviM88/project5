@@ -15,8 +15,11 @@ public class PlayerMovement : MonoBehaviour {
     private bool _facingRight = true;
     public float value;
 
+	public Vector3 initialPos;
+
 	bool isRunning;
     bool CanPlayerMove;
+
 	//AnimeController _animeScript;
     private Animator anime;
     private Rigidbody rigidbody;
@@ -38,12 +41,12 @@ public class PlayerMovement : MonoBehaviour {
 
     void Awake()
     {
-        CanPlayerMove = false;
+		DisablePlayerMovement ();
     }
 
     void Start()
     {
-		//_animeScript = GetComponent<AnimeController> ();
+		initialPos = transform.position;
         controller = GetComponent<CharacterController>();
         anime = GetComponent<Animator>();
         rigidbody = GetComponent<Rigidbody>();
@@ -52,10 +55,15 @@ public class PlayerMovement : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+		if (gameObject.transform.position.z != 0) 
+		{
+			transform.position = new Vector3 (transform.position.x, transform.position.y, initialPos.z);
+			//Debug.Log ("Moved player");
+		}
+
         if (CanPlayerMove == true)
         {
-            if (Time.timeScale == 1)
-            {
+            
                 //LIIKKUMINEN JA FLIP, Run ja Idle animaatio ----------------------------------------------------------------
                 IsControllerGrounded();
                 moveVector = Vector3.zero;
@@ -94,14 +102,6 @@ public class PlayerMovement : MonoBehaviour {
                     anime.SetInteger("State", 0);
                 }
 
-                // juoksu ääni on hyllylllä
-                /*if (isRunning == true) 
-                {
-                    AudioManager.audioManager.RunSound ();
-
-                }
-                else*/
-
                 //----------------------------------------------------------------------------
 
                 //HYÖKKÄYS ANIMAATIO (hyökkäys komento itsessään on playeruseskill.cs)
@@ -109,7 +109,6 @@ public class PlayerMovement : MonoBehaviour {
                 if (Input.GetButtonDown("P1Fire"))
                 {
                     anime.SetInteger("State", 4);
-                    //AudioManager.audioManager.WandSwing ();
                     AudioManager.audioManager.WandSwing();
                 }
 
@@ -145,8 +144,6 @@ public class PlayerMovement : MonoBehaviour {
                     //Jos haluat vapaan liikkumisen ja vapaan hyppy suunnan, ota kaksi seuraavaa käyttöön
                     moveVector.x = inputDirection;
                     moveVector.y = inputDirection;
-                    //Jos haluat fixedjump ota käyttöön
-                    //moveVector.x = lastMotion.x;
                 }
 
                 moveVector.y = verticalVelocity;
@@ -154,9 +151,9 @@ public class PlayerMovement : MonoBehaviour {
                 controller.Move(moveVector * Time.deltaTime);
                 lastMotion = moveVector;
 
-            }
 
-        }
+            }
+			
     }
 	//-----------------------------------------------------------------------------------------------
 

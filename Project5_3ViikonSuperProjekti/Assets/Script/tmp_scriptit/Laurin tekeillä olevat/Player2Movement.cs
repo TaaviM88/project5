@@ -14,7 +14,12 @@ public class Player2Movement : MonoBehaviour {
 	private bool secondJumpAvail = false;
 	private bool _facingRight = true;
 	public float value;
+
+	public Vector3 initialPos;
+
+	bool isRunning;
     bool CanPlayerMove2;
+
 	//AnimeController _animeScript;
 	private Animator anime;
 	private Rigidbody rigidbody;
@@ -41,7 +46,7 @@ public class Player2Movement : MonoBehaviour {
 	// Use this for initialization
 	void Start()
 	{
-		//_animeScript = GetComponent<AnimeController> ();
+		initialPos = transform.position;
 		controller = GetComponent<CharacterController>();
 		anime = GetComponent<Animator>();
 		rigidbody = GetComponent<Rigidbody>();
@@ -50,10 +55,14 @@ public class Player2Movement : MonoBehaviour {
 	// Update is called once per frame
     void Update()
     {
+		if (gameObject.transform.position.z != 0) 
+		{
+			transform.position = new Vector3 (transform.position.x, transform.position.y, initialPos.z);
+			//Debug.Log ("Moved player");
+		}
+
         if (CanPlayerMove2 == true)
         {
-            if (Time.timeScale == 1)
-            {
                 //LIIKKUMINEN JA FLIP, Run ja Idle animaatio ----------------------------------------------------------------
                 IsControllerGrounded();
                 moveVector = Vector3.zero;
@@ -69,6 +78,7 @@ public class Player2Movement : MonoBehaviour {
                     }
                     if (IsControllerGrounded())
                     {
+						isRunning = true;
                         anime.SetInteger("State", 1);
                     }
                 }
@@ -82,11 +92,13 @@ public class Player2Movement : MonoBehaviour {
                     }
                     if (IsControllerGrounded())
                     {
+						isRunning = true;
                         anime.SetInteger("State", 1);
                     }
                 }
                 if (value == 0 && verticalVelocity == 0)
                 {
+					isRunning = false;
                     anime.SetInteger("State", 0);
                 }
 
@@ -97,6 +109,7 @@ public class Player2Movement : MonoBehaviour {
                 if (Input.GetButtonDown("P2Fire"))
                 {
                     anime.SetInteger("State", 4);
+					AudioManager.audioManager.WandSwing();
                 }
 
                 //----------------------------------------------------------------------------
@@ -131,8 +144,6 @@ public class Player2Movement : MonoBehaviour {
                     //Jos haluat vapaan liikkumisen ja vapaan hyppy suunnan, ota kaksi seuraavaa käyttöön
                     moveVector.x = inputDirection;
                     moveVector.y = inputDirection;
-                    //Jos haluat fixedjump ota käyttöön
-                    //moveVector.x = lastMotion.x;
                 }
 
                 moveVector.y = verticalVelocity;
@@ -141,7 +152,6 @@ public class Player2Movement : MonoBehaviour {
                 lastMotion = moveVector;
 
             }
-        }
     }
 	//-----------------------------------------------------------------------------------------------
 
@@ -226,12 +236,14 @@ public class Player2Movement : MonoBehaviour {
     public void EnablePlayerMovement2()
     {
         CanPlayerMove2 = true;
+		//pelaaja voi liikkua
         Debug.Log("pelaaja2 voi liikkua");
        
     }
     public void DisablePlayerMovement2()
     {
         CanPlayerMove2 = false;
+		//pelaaja ei voi liikkua
         Debug.Log("pelaaja2 ei voi liikkua");
     }
 }
