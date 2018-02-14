@@ -15,16 +15,72 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
    
     void Start()
     {
-        button = GetComponent<Button>();
-        if (button == null)
+        UpdateButtonNavigation();
+    }
+
+    void Update()
+    {
+        //Kesken
+        //Debug.Log(EventSystem.current.currentSelectedGameObject.name);
+
+        if (EventSystem.current.currentSelectedGameObject.name == this.gameObject.name)
         {
-            Debug.Log("Button puuttuu");
-        }
-        else
-        {
-            button.navigation = Navigation.defaultNavigation;
+            if (Input.GetButtonDown("P1Jump"))
+            {
+                _player = GameManager.gamemanager.GetPlayer(GameTypes.PlayerType.player1);
+                if(_player._cardList.Count <= 6)
+                { //Debug.Log(_player);
+                    Card _card = GetComponent<Card>();
+                    Player1Tab_Script _player1tab = FindObjectOfType<Player1Tab_Script>();
+
+                    if (this.transform.parent.name == "Hand")
+                    {
+                        this.transform.SetParent(_player1tab.transform);
+                        _player.AddCardToPlayer(_card);
+                    }
+                    else
+                    {
+                        CardSpawner _cardSpawner = FindObjectOfType<CardSpawner>();
+                        this.transform.SetParent(_cardSpawner.transform);         
+                        _player.RemoveCardFromPlayer(_card);
+                    }
+                    //transform.localPosition = new Vector3(0, 0, 0);
+                    transform.position = Vector3.MoveTowards(transform.position, new Vector3(0, 0, 0), Time.deltaTime/2);
+                    UpdateButtonNavigation();
+                    
+                }
+               
+            }
+
+            if (Input.GetButtonDown("P2Jump"))
+            {
+                _player = GameManager.gamemanager.GetPlayer(GameTypes.PlayerType.player2);
+                if (_player._cardList.Count <= 6)
+                {
+                    Card _card = GetComponent<Card>();
+                    
+                    Player2Tab_Script _player2tab = FindObjectOfType<Player2Tab_Script>();
+                    if (this.transform.parent.name == "Hand")
+                    {
+                        this.transform.SetParent(_player2tab.transform);
+                        _player.AddCardToPlayer(_card);
+                    }
+                    else
+                    {
+                        CardSpawner _cardSpawner = FindObjectOfType<CardSpawner>();
+                        this.transform.SetParent(_cardSpawner.transform);
+                        _player.RemoveCardFromPlayer(_card);
+                    }
+                        
+                    //transform.localPosition = new Vector3(0, 0, 0);
+                    transform.position = Vector3.MoveTowards(transform.position, new Vector3(0, 0, 0), Time.deltaTime/2);
+                    UpdateButtonNavigation();
+                }
+                    
+            }
         }
     }
+
     //kortti otetaan hiireen
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -41,17 +97,13 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         placeholderParent = parentToReturnTo;
         this.transform.SetParent(this.transform.parent.parent);
         GetComponent<CanvasGroup>().blocksRaycasts = false;
-
-        Debug.Log(EventSystem.current.currentSelectedGameObject.name);
+        
+        
+        }
         //Voi tehdä esim hohto efektin dropzone:lle
         //DropZone[] zones =  GameObject.FindObjectsOfType<DropZone>();
-    }
- 
-    void Update()
-    {
-        Debug.Log(EventSystem.current.currentSelectedGameObject.name);
-    
-    }
+
+   
     //Korttia raahataan
     public void OnDrag(PointerEventData eventData)
     {
@@ -107,5 +159,18 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         //Ota hohto efekti pois päältä jos tehty
         //Tsekkailee mitä on kortin alla.
         //EventSystem.current.RaycastAll(eventData)
+    }
+
+    public void UpdateButtonNavigation()
+    {
+        button = GetComponent<Button>();
+        if (button == null)
+        {
+            Debug.Log("Button puuttuu");
+        }
+        else
+        {
+            button.navigation = Navigation.defaultNavigation;
+        }
     }
 }

@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour {
    private bool _isRunning = false;
    private Effect_Container _effectContainer;
    PlayerMovement playerMovement1;
+   //PlayerUseSkill _playerUseSkill;
    Player2Movement playerMovement2;
     UiTimer uiTimer;
    public Effect_Container Effectlist { get 
@@ -103,6 +104,14 @@ public class GameManager : MonoBehaviour {
         playerMovement1.EnablePlayerMovement();
         playerMovement2 = FindObjectOfType<Player2Movement>();
         playerMovement2.EnablePlayerMovement2();
+        //Etsii objekteista kaikki joissa on PlayerUseSKill ja sitten kutsuu niissä metodia joka mahdollistaa pelaajia käyttämään skillejä
+        PlayerUseSkill[] _playerUseSkill = FindObjectsOfType(typeof(PlayerUseSkill)) as PlayerUseSkill[];
+        foreach (PlayerUseSkill _playerSkill in _playerUseSkill)
+        {
+            _playerSkill.PlayerCanMove();
+        }
+        //_playerUseSkill = FindObjectOfType<PlayerUseSkill>();
+        //_playerUseSkill.PlayerCanMove();
     }
 
     public void DisablePlayerMovements()
@@ -111,6 +120,14 @@ public class GameManager : MonoBehaviour {
         playerMovement1.DisablePlayerMovement();
         playerMovement2 = FindObjectOfType<Player2Movement>();
         playerMovement2.DisablePlayerMovement2();
+        //Etsii objekteista kaikki joissa on PlayerUseSKill ja sitten kutsuu niissä metodia joka estää pelaajia käyttämästä skilliä
+        PlayerUseSkill[] _playerUseSkill = FindObjectsOfType(typeof(PlayerUseSkill)) as PlayerUseSkill[];
+        foreach (PlayerUseSkill _playerSkill in _playerUseSkill)
+        {
+            _playerSkill.PlayerCantMove();
+        }
+        /* _playerUseSkill = FindObjectOfType<PlayerUseSkill>();
+         _playerUseSkill.PlayerCantMove();*/
     }
 
     public void Winner(Player _player)

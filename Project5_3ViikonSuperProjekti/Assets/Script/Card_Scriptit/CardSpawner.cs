@@ -27,7 +27,10 @@ public class CardSpawner : MonoBehaviour {
             //CardCopies = montako kopiota yhdestä kortista tehdään
             for (int j = 0; j < CardCopies; j++)
             {
-                _cards.Add(Instantiate(CardsPrefabs[i], transform));
+                Card _instantiatedCard = Instantiate(CardsPrefabs[i], transform);
+                _instantiatedCard.name = _instantiatedCard.name+i;
+                _cards.Add(_instantiatedCard);
+                //_cards.Add(Instantiate(CardsPrefabs[i], transform));
             }
         }
     }
@@ -37,7 +40,10 @@ public class CardSpawner : MonoBehaviour {
         for (int i = 0; i < CardAmountRandomised; i++)
         {
             int randomindex = Random.Range(0, CardsPrefabs.Length);
-            _cards.Add(Instantiate(CardsPrefabs[randomindex], transform));
+            Card _instantiatedCard = Instantiate(CardsPrefabs[randomindex], transform);
+            _instantiatedCard.name = _instantiatedCard.name + i;
+            _cards.Add(_instantiatedCard);
+            //_cards.Add(Instantiate(CardsPrefabs[randomindex], transform));
         }
     }
 }

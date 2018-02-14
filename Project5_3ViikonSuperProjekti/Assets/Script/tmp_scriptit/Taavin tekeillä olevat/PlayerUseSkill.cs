@@ -9,19 +9,20 @@ public  GameObject cardGameObject;
 Card _card;
 PlayerSkillSet _playerSkillSet;
 Player _playerscript;
-
+    bool canPlayerMove;
 void Awake()
 {
     _playerSkillSet = playerGameObject.GetComponent<PlayerSkillSet>();
     _card = cardGameObject.GetComponent<Card>();
     _playerscript = GetComponentInParent<Player>().GetComponent<Player>();
+    PlayerCantMove();
 }
-void Start()
-{
-    //Debug.Log(_card.cardSkill);
-    //_playerSkillSet.AddSkillToPlayer(_card.cardSkill);
+    void Start()
+    {
+        //Debug.Log(_card.cardSkill);
+        //_playerSkillSet.AddSkillToPlayer(_card.cardSkill);
    
-}
+    }
     void Update()
     {
         //Debug.Log(transform.localScale);
@@ -33,7 +34,7 @@ void Start()
         if (_playerscript.playerType == GameTypes.PlayerType.player1)
         {
 
-            if (Input.GetButtonDown("P1Fire") && _playerscript._cardList.Count != 0 && Time.timeScale == 1)
+            if (Input.GetButtonDown("P1Fire") && _playerscript._cardList.Count != 0 && canPlayerMove)
             {
                 //Luo kortissa määritellyn prefabin(effektin)
                 /* GameObject  clone = Instantiate(_card.effect, transform.position,transform.rotation);
@@ -52,9 +53,9 @@ void Start()
           
 
         }
-        if (_playerscript.playerType == GameTypes.PlayerType.player2 && Time.timeScale == 1)
+        if (_playerscript.playerType == GameTypes.PlayerType.player2)
         {
-            if (Input.GetButtonDown("P2Fire") && _playerscript._cardList.Count != 0)
+            if (Input.GetButtonDown("P2Fire") && _playerscript._cardList.Count != 0 && canPlayerMove == true)
             {
                 //Luo kortissa määritellyn prefabin(effektin)
                 /* GameObject  clone = Instantiate(_card.effect, transform.position,transform.rotation);
@@ -66,5 +67,14 @@ void Start()
             }
             
         }
+    }
+
+    public void PlayerCanMove()
+    {
+        canPlayerMove = true;
+    }
+    public void PlayerCantMove()
+    {
+        canPlayerMove = false;
     }
 }

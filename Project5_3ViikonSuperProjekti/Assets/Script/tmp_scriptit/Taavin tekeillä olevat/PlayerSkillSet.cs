@@ -125,6 +125,7 @@ namespace Skills
               //clone.transform.SetParent(Player.GetComponentInChildren<PlayerUseSkill>().transform);
 
               AudioManager.audioManager.FireArrow();
+                    
               if (Player.transform.localScale.z == -1)
               {
                    GameObject clone = UnityEngine.Object.Instantiate(_prefab, Player.GetComponentInChildren<PlayerUseSkill>().transform.position + new Vector3(-15, 0, 0), Player.transform.rotation);

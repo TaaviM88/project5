@@ -32,6 +32,7 @@ public class Player : MonoBehaviour {
 		if(_cardList.Count <=6)
 		{
         _cardList.Add(card);
+            Debug.Log("Kortti lisätty");
             //tarkastetaan onko listassa yksi kortti, jos on niin käsketään UIPlayerCardImager.cs piirtää se HUD:iin
         if (_cardList.Count == 1)
         {
