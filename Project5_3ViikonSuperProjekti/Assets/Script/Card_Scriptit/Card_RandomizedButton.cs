@@ -33,9 +33,13 @@ public class Card_RandomizedButton : MonoBehaviour {
         {
             int randomindex = Random.Range(0, CardsPrefabs.Length);
             _player = GameManager.gamemanager.GetPlayer(GameTypes.PlayerType.player1);
-            Card _card = GetComponent<Card>();
-            _card = CardsPrefabs[randomindex];
-            _player.AddCardToPlayer(_card);
+            if (_player._cardList.Count <= 5)
+            {
+                Card _card = GetComponent<Card>();
+                _card = CardsPrefabs[randomindex];
+                _player.AddCardToPlayer(_card);
+            }
+            
         }
     }
     // Player 2 korttien antaminen
@@ -45,9 +49,13 @@ public class Card_RandomizedButton : MonoBehaviour {
         {
             int randomindex = Random.Range(0, CardsPrefabs.Length);
             _player = GameManager.gamemanager.GetPlayer(GameTypes.PlayerType.player2);
-            Card _card = GetComponent<Card>();
-            _card = CardsPrefabs[randomindex];
-            _player.AddCardToPlayer(_card);
+            if (_player._cardList.Count <=5)
+            {
+                Card _card = GetComponent<Card>();
+                _card = CardsPrefabs[randomindex];
+                _player.AddCardToPlayer(_card);
+            }
+                
         }
     }
 }
