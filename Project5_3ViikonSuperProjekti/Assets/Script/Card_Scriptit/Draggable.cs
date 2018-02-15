@@ -10,9 +10,11 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
    GameObject placeholder = null;
    private Player _player;
     Button button;
+    float speed = 0.1f;
+    float step;
     /* public enum Slot { WEAPON, HEAD, CHEST, LEGS, FEET, INVENTORY };
      public Slot typeOfItem = Slot.WEAPON;*/
-   
+
     void Start()
     {
         UpdateButtonNavigation();
@@ -25,62 +27,81 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
         if (EventSystem.current.currentSelectedGameObject.name == this.gameObject.name)
         {
+
+            float angle = Mathf.PingPong(Time.time * 10, 2) - 2;
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.back);
             if (Input.GetButtonDown("P1Jump"))
             {
-                _player = GameManager.gamemanager.GetPlayer(GameTypes.PlayerType.player1);
-                if(_player._cardList.Count <= 6)
-                { //Debug.Log(_player);
-                    Card _card = GetComponent<Card>();
-                    Player1Tab_Script _player1tab = FindObjectOfType<Player1Tab_Script>();
-
-                    if (this.transform.parent.name == "Hand")
-                    {
-                        this.transform.SetParent(_player1tab.transform);
-                        _player.AddCardToPlayer(_card);
-                    }
-                    else
-                    {
-                        CardSpawner _cardSpawner = FindObjectOfType<CardSpawner>();
-                        this.transform.SetParent(_cardSpawner.transform);         
-                        _player.RemoveCardFromPlayer(_card);
-                    }
-                    //transform.localPosition = new Vector3(0, 0, 0);
-                    transform.position = Vector3.MoveTowards(transform.position, new Vector3(0, 0, 0), Time.deltaTime/2);
-                    UpdateButtonNavigation();
-                    
-                }
-               
+                MoveCardtoPlayer1();
             }
 
             if (Input.GetButtonDown("P2Jump"))
             {
-                _player = GameManager.gamemanager.GetPlayer(GameTypes.PlayerType.player2);
-                if (_player._cardList.Count <= 6)
-                {
-                    Card _card = GetComponent<Card>();
-                    
-                    Player2Tab_Script _player2tab = FindObjectOfType<Player2Tab_Script>();
-                    if (this.transform.parent.name == "Hand")
-                    {
-                        this.transform.SetParent(_player2tab.transform);
-                        _player.AddCardToPlayer(_card);
-                    }
-                    else
-                    {
-                        CardSpawner _cardSpawner = FindObjectOfType<CardSpawner>();
-                        this.transform.SetParent(_cardSpawner.transform);
-                        _player.RemoveCardFromPlayer(_card);
-                    }
-                        
-                    //transform.localPosition = new Vector3(0, 0, 0);
-                    transform.position = Vector3.MoveTowards(transform.position, new Vector3(0, 0, 0), Time.deltaTime/2);
-                    UpdateButtonNavigation();
-                }
-                    
+                MoveCardtoPlayer2();
             }
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+        }
+       
+        //float angle = Mathf.Sin(Time.time) * 1; 
+
+        //transform.position = Vector3.MoveTowards(transform.position, new Vector3(0, 0, transform.position.z),0.1f * Time.deltaTime);
+
+    }
+
+   public void MoveCardtoPlayer1()
+    {
+        _player = GameManager.gamemanager.GetPlayer(GameTypes.PlayerType.player1);
+        if (_player._cardList.Count <= 5)
+        { //Debug.Log(_player);
+            Card _card = GetComponent<Card>();
+            Player1Tab_Script _player1tab = FindObjectOfType<Player1Tab_Script>();
+
+            if (this.transform.parent.name == "Hand")
+            {
+                this.transform.SetParent(_player1tab.transform);
+                _player.AddCardToPlayer(_card);
+            }
+            else
+            {
+                CardSpawner _cardSpawner = FindObjectOfType<CardSpawner>();
+                this.transform.SetParent(_cardSpawner.transform);
+                _player.RemoveCardFromPlayer(_card);
+            }
+            transform.localPosition = new Vector3(0, 0, 0);
+
+            UpdateButtonNavigation();
         }
     }
 
+    public void MoveCardtoPlayer2()
+    {
+        _player = GameManager.gamemanager.GetPlayer(GameTypes.PlayerType.player2);
+        if (_player._cardList.Count <= 5)
+        {
+            Card _card = GetComponent<Card>();
+
+            Player2Tab_Script _player2tab = FindObjectOfType<Player2Tab_Script>();
+            if (this.transform.parent.name == "Hand")
+            {
+                this.transform.SetParent(_player2tab.transform);
+                _player.AddCardToPlayer(_card);
+            }
+            else
+            {
+                CardSpawner _cardSpawner = FindObjectOfType<CardSpawner>();
+                this.transform.SetParent(_cardSpawner.transform);
+                _player.RemoveCardFromPlayer(_card);
+            }
+
+            transform.localPosition = new Vector3(0, 0, 0);
+            //transform.position = Vector3.MoveTowards(transform.position, new Vector3(0, 0, 0), Time.deltaTime / 2);
+            UpdateButtonNavigation();
+        }
+
+    }
     //kortti otetaan hiireen
     public void OnBeginDrag(PointerEventData eventData)
     {
