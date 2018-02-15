@@ -10,8 +10,6 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
    GameObject placeholder = null;
    private Player _player;
     Button button;
-    float speed = 0.1f;
-    float step;
     /* public enum Slot { WEAPON, HEAD, CHEST, LEGS, FEET, INVENTORY };
      public Slot typeOfItem = Slot.WEAPON;*/
 
@@ -43,7 +41,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         else
         {
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(0, 0, transform.position.z), 0.1f * Time.deltaTime);
+            //transform.position = Vector3.MoveTowards(transform.position, new Vector3(0, 0, transform.position.z), 0.1f * Time.deltaTime);
         }
        
         //float angle = Mathf.Sin(Time.time) * 1; 

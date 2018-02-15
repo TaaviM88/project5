@@ -9,7 +9,7 @@ public  GameObject cardGameObject;
 Card _card;
 PlayerSkillSet _playerSkillSet;
 Player _playerscript;
-    bool canPlayerMove;
+    bool canPlayerMove = false;
 void Awake()
 {
     _playerSkillSet = playerGameObject.GetComponent<PlayerSkillSet>();
@@ -34,7 +34,7 @@ void Awake()
         if (_playerscript.playerType == GameTypes.PlayerType.player1)
         {
 
-            if (Input.GetButtonDown("P1Fire") && _playerscript._cardList.Count != 0 && canPlayerMove)
+            if (Input.GetButtonDown("P1Fire") && _playerscript._cardList.Count != 0 && canPlayerMove == true)
             {
                 //Luo kortissa määritellyn prefabin(effektin)
                 /* GameObject  clone = Instantiate(_card.effect, transform.position,transform.rotation);

@@ -80,15 +80,7 @@ public class Player : MonoBehaviour {
        PlayerDie();
    }
 
-   void OnTriggerStay(Collider col)
-   {
 
-   }
-   void OnTriggerExit(Collider col)
-   {
-
-
-   }
 
   /* public void ToggleMovement()
    {
