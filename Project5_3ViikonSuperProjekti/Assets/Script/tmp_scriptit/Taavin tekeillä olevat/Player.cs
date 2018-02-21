@@ -29,7 +29,7 @@ public class Player : MonoBehaviour {
 
     public bool AddCardToPlayer(Card card)
     {
-		if(_cardList.Count <=6)
+		if(_cardList.Count <=5)
 		{
         _cardList.Add(card);
             Debug.Log("Kortti lisätty");
@@ -67,7 +67,8 @@ public class Player : MonoBehaviour {
             }
             else
             {
-                Image _cardsprite = _cardList[0].GetComponent<Image>();
+                //Image _cardsprite = _cardList[0].GetComponent<Image>();
+                Image _cardsprite = _cardList[0].GetComponentInChildren<Image>();   
                 _uicard.CardImage(_cardsprite, this);
 
             }

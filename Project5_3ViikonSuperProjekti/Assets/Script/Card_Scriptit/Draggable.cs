@@ -9,31 +9,48 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
    public Transform placeholderParent = null;
    GameObject placeholder = null;
    private Player _player;
-    Button button;
+    Button button; 
+    ColorBlock cb;
     /* public enum Slot { WEAPON, HEAD, CHEST, LEGS, FEET, INVENTORY };
      public Slot typeOfItem = Slot.WEAPON;*/
 
     void Start()
     {
+        button = GetComponent<Button>();
         UpdateButtonNavigation();
     }
 
     void Update()
     {
-        //Kesken
         //Debug.Log(EventSystem.current.currentSelectedGameObject.name);
-
+        if (GameManager.gamemanager._player1PickedCard == false)
+        {
+            cb = button.colors;
+            cb.highlightedColor = Color.cyan;
+            button.colors = cb;
+            
+        }
+        else
+        {
+            cb = button.colors;
+            cb.colorMultiplier = 2f;
+            cb.disabledColor = Color.white;
+            cb.highlightedColor = new Color32(150, 0, 150, 255);
+            button.colors = cb;
+        }
         if (EventSystem.current.currentSelectedGameObject.name == this.gameObject.name)
         {
-
+            
+            
+            //cb.normalColor = new Color32(255, 255, 255, 0);
             float angle = Mathf.PingPong(Time.time * 10, 2) - 2;
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.back);
-            if (Input.GetButtonDown("P1Jump"))
+            if (Input.GetButtonDown("P1Jump") && GameManager.gamemanager._player1PickedCard == false)
             {
                 MoveCardtoPlayer1();
             }
 
-            if (Input.GetButtonDown("P2Jump"))
+            if (Input.GetButtonDown("P2Jump") && GameManager.gamemanager._player1PickedCard == true)
             {
                 MoveCardtoPlayer2();
             }
@@ -62,6 +79,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
             {
                 this.transform.SetParent(_player1tab.transform);
                 _player.AddCardToPlayer(_card);
+                GameManager.gamemanager.Player1PickedACard();
             }
             else
             {
@@ -87,6 +105,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
             {
                 this.transform.SetParent(_player2tab.transform);
                 _player.AddCardToPlayer(_card);
+                GameManager.gamemanager.Player2PickedACard();
             }
             else
             {

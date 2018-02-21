@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour {
    //PlayerUseSkill _playerUseSkill;
    Player2Movement playerMovement2;
     UiTimer uiTimer;
+   public bool _player1PickedCard = false;
    public Effect_Container Effectlist { get 
    {
        if (_effectContainer == null)
@@ -157,5 +158,17 @@ public class GameManager : MonoBehaviour {
             UIRoundOver _uiroundover = RoundOverCanvas.GetComponentInChildren<UIRoundOver>();
             _uiroundover.ShowNoOneWins();
         }
+    }
+
+    public void Player1PickedACard()
+    {
+        // Draggable-scripti sidonnainen. tsekkailee kumman vuoro on ottaa kortti. Pelaaja 1 valitsee kun _player1PickedCard = false
+        _player1PickedCard = true;
+    }
+
+    public void Player2PickedACard()
+    {
+        // Draggable-scripti sidonnainen. tsekkailee kumman vuoro on ottaa kortti. Pelaaja 2 valitsee kun _player1PickedCard = ´true
+        _player1PickedCard = false;
     }
 }
