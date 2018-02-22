@@ -28,14 +28,13 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
             cb = button.colors;
             cb.highlightedColor = Color.cyan;
             button.colors = cb;
-            
         }
         else
         {
             cb = button.colors;
             cb.colorMultiplier = 2f;
             cb.disabledColor = Color.white;
-            cb.highlightedColor = new Color32(150, 0, 150, 255);
+            cb.highlightedColor = new Color32(150, 0, 150, 255);    
             button.colors = cb;
         }
         if (EventSystem.current.currentSelectedGameObject.name == this.gameObject.name)

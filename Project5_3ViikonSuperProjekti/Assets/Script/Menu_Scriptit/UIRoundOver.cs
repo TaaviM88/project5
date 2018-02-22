@@ -13,7 +13,7 @@ public class UIRoundOver : MonoBehaviour {
 	// Update is called once per frame
     public void Show(Player winner)
     {
-        string text = "Round Over!";
+        string text = ""; //= "Round Over!";
         if (winner != null)
         {
             text += "\n" + winner.name + " Wins!";
@@ -24,7 +24,7 @@ public class UIRoundOver : MonoBehaviour {
 
     public void ShowNoOneWins()
     {
-        string text = "Round Over!";
+        string text = ""; //= "Round Over!";
        
             text += "\n" +  " No winners!";
         

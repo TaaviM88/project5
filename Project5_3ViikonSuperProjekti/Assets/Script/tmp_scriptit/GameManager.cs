@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 /*public enum PlayerType
 {
@@ -22,7 +23,9 @@ public class GameManager : MonoBehaviour {
    Player2Movement playerMovement2;
     UiTimer uiTimer;
    public bool _player1PickedCard = false;
-   public Effect_Container Effectlist { get 
+    StandaloneInputModule _sIM;
+
+    public Effect_Container Effectlist { get 
    {
        if (_effectContainer == null)
        {
@@ -34,6 +37,11 @@ public class GameManager : MonoBehaviour {
 	void Awake () {
         gamemanager = this;
         listPlayers = new List<Player>();
+        _sIM = FindObjectOfType<StandaloneInputModule>();
+        if(_sIM == null)
+        {
+            Debug.Log("VOi vittu saatana perkele");
+        }
         if (RoundOverCanvas == null)
         {
             Debug.Log("RounoverCanvas on NULL");
@@ -163,12 +171,19 @@ public class GameManager : MonoBehaviour {
     public void Player1PickedACard()
     {
         // Draggable-scripti sidonnainen. tsekkailee kumman vuoro on ottaa kortti. Pelaaja 1 valitsee kun _player1PickedCard = false
+        _sIM.horizontalAxis = "P2movement";
+        _sIM.verticalAxis = "P2Vertical";
         _player1PickedCard = true;
-    }
 
+        
+
+    }
     public void Player2PickedACard()
     {
         // Draggable-scripti sidonnainen. tsekkailee kumman vuoro on ottaa kortti. Pelaaja 2 valitsee kun _player1PickedCard = ´true
+        _sIM.horizontalAxis = "Horizontal";
+        _sIM.verticalAxis = "Vertical";
         _player1PickedCard = false;
+        
     }
 }
