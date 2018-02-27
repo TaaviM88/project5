@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler {
+public class Draggable : MonoBehaviour/*, IBeginDragHandler, IDragHandler, IEndDragHandler*/ {
     //Laita tämä niihin asioita mitä voi raahata hiirellä.
    public Transform parentToReturnTo = null;
    public Transform placeholderParent = null;
@@ -11,6 +11,10 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
    private Player _player;
     Button button; 
     ColorBlock cb;
+    bool _isCardPicked = false;
+    float CardSizeWidth = 130f;
+    float CardSizeHeight = 170f;
+    RectTransform rect;    
     /* public enum Slot { WEAPON, HEAD, CHEST, LEGS, FEET, INVENTORY };
      public Slot typeOfItem = Slot.WEAPON;*/
 
@@ -18,6 +22,10 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     {
         button = GetComponent<Button>();
         UpdateButtonNavigation();
+        rect = GetComponent<RectTransform>();
+        //tallennetaan korttien koot(Poista tämä kun nää luvut on annettu korteille width 200,23 & height 288,9)
+        CardSizeWidth = rect.sizeDelta.x;
+        CardSizeHeight = rect.sizeDelta.y;
     }
 
     void Update()
@@ -26,45 +34,58 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         if (GameManager.gamemanager._player1PickedCard == false)
         {
             cb = button.colors;
-            cb.highlightedColor = Color.cyan;
+            //cb.highlightedColor = Color.cyan;
+            //Sininenväri
+            cb.highlightedColor = new Color32(0,95,255,255);
             button.colors = cb;
         }
         else
         {
             cb = button.colors;
-            cb.colorMultiplier = 2f;
-            cb.disabledColor = Color.white;
-            cb.highlightedColor = new Color32(150, 0, 150, 255);    
+            //Punainenväri
+            cb.highlightedColor = new Color32(255, 0, 30, 255);    
             button.colors = cb;
         }
+        if(EventSystem.current.currentSelectedGameObject != null)
+        {
+
         if (EventSystem.current.currentSelectedGameObject.name == this.gameObject.name)
         {
-            
-            
-            //cb.normalColor = new Color32(255, 255, 255, 0);
+            //Kortin pieni heilunta animaatio
             float angle = Mathf.PingPong(Time.time * 10, 2) - 2;
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.back);
-            if (Input.GetButtonDown("P1Jump") && GameManager.gamemanager._player1PickedCard == false)
+            if (Input.GetButtonDown("P1Jump") && GameManager.gamemanager._player1PickedCard == false && _isCardPicked == false)
             {
                 MoveCardtoPlayer1();
             }
 
-            if (Input.GetButtonDown("P2Jump") && GameManager.gamemanager._player1PickedCard == true)
+            if (Input.GetButtonDown("P2Jump") && GameManager.gamemanager._player1PickedCard == true && _isCardPicked == false)
             {
                 MoveCardtoPlayer2();
             }
         }
         else
         {
+            //Resetoidaan kortin rotaatio
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+            //Muutetaan kortin koko takaisin samanlaiseksi mitä oli aluksi
+			rect.sizeDelta = new Vector2(CardSizeWidth,CardSizeHeight);
+            return;
             //transform.position = Vector3.MoveTowards(transform.position, new Vector3(0, 0, transform.position.z), 0.1f * Time.deltaTime);
         }
        
         //float angle = Mathf.Sin(Time.time) * 1; 
-
-        //
-
-    }
+        /*if(_isCardPicked == true)
+        {
+            //Muutetaan korttien koko peinemmäksi, jotta mahtuvat paremmin canvaksessa oleviin paikkoihin
+            rect.sizeDelta = new Vector2(130,170);
+        }*/
+        }
+        else
+        {
+            return;
+        }
+            }
 
    public void MoveCardtoPlayer1()
     {
@@ -76,18 +97,28 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
             if (this.transform.parent.name == "Hand")
             {
+                //Vaihdetaan kortin parenttia jotta saadaan se siirtymään pois kädestä.
                 this.transform.SetParent(_player1tab.transform);
+                //Lisätään pelaajan korttilistaan kortti
                 _player.AddCardToPlayer(_card);
+                //Kerrotaan gamenagerille, että kumman vuoro on valita kortti
                 GameManager.gamemanager.Player1PickedACard();
+                //Merkataan, että kortti on valittu, jotta sitä ei voida valita uudestaan tai ottaa pois
+                CardIsPicked();
+                //Käsketään kortin kuvan childin muuttaa kokoansa myös
+                ResizeChild();
             }
             else
             {
+                //Sitä varten jos haluttaisiin, että pelaajat vois ottaa korttinsa myös pois
+                //Aiheuttaa bugeja joten ei suositella.
                 CardSpawner _cardSpawner = FindObjectOfType<CardSpawner>();
                 this.transform.SetParent(_cardSpawner.transform);
                 _player.RemoveCardFromPlayer(_card);
             }
+            //Varmistetaan, että kortit pysyvät keskellä, eivätkä lähde vaeltamaan.
             transform.localPosition = new Vector3(0, 0, 0);
-
+            //Päivitetään nappinavigointi
             UpdateButtonNavigation();
         }
     }
@@ -105,6 +136,8 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
                 this.transform.SetParent(_player2tab.transform);
                 _player.AddCardToPlayer(_card);
                 GameManager.gamemanager.Player2PickedACard();
+                CardIsPicked();
+                ResizeChild();
             }
             else
             {
@@ -120,6 +153,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
     }
     //kortti otetaan hiireen
+    /* 
     public void OnBeginDrag(PointerEventData eventData)
     {
        // Debug.Log("OnBeginDrag");
@@ -197,7 +231,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         //Ota hohto efekti pois päältä jos tehty
         //Tsekkailee mitä on kortin alla.
         //EventSystem.current.RaycastAll(eventData)
-    }
+    }*/
 
     public void UpdateButtonNavigation()
     {
@@ -210,5 +244,23 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         {
             button.navigation = Navigation.defaultNavigation;
         }
+    }
+    public void CardIsPicked()
+    {
+        MakeCardSmaller();
+        _isCardPicked = true;
+    }
+
+    public void ResizeChild()
+    {
+        CardImage_controller _child = GetComponentInChildren<CardImage_controller>();
+        _child.ResizeSize();
+    }
+
+    public void MakeCardSmaller()
+    {
+        //Muutetaan korttien koko peinemmäksi, jotta mahtuvat paremmin canvaksessa oleviin paikkoihin
+        rect.sizeDelta = new Vector2(130,170);
+
     }
 }
