@@ -1,19 +1,20 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\tmp_scriptit\Laurin tekeillä olevat\Floater.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\tmp_scriptit\tyhja.cs">
     <Files>
-      <File FileName="Assets\Script\tmp_scriptit\Laurin tekeillä olevat\PlayerMovement.cs" Line="241" Column="6" />
+      <File FileName="Assets\Script\tmp_scriptit\Laurin tekeillä olevat\PlayerMovement.cs" Line="1" Column="1" />
       <File FileName="Assets\Script\tmp_scriptit\Laurin tekeillä olevat\AnimeController.cs" Line="1" Column="1" />
       <File FileName="Assets\Script\tmp_scriptit\Laurin tekeillä olevat\NewContAndAnim.cs" Line="1" Column="1" />
       <File FileName="Assets\Script\tmp_scriptit\Laurin tekeillä olevat\CameraManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\tmp_scriptit\Laurin tekeillä olevat\Floater.cs" Line="31" Column="1" />
+      <File FileName="Assets\Script\tmp_scriptit\Laurin tekeillä olevat\Floater.cs" Line="1" Column="1" />
       <File FileName="Assets\Script\tmp_scriptit\Taavin tekeillä olevat\Player.cs" Line="1" Column="1" />
       <File FileName="Assets\Script\tmp_scriptit\Laurin tekeillä olevat\AudioManager.cs" Line="1" Column="1" />
       <File FileName="Assets\Script\tmp_scriptit\Laurin tekeillä olevat\FPScounter.cs" Line="1" Column="1" />
       <File FileName="Assets\Script\tmp_scriptit\GameManager.cs" Line="1" Column="1" />
       <File FileName="Assets\Script\tmp_scriptit\Laurin tekeillä olevat\ButtonControlsHelp.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\tmp_scriptit\Laurin tekeillä olevat\Player2Movement.cs" Line="230" Column="32" />
-      <File FileName="Assets\Script\tmp_scriptit\Laurin tekeillä olevat\XaxisFloater.cs" Line="8" Column="30" />
+      <File FileName="Assets\Script\tmp_scriptit\Laurin tekeillä olevat\Player2Movement.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\tmp_scriptit\Laurin tekeillä olevat\XaxisFloater.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\tmp_scriptit\tyhja.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
