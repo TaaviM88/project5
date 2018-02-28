@@ -54,6 +54,7 @@ public class Draggable : MonoBehaviour/*, IBeginDragHandler, IDragHandler, IEndD
             //Kortin pieni heilunta animaatio
             float angle = Mathf.PingPong(Time.time * 10, 2) - 2;
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.back);
+            rect.sizeDelta = new Vector2(CardSizeWidth*1.07f,CardSizeHeight*1.07f);
             if (Input.GetButtonDown("P1Jump") && GameManager.gamemanager._player1PickedCard == false && _isCardPicked == false)
             {
                 MoveCardtoPlayer1();
