@@ -171,7 +171,7 @@ public class GameManager : MonoBehaviour {
     public void Player1PickedACard()
     {
         // Draggable-scripti sidonnainen. tsekkailee kumman vuoro on ottaa kortti. Pelaaja 1 valitsee kun _player1PickedCard = false
-        _sIM.horizontalAxis = "P2movement";
+        _sIM.horizontalAxis = "P2XAxis";
         _sIM.verticalAxis = "P2Vertical";
         _player1PickedCard = true;
 

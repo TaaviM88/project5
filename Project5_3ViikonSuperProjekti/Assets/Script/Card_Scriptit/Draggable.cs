@@ -70,7 +70,6 @@ public class Draggable : MonoBehaviour/*, IBeginDragHandler, IDragHandler, IEndD
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
             //Muutetaan kortin koko takaisin samanlaiseksi mitä oli aluksi
 			rect.sizeDelta = new Vector2(CardSizeWidth,CardSizeHeight);
-            return;
             //transform.position = Vector3.MoveTowards(transform.position, new Vector3(0, 0, transform.position.z), 0.1f * Time.deltaTime);
         }
        
@@ -85,7 +84,14 @@ public class Draggable : MonoBehaviour/*, IBeginDragHandler, IDragHandler, IEndD
         {
             return;
         }
-            }
+
+         if(_isCardPicked == true)
+        {
+            //Muutetaan korttien koko peinemmäksi, jotta mahtuvat paremmin canvaksessa oleviin paikkoihin
+            rect.sizeDelta = new Vector2(130,170);
+        }
+        
+    }
 
    public void MoveCardtoPlayer1()
     {
