@@ -159,12 +159,16 @@ public class GameManager : MonoBehaviour {
             RoundOverCanvas.SetActive(true);
             UIRoundOver _uiroundover = RoundOverCanvas.GetComponentInChildren<UIRoundOver>();
             _uiroundover.Show(winner);
+            EndingCanvasButton _endingbutton = FindObjectOfType<EndingCanvasButton>();
+            _endingbutton.SetEndingCanvasButton();
         }
         else
         {
             RoundOverCanvas.SetActive(true);
             UIRoundOver _uiroundover = RoundOverCanvas.GetComponentInChildren<UIRoundOver>();
             _uiroundover.ShowNoOneWins();
+            EndingCanvasButton _endingbutton = FindObjectOfType<EndingCanvasButton>();
+            _endingbutton.SetEndingCanvasButton();
         }
     }
 
