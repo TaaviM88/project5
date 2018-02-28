@@ -69,10 +69,11 @@ public class Player : MonoBehaviour {
             {
                 //Image _cardsprite = _cardList[0].GetComponent<Image>(); 
                 //_cardsprite = _cardList[0].GetComponentInChildren<Image>();
-                Image _cardsprite = _cardList[0].GetComponentInChildren<Image>();
-                //Debug.Log(_cardsprite);   
+                //Image _cardsprite = _cardList[0].gameObject.GetComponentInChildren<Image>();
+                
+                // Haetaan korttilistasta tän hetken skillin childista kuva joka piirretään UI:hin
+                Image _cardsprite = _cardList[0].transform.GetChild(0).GetComponent<Image>();       
                 _uicard.CardImage(_cardsprite, this);
-
             }
         }
         else { _uicard.NoCardLeft(this); }
