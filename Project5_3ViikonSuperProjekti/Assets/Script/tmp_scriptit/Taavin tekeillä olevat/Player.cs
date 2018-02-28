@@ -32,7 +32,7 @@ public class Player : MonoBehaviour {
 		if(_cardList.Count <=5)
 		{
         _cardList.Add(card);
-            Debug.Log("Kortti lisätty");
+            //Debug.Log("Kortti lisätty");
             //tarkastetaan onko listassa yksi kortti, jos on niin käsketään UIPlayerCardImager.cs piirtää se HUD:iin
         if (_cardList.Count == 1)
         {
@@ -62,13 +62,15 @@ public class Player : MonoBehaviour {
         {
             if (_uicard == null)
             {
-                Debug.Log("VITTU KU EI LÖYDY");
+               // Debug.Log("VITTU KU EI LÖYDY");
                 //_uicard = GetComponent<UIPlayerCardImager>();
             }
             else
             {
-                //Image _cardsprite = _cardList[0].GetComponent<Image>();
-                Image _cardsprite = _cardList[0].GetComponentInChildren<Image>();   
+                //Image _cardsprite = _cardList[0].GetComponent<Image>(); 
+                //_cardsprite = _cardList[0].GetComponentInChildren<Image>();
+                Image _cardsprite = _cardList[0].GetComponentInChildren<Image>();
+                //Debug.Log(_cardsprite);   
                 _uicard.CardImage(_cardsprite, this);
 
             }
@@ -104,7 +106,7 @@ public class Player : MonoBehaviour {
 		    Instantiate (deathAnimation, transform.position, transform.rotation);
             GameManager.gamemanager.Winner(this);
             //GameManager.gamemanager.EnablePlayerMovements();      
-            Debug.Log("LUL KUOLIN SAATANA");
+            //Debug.Log("LUL KUOLIN SAATANA");
             isdead = true;
        }
    }

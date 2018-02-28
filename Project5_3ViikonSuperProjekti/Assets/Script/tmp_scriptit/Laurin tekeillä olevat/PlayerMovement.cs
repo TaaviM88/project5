@@ -165,7 +165,7 @@ public class PlayerMovement : MonoBehaviour {
             //Debug.Log(moveVector.y);
             if (moveVector.y != 0f /*&& Input.GetButtonUp("P1Jump")*/)
             {
-                Debug.Log("hyppasin, menen up ja hyppy ei pohjassa");
+               // Debug.Log("hyppasin, menen up ja hyppy ei pohjassa");
                 anime.SetInteger("State", 3);
 
             }
@@ -186,8 +186,8 @@ public class PlayerMovement : MonoBehaviour {
             leftRayStart.x -= controller.bounds.extents.x;
             rightRayStart.x += controller.bounds.extents.x;
 
-            Debug.DrawRay(leftRayStart, Vector3.down, Color.red);
-            Debug.DrawRay(rightRayStart, Vector3.down, Color.blue);
+            //Debug.DrawRay(leftRayStart, Vector3.down, Color.red);
+            //Debug.DrawRay(rightRayStart, Vector3.down, Color.blue);
 
             if (Physics.Raycast(rightRayStart, Vector3.down, (controller.height / 2) + hoverHeight))
             {
@@ -238,13 +238,13 @@ public class PlayerMovement : MonoBehaviour {
     {
         CanPlayerMove = true;
         //pelaaja voi liikkua
-        Debug.Log("pelaaja1 voi liikkua");
+        //Debug.Log("pelaaja1 voi liikkua");
     }
     public void DisablePlayerMovement()
     {
         CanPlayerMove = false;
         //pelaaja ei voi liikkua
-        Debug.Log("pelaaja1 ei voi liikkua");
+        //Debug.Log("pelaaja1 ei voi liikkua");
     }
 
 }

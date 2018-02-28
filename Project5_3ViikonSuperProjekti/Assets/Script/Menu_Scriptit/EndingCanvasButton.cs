@@ -9,11 +9,10 @@ public class EndingCanvasButton : MonoBehaviour {
 		
 	}
 	
-	// Update is called once per frame
 
 	public void SetEndingCanvasButton()
 	{
 		EventSystem.current.SetSelectedGameObject(this.gameObject);
-		
+
 	}
 }

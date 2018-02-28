@@ -245,7 +245,7 @@ public class Draggable : MonoBehaviour/*, IBeginDragHandler, IDragHandler, IEndD
         button = GetComponent<Button>();
         if (button == null)
         {
-            Debug.Log("Button puuttuu");
+            //Debug.Log("Button puuttuu");
         }
         else
         {

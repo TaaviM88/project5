@@ -162,7 +162,7 @@ public class Player2Movement : MonoBehaviour {
 		//Debug.Log(moveVector.y);
 		if (moveVector.y != 0f /*&& Input.GetButtonUp("P1Jump")*/)
 		{
-			Debug.Log("hyppasin, menen up ja hyppy ei pohjassa");
+			//Debug.Log("hyppasin, menen up ja hyppy ei pohjassa");
 			anime.SetInteger ("State", 3);
 
 		}
@@ -237,13 +237,13 @@ public class Player2Movement : MonoBehaviour {
     {
         CanPlayerMove2 = true;
 		//pelaaja voi liikkua
-        Debug.Log("pelaaja2 voi liikkua");
+        //Debug.Log("pelaaja2 voi liikkua");
        
     }
     public void DisablePlayerMovement2()
     {
         CanPlayerMove2 = false;
 		//pelaaja ei voi liikkua
-        Debug.Log("pelaaja2 ei voi liikkua");
+        //Debug.Log("pelaaja2 ei voi liikkua");
     }
 }
