@@ -178,9 +178,8 @@ public class GameManager : MonoBehaviour {
         _sIM.horizontalAxis = "P2XAxis";
         _sIM.verticalAxis = "P2Vertical";
         _player1PickedCard = true;
-
-        
-
+        UIPlayerPickASkill _1player = FindObjectOfType<UIPlayerPickASkill>();
+        _1player.Player1PickASkill();
     }
     public void Player2PickedACard()
     {
@@ -188,6 +187,8 @@ public class GameManager : MonoBehaviour {
         _sIM.horizontalAxis = "Horizontal";
         _sIM.verticalAxis = "Vertical";
         _player1PickedCard = false;
+         UIPlayerPickASkill _2player = FindObjectOfType<UIPlayerPickASkill>();
+         _2player.Player2PickASkill();
         
     }
 }
