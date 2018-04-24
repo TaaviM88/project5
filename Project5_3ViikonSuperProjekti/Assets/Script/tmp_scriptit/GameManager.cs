@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour {
     UiTimer uiTimer;
    public bool _player1PickedCard = false;
     StandaloneInputModule _sIM;
+    // checkkaa onko voittaja jo julistettu. Jos on niin ei vaihdeta voittajan julistamisen jällkeen voittaa (esim spelli osuu kuoleman jälkeen)
+    bool _isWinnerAnnounced = false;
 
     public Effect_Container Effectlist { get 
    {
@@ -144,7 +146,7 @@ public class GameManager : MonoBehaviour {
         DisablePlayerMovements();
         uiTimer = FindObjectOfType<UiTimer>();
         uiTimer.StopTimer();
-        if (_player != null)
+        if (_player != null && _isWinnerAnnounced ==false)
         {
             Player winner = null;
             foreach (var p in listPlayers)
@@ -161,6 +163,7 @@ public class GameManager : MonoBehaviour {
             _uiroundover.Show(winner);
             EndingCanvasButton _endingbutton = FindObjectOfType<EndingCanvasButton>();
             _endingbutton.SetEndingCanvasButton();
+            _isWinnerAnnounced = true;
         }
         else
         {
