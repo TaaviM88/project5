@@ -59,7 +59,7 @@ namespace Skills
       {
           {Skill.Fireball, (PlayerSkillSet, Player) => {
               PlayerSkillSet.health -=1; 
-              //Debug.Log("whoosh");
+              Debug.Log("whoosh");
               /* FireBall-prefabin luonti */
               GameObject _prefab = GameManager.gamemanager.Effectlist.GetEffect(Skill.Fireball);
               GameObject clone = UnityEngine.Object.Instantiate(_prefab, Player.GetComponentInChildren<PlayerUseSkill>().transform.position, Player.transform.rotation);
@@ -90,19 +90,7 @@ namespace Skills
             PlayerSkillSet.health -= 1;
             GameObject _prefab = GameManager.gamemanager.Effectlist.GetEffect(Skill.FireArrow);
             AudioManager.audioManager.FireArrow();
-
-            if (Player.transform.localScale.z == 1)
-            {
-              GameObject clone = UnityEngine.Object.Instantiate(_prefab, Player.GetComponentInChildren<PlayerUseSkill>().transform.position + new Vector3(5, 0, 0), Player.transform.rotation);
-            }
-
-            if (Player.transform.localScale.z == -1)  
-            {
-                  GameObject clone = UnityEngine.Object.Instantiate(_prefab, Player.GetComponentInChildren<PlayerUseSkill>().transform.position + new Vector3(-5, 0, 0), Player.transform.rotation);
-                  clone.GetComponent<Bullet>().ChangeDirection();
-            }
-            //vanha. Player 2 tappaa itsensä tähän.
-           /* GameObject clone = UnityEngine.Object.Instantiate(_prefab, Player.GetComponentInChildren<PlayerUseSkill>().transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
+            GameObject clone = UnityEngine.Object.Instantiate(_prefab, Player.GetComponentInChildren<PlayerUseSkill>().transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
             
               if (Player.transform.localScale.z == -1 )
               {
@@ -111,7 +99,7 @@ namespace Skills
                   clone.transform.localScale = _scale;
                   //clone.GetComponent<Bullet>().ChangeDirection();
 
-              }*/
+              }
              
           }},
            {Skill.FlameMine, (PlayerSkillSet, Player) => {
