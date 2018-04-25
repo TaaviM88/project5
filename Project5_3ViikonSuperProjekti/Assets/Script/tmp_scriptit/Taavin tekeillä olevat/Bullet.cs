@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour {
     public float speed = 3f;
-    public int powerUpInt = 0;
-    public float damage = 0f;
+    private int powerUpInt = 0;
+    private float damage = 0f;
     //Timer ei tällä hetkellä käytössä. Tsekkaa SpellCOntroller.cs filu
     private float timer = 10f;
     private Vector3 bulletMovement;
@@ -13,10 +13,15 @@ public class Bullet : MonoBehaviour {
     private int direction = 1;
 	// Use this for initialization
     public bool slowBulletDown = false;
+    public int timerToStop = 5;
 
     void Awake()
     {
-        Invoke("StopBullet", speed);
+        if(slowBulletDown == true)
+        {
+            Invoke("StopBullet", timerToStop);
+        }
+        
     }    
     void Update()
     {
