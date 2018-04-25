@@ -107,13 +107,13 @@ namespace Skills
               GameObject _prefab = GameManager.gamemanager.Effectlist.GetEffect(Skill.FlameMine);
             if (Player.transform.localScale.z == 1)
             {
-              GameObject clone = UnityEngine.Object.Instantiate(_prefab, Player.GetComponentInChildren<PlayerUseSkill>().transform.position + new Vector3(5, 0, 0), Player.transform.rotation);
+              GameObject clone = UnityEngine.Object.Instantiate(_prefab, Player.GetComponentInChildren<PlayerUseSkill>().transform.position + new Vector3(5, 0, 0), Quaternion.Euler(new Vector3(0, 0, 0)));
             }
 
               AudioManager.audioManager.FireArrow();
               if (Player.transform.localScale.z == -1)
               {
-                  GameObject clone = UnityEngine.Object.Instantiate(_prefab, Player.GetComponentInChildren<PlayerUseSkill>().transform.position + new Vector3(-5, 0, 0), Player.transform.rotation);
+                  GameObject clone = UnityEngine.Object.Instantiate(_prefab, Player.GetComponentInChildren<PlayerUseSkill>().transform.position + new Vector3(-5, 0, 0), Quaternion.Euler(new Vector3(0, 0, 0)));
                   clone.GetComponent<Bullet>().ChangeDirection();
               }
           }},
