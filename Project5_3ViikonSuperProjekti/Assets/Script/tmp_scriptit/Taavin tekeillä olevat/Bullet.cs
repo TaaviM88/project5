@@ -16,9 +16,9 @@ public class Bullet : MonoBehaviour {
 
     void Awake()
     {
-
+        Invoke("StopBullet", speed);
     }    
-void Update()
+    void Update()
     {
         if(slowBulletDown == false)
         {
@@ -79,7 +79,6 @@ void Update()
     {
         //gameObject.SetActive(false);
         //Destroy(gameObject, 1);
-        Debug.Log("LUL EN TEE MITÄÄN PASKA! T: BULLET LASSE");
     }
 
     void OnDisable()

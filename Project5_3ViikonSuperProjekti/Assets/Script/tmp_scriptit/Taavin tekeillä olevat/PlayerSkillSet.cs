@@ -27,7 +27,7 @@ namespace Skills
         None,
         Fireball,
         FireArrow,
-        FlameThrower,
+        FlameMine,
         IceArrow,
         IceStorm,
         IceBlast,
@@ -43,7 +43,7 @@ namespace Skills
       {
           {Skill.Fireball, "Fireball"},
           {Skill.FireArrow, "Fire Arrow"},
-          {Skill.FlameThrower, "FlameThrower"},
+          {Skill.FlameMine, "FlameMine"},
           {Skill.IceArrow, "Ice Arrow"},
           {Skill.IceStorm, "Ice Storm"},
           {Skill.IceBlast, "Ice Blast"},
@@ -114,27 +114,20 @@ namespace Skills
               }*/
              
           }},
-           {Skill.FlameThrower, (PlayerSkillSet, Player) => {
+           {Skill.FlameMine, (PlayerSkillSet, Player) => {
               PlayerSkillSet.health -= 1;
-              GameObject _prefab = GameManager.gamemanager.Effectlist.GetEffect(Skill.FlameThrower);
-               if(Player.transform.localScale.z == 1)
-               {
-                   GameObject clone = UnityEngine.Object.Instantiate(_prefab, Player.GetComponentInChildren<PlayerUseSkill>().transform.position + new Vector3(15, 0, 0), Player.transform.rotation);
-               }
-              
-              //clone.transform.SetParent(Player.GetComponentInChildren<PlayerUseSkill>().transform);
+              GameObject _prefab = GameManager.gamemanager.Effectlist.GetEffect(Skill.FlameMine);
+                if (Player.transform.localScale.z == 1)
+              {
+              GameObject clone = UnityEngine.Object.Instantiate(_prefab, Player.GetComponentInChildren<PlayerUseSkill>().transform.position + new Vector3(5, 0, 0), Quaternion.Euler(new Vector3(0, 0, 0)));
+              }
 
               AudioManager.audioManager.FireArrow();
-                    
               if (Player.transform.localScale.z == -1)
               {
-                   GameObject clone = UnityEngine.Object.Instantiate(_prefab, Player.GetComponentInChildren<PlayerUseSkill>().transform.position + new Vector3(-15, 0, 0), Player.transform.rotation);
-                   Vector3 _scale = clone.transform.localScale;
-                  _scale.x = Player.transform.localScale.z;
-                  clone.transform.localScale = _scale;
-              }    
-             
-
+                  GameObject clone = UnityEngine.Object.Instantiate(_prefab, Player.GetComponentInChildren<PlayerUseSkill>().transform.position + new Vector3(-5, 0, 0), Quaternion.Euler(new Vector3(0, 0, 0)));
+                  clone.GetComponent<Bullet>().ChangeDirection();
+              }
           }},
            {Skill.Plasma, (PlayerSkillSet, Player) => {
               PlayerSkillSet.health -= 1;
