@@ -13,7 +13,7 @@ public class Bullet : MonoBehaviour {
     private int direction = 1;
 	// Use this for initialization
     public bool slowBulletDown = false;
-    public int timerToStop = 5;
+    public float timerToStop = 5;
 
     void Awake()
     {
