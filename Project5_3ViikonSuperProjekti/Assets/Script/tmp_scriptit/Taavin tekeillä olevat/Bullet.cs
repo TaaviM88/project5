@@ -12,11 +12,28 @@ public class Bullet : MonoBehaviour {
     private Vector3 bulletRotation;
     private int direction = 1;
 	// Use this for initialization
+    public bool slowBulletDown = false;
 
-    void Update()
+    void Awake()
     {
+
+    }    
+void Update()
+    {
+        if(slowBulletDown == false)
+        {
         transform.position +=  direction* bulletMovement;
         transform.localRotation *= Quaternion.Euler(bulletRotation);
+        }
+
+        if(slowBulletDown == true)
+        {             
+            transform.position +=  direction* bulletMovement;
+            transform.localRotation *= Quaternion.Euler(bulletRotation);
+
+        }
+        Debug.Log("speed"+ speed);
+       
     }
     void OnEnable()
     {
